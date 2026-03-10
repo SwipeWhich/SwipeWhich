@@ -313,10 +313,10 @@ function Badge({type}){
 function getScenarioDesc(card,sc,rate,isCB,vs){
   const pct=(rate*100).toFixed(1);
   const capInfo=CAP_AMT[card.id]&&CAP_AMT[card.id][sc];
-  // Check dynamic guru cap for HSBC cards on FX scenarios
+  const annualCapCards=["hsbc_vs","ds_earnmore"]; // caps are annual not monthly
   const allGuruIds=["hsbc_everymile","hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
   const isGuruScenario=allGuruIds.includes(card.id)&&["physicalFX","travelJKSTA"].includes(sc);
-  const capStr=capInfo?`月度$${capInfo.toLocaleString()}上限`:isGuruScenario?"Travel Guru上限":card.noCap?"無上限":card.capInfo?"有上限":"無上限";
+  const capStr=capInfo?(annualCapCards.includes(card.id)?`年度$${capInfo.toLocaleString()}上限`:`月度$${capInfo.toLocaleString()}上限`):isGuruScenario?"Travel Guru上限":card.noCap?"無上限":card.capInfo?"有上限":"無上限";
   const scenarioNames={local:"一般消費",dining:"食飯",onlineHKD:"網購HKD",mobilePay:"流動支付",octopus:"八達通增值",supermarket:"超市",onlineFX:"網上外幣",travelJKSTA:"日韓泰中台",physicalFX:"海外實體"};
   const sn=scenarioNames[sc]||sc;
   if(isCB)return `${sn} ${pct}% 回贈（${capStr}）`;
@@ -513,7 +513,8 @@ export default function App(){
     if(n===4){setTab("calc");}
     if(n===9)setTab("tracker");
     if(n===10)setTab("guide");
-    if(n>10){setTut(0);setTab("cards");return;}
+    // step 11 = PWA modal, stay on current tab
+    if(n>11){setTut(0);return;}
     setTut(n);
   };
 
@@ -542,9 +543,9 @@ export default function App(){
     if(tut===10&&section==="guidetab")return true;
     return false;
   };
-  const dimmed=tut>=2&&tut<=10;
+  const dimmed=tut>=2&&tut<=10; // dark overlay for all tutorial steps
   const hlStyle=(section)=>isHL(section)?{position:"relative",zIndex:9990,boxShadow:"0 0 0 3px #007AFF, 0 0 20px rgba(0,122,255,0.25)",borderRadius:16}:{};
-
+  const scenarioHL=tut===4?{position:"relative",zIndex:9990,outline:"3px solid #007AFF",outlineOffset:2,borderRadius:16,background:"#fff"}:{};
   // Tooltip positioning handled inline in JSX
 
   if(!loaded)return(
@@ -569,15 +570,15 @@ export default function App(){
     <div style={{minHeight:"100vh",paddingBottom:72,background:S.bg,fontFamily:'-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif',WebkitFontSmoothing:"antialiased",MozOsxFontSmoothing:"grayscale"}}>
 
       {/* Dark overlay for tutorial — much darker */}
-      {dimmed&&<div style={{position:"fixed",inset:0,zIndex:9980,background:"rgba(0,0,0,0.75)",pointerEvents:"none"}}/>}
+      {/* Tutorial tooltips - no dark overlay */}
 
       {/* Tutorial tooltip — Steps 2-3 use fixed position, Steps 4-6 use inline (rendered near target in JSX) */}
       {tut===2&&(
         <div style={{position:"fixed",bottom:62,left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
-          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
+          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 1/9</span>
-              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"11.1%"}}/></div>
+              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 1/10</span>
+              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"10%"}}/></div>
             </div>
             <p style={{fontSize:15,fontWeight:600,color:S.dark,lineHeight:1.5}}>剔選你擁有嘅信用卡！揀完撳「下一步」</p>
             <div style={{display:"flex",gap:8,marginTop:12}}>
@@ -590,10 +591,10 @@ export default function App(){
       )}
       {tut===9&&(
         <div style={{position:"fixed",bottom:76,left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
-          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
+          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 8/9</span>
-              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"88.9%"}}/></div>
+              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 8/10</span>
+              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"80%"}}/></div>
             </div>
             <p style={{fontSize:15,fontWeight:600,color:S.dark,lineHeight:1.5}}>「記帳」追蹤每張卡嘅月度消費額度，爆 Cap 時會自動提醒你轉保底卡</p>
             <div style={{display:"flex",gap:8,marginTop:12}}>
@@ -606,18 +607,93 @@ export default function App(){
       )}
       {tut===10&&(
         <div style={{position:"fixed",bottom:76,right:8,zIndex:9995,maxWidth:300,width:"calc(100% - 80px)"}}>
-          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
+          <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 9/9</span>
-              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"100%"}}/></div>
+              <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 9/10</span>
+              <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"90%"}}/></div>
             </div>
             <p style={{fontSize:15,fontWeight:600,color:S.dark,lineHeight:1.5}}>「攻略」可以睇到每個場景嘅信用卡排名！即刻了解邊張卡最強</p>
             <div style={{display:"flex",gap:8,marginTop:12}}>
               <button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button>
-              <button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>完成教學 🎉</button>
+              <button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button>
             </div>
           </div>
           <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",marginLeft:"auto",marginRight:24}}/>
+        </div>
+      )}
+
+      {/* PWA Install Tutorial - Step 11 or standalone */}
+      {tut===11&&(
+        <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",padding:16,background:"rgba(0,0,0,0.6)"}} onClick={()=>setTut(0)}>
+          <div style={{background:"#fff",borderRadius:24,maxWidth:380,width:"100%",maxHeight:"85vh",overflow:"auto",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
+            <div style={{padding:"28px 24px 8px",textAlign:"center"}}>
+              <div style={{fontSize:48,marginBottom:8}}>📲</div>
+              <div style={{display:"flex",alignItems:"center",gap:6,justifyContent:"center",marginBottom:12}}>
+                <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 10/10</span>
+                <div style={{width:60,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"100%"}}/></div>
+              </div>
+              <h2 style={{fontSize:20,fontWeight:700,color:S.dark,marginBottom:4}}>加入主畫面</h2>
+              <p style={{fontSize:13,color:S.sec}}>一撳即開，同 App 一樣快！</p>
+            </div>
+            <div style={{padding:"12px 24px"}}>
+              <div style={{background:"#F9F9FB",borderRadius:16,padding:16,marginBottom:12}}>
+                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+                  <span style={{fontSize:20}}>🍎</span>
+                  <p style={{fontSize:15,fontWeight:700,color:S.dark}}>iPhone / iPad</p>
+                  <span style={{fontSize:10,color:S.label,background:"#E5E5EA",padding:"2px 8px",borderRadius:99}}>必須用 Safari</span>
+                </div>
+                <div style={{display:"flex",flexDirection:"column",gap:10}}>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>1️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>用 <strong>Safari</strong> 打開 swipewhich.com</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>2️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>撳底部工具列嘅 <strong style={{fontSize:18,verticalAlign:"middle"}}>⬆️</strong> 分享按鈕</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>3️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>向下捲，撳 <strong>「加入主畫面」</strong> ➕</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>4️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>撳右上角 <strong>「新增」</strong>，搞掂！✅</p>
+                  </div>
+                </div>
+                <div style={{marginTop:10,padding:"8px 10px",borderRadius:10,background:"rgba(52,199,89,0.08)"}}>
+                  <p style={{fontSize:11,color:S.green}}>💡 加入後會全螢幕運行，冇地址欄，似 native app！</p>
+                </div>
+              </div>
+              <div style={{background:"#F9F9FB",borderRadius:16,padding:16}}>
+                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+                  <span style={{fontSize:20}}>🤖</span>
+                  <p style={{fontSize:15,fontWeight:700,color:S.dark}}>Android</p>
+                  <span style={{fontSize:10,color:S.label,background:"#E5E5EA",padding:"2px 8px",borderRadius:99}}>用 Chrome</span>
+                </div>
+                <div style={{display:"flex",flexDirection:"column",gap:10}}>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>1️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>用 <strong>Chrome</strong> 打開 swipewhich.com</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>2️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>撳右上角 <strong style={{fontSize:16,verticalAlign:"middle"}}>⋮</strong> 選單</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>3️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>撳 <strong>「新增至主畫面」</strong> 📲</p>
+                  </div>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <span style={{fontSize:24,flexShrink:0}}>4️⃣</span>
+                    <p style={{fontSize:13,color:S.dark,lineHeight:1.5}}>確認名稱，撳 <strong>「新增」</strong>，搞掂！✅</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style={{padding:"12px 24px 24px",display:"flex",gap:8}}>
+              <button onClick={()=>setTut(0)} style={{flex:1,padding:14,borderRadius:S.rad,background:S.blue,color:"#fff",fontSize:15,fontWeight:600,border:"none",cursor:"pointer"}}>完成教學 🎉</button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -693,12 +769,14 @@ export default function App(){
             <span style={{fontSize:17,fontWeight:700,color:S.dark,letterSpacing:-0.41}}>碌邊張 <span style={{color:S.label,fontWeight:500}}>SwipeWhich</span></span>
           </div>
           <div style={{display:"flex",alignItems:"center"}}>
+            {!window.matchMedia("(display-mode: standalone)").matches&&<button onClick={()=>setTut(11)} style={{padding:8,background:"none",border:"none",cursor:"pointer",fontSize:16}} title="加入主畫面">📲</button>}
             <button onClick={()=>setTut(1)} style={{padding:8,background:"none",border:"none",cursor:"pointer"}}><HelpCircle size={20} color={S.label}/></button>
           </div>
         </div>
       </header>
 
       {/* Content */}
+      {dimmed&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:9989}}/>}
       <main style={{maxWidth:640,margin:"0 auto",padding:"0 16px"}}>
 
         {tab==="calc"&&(
@@ -739,7 +817,7 @@ export default function App(){
             {/* 1) Scenario Selection Boxes */}
             <div>
               <label style={{fontSize:13,fontWeight:400,color:S.sec,letterSpacing:-0.08,display:"block",marginBottom:8}}>簽賬種類</label>
-              <div id="tut-scenario" style={{...hlStyle("scenario")}}>
+              <div id="tut-scenario" style={{...scenarioHL}}>
                 <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8}}>
                   {SCENARIOS.map(s=>{
                     const active=sc===s.id||(s.id==="physicalFX"&&sc==="travelJKSTA");
@@ -766,8 +844,8 @@ export default function App(){
             {/* Inline tooltip for step 4: below scenario */}
             {tut===4&&<div style={{position:"relative",zIndex:9995}}>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderBottom:"10px solid #fff",marginLeft:24}}/>
-              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 3/9</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"33.3%"}}/></div></div>
+              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 3/10</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"30%"}}/></div></div>
                 <p style={{fontSize:15,fontWeight:600,color:S.dark}}>揀你嘅簽賬種類</p>
                 <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button><button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button></div>
               </div>
@@ -810,8 +888,8 @@ export default function App(){
             {/* Inline tooltip for step 5: below amount */}
             {tut===6&&<div style={{position:"relative",zIndex:9995}}>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderBottom:"10px solid #fff",marginLeft:24}}/>
-              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 5/9</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"55.6%"}}/></div></div>
+              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 5/10</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"50%"}}/></div></div>
                 <p style={{fontSize:15,fontWeight:600,color:S.dark}}>輸入今次簽賬金額</p>
                 <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button><button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button></div>
               </div>
@@ -826,8 +904,8 @@ export default function App(){
             {/* Inline tooltip for step 4: mode toggle */}
             {tut===5&&<div style={{position:"relative",zIndex:9995}}>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderBottom:"10px solid #fff",marginLeft:24}}/>
-              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 4/9</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"44.4%"}}/></div></div>
+              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 4/10</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"40%"}}/></div></div>
                 <p style={{fontSize:15,fontWeight:600,color:S.dark}}>揀返你想睇「現金回贈」定「飛行里數」</p>
                 <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button><button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button></div>
               </div>
@@ -836,8 +914,8 @@ export default function App(){
             {/* 4) Result Card — BIGGER fonts */}
             {/* Inline tooltip for step 6: above result */}
             {tut===7&&<div style={{position:"relative",zIndex:9995}}>
-              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 6/9</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"66.7%"}}/></div></div>
+              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 6/10</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"60%"}}/></div></div>
                 <p style={{fontSize:15,fontWeight:600,color:S.dark}}>搞掂！呢度即刻顯示推薦卡同保底卡！</p>
                 <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button><button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button></div>
               </div>
@@ -930,6 +1008,7 @@ export default function App(){
                       :<div>
                         <p style={{fontSize:11,color:S.label,marginBottom:4}}>✨ 全城最抵</p>
                         <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{gb.card.name} <span style={{color:"#FF9500"}}>{isCB?`${(gb.rate*100).toFixed(1)}%`:`$${parseFloat(gb.rate.toFixed(2))}/里`}</span>{!own.includes(gb.card.id)&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
+                        {gb.card.cond&&gb.card.cond[sc]&&<p style={{fontSize:9,color:"#FF9500",marginTop:2}}>{gb.card.cond[sc]}</p>}
                         <a href={`https://www.google.com/search?q=${encodeURIComponent(gb.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:6,display:"inline-block"}}>了解更多 / 申請 →</a>
                       </div>}
                     </div>
@@ -1002,8 +1081,8 @@ export default function App(){
             {/* Inline tooltip for step 7: 記一筆 — just above the box */}
             {tut===8&&<div style={{position:"relative",zIndex:9995}}>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderBottom:"10px solid #fff",marginLeft:24}}/>
-              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.3)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 7/9</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"77.8%"}}/></div></div>
+              <div style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 7/10</span><div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"70%"}}/></div></div>
                 <p style={{fontSize:15,fontWeight:600,color:S.dark}}>碌完卡撳「記一筆」追蹤消費，爆 Cap 時會自動建議轉保底卡！</p>
                 <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:"#F2F2F7",border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button><button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button></div>
               </div>
@@ -1083,8 +1162,8 @@ export default function App(){
                     <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderBottom:"10px solid #fff",marginLeft:"auto",marginRight:16}}/>
                     <div style={{background:"#fff",borderRadius:14,padding:14,boxShadow:"0 8px 24px rgba(0,0,0,0.15)"}}>
                       <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:6}}>
-                        <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 2/9</span>
-                        <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"22.2%"}}/></div>
+                        <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 2/10</span>
+                        <div style={{flex:1,height:3,borderRadius:2,background:"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"20%"}}/></div>
                       </div>
                       <p style={{fontSize:14,fontWeight:600,color:S.dark,lineHeight:1.4}}>如有 HSBC 卡，撳上面「⚙️ 設定」揀最紅獎賞同 Travel Guru 等級</p>
                       <p style={{fontSize:11,color:S.label,marginTop:3}}>冇 HSBC 卡可直接略過</p>
@@ -1097,7 +1176,7 @@ export default function App(){
                 )}
                 {/* Step 2 — when panel is open, show 下一步 inside panel */}
                 {iss==="HSBC"&&hsbcOpen&&(
-                  <div id="tut-settings" style={{padding:"14px 16px",background:tut===3?"#fff":"rgba(0,122,255,0.02)",borderBottom:"1px solid rgba(0,0,0,0.06)",...(tut===3?{position:"relative",zIndex:9990,boxShadow:"0 0 0 3px #007AFF, 0 0 20px rgba(0,122,255,0.25)",borderRadius:16,margin:4}:{})}}>
+                  <div id="tut-settings" style={{padding:"14px 16px",background:tut===3?"#fff":"rgba(0,122,255,0.02)",borderBottom:"1px solid rgba(0,0,0,0.06)",...(tut===3?{position:"relative",zIndex:9990,outline:"3px solid #007AFF",outlineOffset:2,borderRadius:16,margin:4}:{})}}>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>最紅自主獎賞</p>
                     <p style={{fontSize:10,color:S.label,marginBottom:8}}>如果你有喺 HSBC App 登記「最紅自主獎賞」，揀返你嗰個類別</p>
                     <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6,marginBottom:14}}>
@@ -1748,7 +1827,7 @@ export default function App(){
       {/* Bottom Tabs */}
       <nav style={{position:"fixed",bottom:0,left:0,right:0,zIndex:9991,display:"flex",borderTop:"1px solid rgba(0,0,0,0.08)",background:"rgba(249,249,251,0.94)",backdropFilter:"blur(20px) saturate(180%)",paddingBottom:"env(safe-area-inset-bottom,8px)"}}>
         {[{k:"calc",l:"計算器",Ic:Calculator},{k:"cards",l:"Card Holder",Ic:Wallet},{k:"tracker",l:"記帳",Ic:ClipboardList},{k:"guide",l:"攻略",Ic:BookOpen}].map(t=>(
-          <button key={t.k} onClick={()=>setTab(t.k)} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,paddingTop:8,paddingBottom:4,background:"none",border:"none",cursor:"pointer",position:"relative",...(isHL("guidetab")&&t.k==="guide"?{zIndex:9990}:{}),...(isHL("trackertab")&&t.k==="tracker"?{zIndex:9990}:{}),...(toast&&t.k==="tracker"?{zIndex:9992}:{})}}>
+          <button key={t.k} onClick={()=>setTab(t.k)} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,paddingTop:8,paddingBottom:4,background:"none",border:"none",cursor:"pointer",position:"relative",...(isHL("guidetab")&&t.k==="guide"?{outline:"3px solid #007AFF",outlineOffset:-2,borderRadius:12}:{}),...(isHL("trackertab")&&t.k==="tracker"?{outline:"3px solid #007AFF",outlineOffset:-2,borderRadius:12}:{}),...(toast&&t.k==="tracker"?{zIndex:9992}:{})}}>
             <div style={{...(toast&&t.k==="tracker"?{animation:"tabPulse 1s ease infinite",borderRadius:12,padding:4,background:"rgba(0,122,255,0.08)"}:{})}}>
               <t.Ic size={22} color={tab===t.k||toast&&t.k==="tracker"?S.blue:S.label}/>
             </div>
