@@ -52,18 +52,18 @@ const CAP_AMT={
 // Sources: flyformiles.hk, mrmiles.hk, hkcashrebate.com, bank official T&Cs (Mar 2026)
 const CARDS=[
   // ── MILES ──
-  mk("ae_explorer","AE Explorer","American Express","miles","全能里數卡，本地$6/里，海外$4.8/里",0.006,{onlineFX:0.016,physicalFX:0.016,travelJKSTA:0.016},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4.8,travelJKSTA:4.8,physicalFX:4.8}),
+  mk("ae_explorer","AE Explorer","American Express","miles","基本$6/里，登記外幣優惠後$4.8/里，季度優惠$1.68/里(首$10,000)",0.006,{onlineFX:0.016,physicalFX:0.016,travelJKSTA:0.016},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4.8,travelJKSTA:4.8,physicalFX:4.8},{onlineFX:"⚠️ $4.8/里需登記3.75X外幣優惠，基本只有$6/里",physicalFX:"⚠️ $4.8/里需登記3.75X外幣優惠，基本只有$6/里",travelJKSTA:"⚠️ $4.8/里需登記3.75X外幣優惠，基本只有$6/里"}),
   mk("ae_plat_cc","AE 白金信用卡","American Express","miles","信用卡版(大頭)，本地/外幣$6/里",0.006,{},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:6,travelJKSTA:6,physicalFX:6}),
-  mk("ae_plat_charge","AE 白金卡（鋼卡/細頭）","American Express","miles","Charge Card，附Priority Pass，基本$9/里，外幣推廣期$2/里(季度$15,000上限)",0.004,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},"外幣推廣期季度$15,000上限",false,{local:9,dining:9,onlineHKD:9,onlineFX:2,travelJKSTA:2,physicalFX:2}),
+  mk("ae_plat_charge","AE 白金卡（鋼卡/細頭）","American Express","miles","Charge Card，附Priority Pass，基本$9/里，外幣推廣期$2/里(季度$15,000上限)",0.004,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},"外幣推廣期季度$15,000上限",false,{local:9,dining:9,onlineHKD:9,onlineFX:2,travelJKSTA:2,physicalFX:2},{onlineFX:"⚠️ $2/里需登記季度推廣，基本$9/里",physicalFX:"⚠️ $2/里需登記季度推廣，基本$9/里",travelJKSTA:"⚠️ $2/里需登記季度推廣，基本$9/里"}),
   mk("ae_blue","AE Blue Cash","American Express","cashback","1.2%所有消費，FCC 2%但CBF 0%",0.012,{},null,true),
   mk("sc_cathay","渣打國泰萬事達卡","Standard Chartered","miles","食飯/酒店/海外$4/里，其他$6/里",0.006,{dining:0.018,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:4,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("ds_ba","大新英國航空白金卡","Dah Sing","miles","Avios里數直接入賬，本地$6/Avios，外幣$4/Avios",0.006,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
-  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$1.25/里。不適用最紅自主。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,onlineFX:5,travelJKSTA:1.25,physicalFX:1.25}),
+  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$1.25/里。不適用最紅自主。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,onlineFX:5,travelJKSTA:1.25,physicalFX:1.25},{travelJKSTA:"⚠️ 加碼需登記Travel Guru，基本只有$5/里",physicalFX:"⚠️ 加碼需登記Travel Guru，基本只有$5/里"}),
   mk("citi_pm","Citi PremierMiles","Citibank","miles","外幣$4/里(滿$2萬$3/里)，里數永不過期",0.005,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_prestige","Citi Prestige","Citibank","miles","高端卡，外幣$4/里+酒店住四送一",0.006,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_rewards_m","Citi Rewards","Citibank","both","指定購物/娛樂$3/里(≈1.85%)，流動支付5X≈1%，其他$15/里",0.003,{onlineHKD:0.0185,mobilePay:0.01},null,true,{local:15,dining:15,onlineHKD:3,onlineFX:15,travelJKSTA:15,physicalFX:15}),
   mk("dbs_black","DBS Black World MC","DBS","miles","外幣$4/里，免年費里數卡",0.005,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
-  mk("mox_miles","MOX（Asia Miles）","Mox Bank","miles","所有消費$8/里，Asia Miles模式0%外幣手續費",0.005,{},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:8,travelJKSTA:8,physicalFX:8}),
+  mk("mox_miles","MOX（Asia Miles）","Mox Bank","miles","所有消費$8/里，Asia Miles模式0%外幣手續費",0.005,{},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:8,travelJKSTA:8,physicalFX:8},{local:"💡 維持$250K存款可升至$4/里",dining:"💡 維持$250K存款可升至$4/里",onlineFX:"💡 維持$250K存款可升至$4/里+0%手續費"}),
 
   // ── CASHBACK ──
   mk("hsbc_red","HSBC Red","HSBC","both","網購4%/$2.5里+指定商戶8%(壽司郎等)，其他0.4%",0.004,{onlineHKD:0.04},"網購月度$10,000/指定商戶$1,250上限",false,{local:25,dining:25,onlineHKD:2.5,onlineFX:25,travelJKSTA:25,physicalFX:25}),
@@ -73,49 +73,49 @@ const CARDS=[
   mk("hsbc_pulse","HSBC 銀聯 Pulse","HSBC","cashback","銀聯雙幣，內地消費免手續費",0.004,{octopus:0.004},null,true),
   mk("hsbc_easy","HSBC easy 卡","HSBC","cashback","最紅自主2.4%，配合易賞錢最高4.8%",0.004,{octopus:0.004},null,true),
   mk("hsbc_student","HSBC 學生卡","HSBC","cashback","大學生專屬，低年薪要求",0.004,{octopus:0.004},null,true),
-  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，需每月登記",0.004,{onlineHKD:0.05,onlineFX:0.06},"需簽滿$5,000，月度$500額外上限，優惠至2026年3月31日",false),
-  mk("hs_travel","恒生 Travel+","Hang Seng","cashback","日韓泰中台澳門實體7%，其他外幣/餐飲5%",0.004,{travelJKSTA:0.07,physicalFX:0.05,dining:0.05},"登記一次即可，簽滿$6,000起，月度$500額外上限，只計實體",false),
+  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，需每月登記",0.004,{onlineHKD:0.05,onlineFX:0.06},"需簽滿$5,000，月度$500額外上限，優惠至2026年3月31日",false,null,{onlineHKD:"⚠️ 需每月登記+月簽滿$5,000，優惠至2026/3/31",onlineFX:"⚠️ 需每月登記+月簽滿$5,000，優惠至2026/3/31"}),
+  mk("hs_travel","恒生 Travel+","Hang Seng","cashback","日韓泰中台澳門實體7%，其他外幣/餐飲5%",0.004,{travelJKSTA:0.07,physicalFX:0.05,dining:0.05},"登記一次即可，簽滿$6,000起，月度$500額外上限，只計實體",false,null,{travelJKSTA:"⚠️ 需登記一次+月簽滿$6,000，只計實體",physicalFX:"⚠️ 需登記一次+月簽滿$6,000，只計實體",dining:"⚠️ 需登記一次+月簽滿$6,000"}),
   mk("hs_enjoy","恒生 enJoy 卡","Hang Seng","cashback","百佳屈臣氏豐澤指定商戶優惠",0.004,{},null,true),
   mk("hs_muji","恒生 Muji 卡","Hang Seng","cashback","MUJI消費額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
   mk("hs_uni","恒生大學/大專卡","Hang Seng","cashback","學生專屬，永久免年費",0.004,{},null,true),
   mk("sc_simply","渣打 Simply Cash","Standard Chartered","cashback","本地1.5%/外幣2%，無上限",0.015,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true),
-  mk("sc_smart","渣打 Smart 卡","Standard Chartered","cashback","月簽$4K起0.56%/$15K起1.2%，特約商戶5%，免外幣手續費",0.0056,{},"需月簽$4,000起，特約商戶年度$60,000上限",false),
+  mk("sc_smart","渣打 Smart 卡","Standard Chartered","cashback","月簽$4K起0.56%/$15K起1.2%，特約商戶5%，免外幣手續費",0.0056,{},"需月簽$4,000起，特約商戶年度$60,000上限",false,null,{local:"⚠️ 0.56%需月簽≥$4,000，$15K起升至1.2%"}),
   mk("sc_apoint","渣打 A. Point Card","Standard Chartered","cashback","積分兌換禮品或現金回贈",0.004,{},null,true),
   mk("boc_sogo","中銀 SOGO Visa Sig","Bank of China","cashback","流動支付5.4%，SOGO消費額外積分",0.004,{mobilePay:0.054},"手機支付月度$2,000上限(額外5%)",false),
   mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購/海外5%，日常0.4%",0.004,{onlineHKD:0.05,onlineFX:0.05},"月度額外$150上限(~$3,260爆Cap)",false),
-  mk("boc_cheers","中銀 Cheers Card VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k月度上限，需簽滿$5,000/月",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4}),
+  mk("boc_cheers","中銀 Cheers Card VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k月度上限，需簽滿$5,000/月",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000",onlineFX:"⚠️ 需月簽滿$5,000",physicalFX:"⚠️ 需月簽滿$5,000",travelJKSTA:"⚠️ 需月簽滿$5,000"}),
   mk("boc_taobao","中銀淘寶卡","Bank of China","cashback","淘寶RMB消費0%手續費+額外積分",0.004,{onlineHKD:0.006},null,true),
   mk("citi_cashback","Citi Cash Back","Citibank","cashback","食飯/酒店/外幣2%無上限，其他1%",0.01,{dining:0.02,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true),
-  mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true),
+  mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true,null,{octopus:"💡 車費15%回贈需所有Citi卡月簽滿$4,000"}),
   mk("citi_hktv","Citi HKTVMALL","Citibank","cashback","逢星期四HKTVmall 95折，其他0.4%",0.004,{onlineHKD:0.005},"星期四HKTVmall限定",false),
   mk("citi_club","Citi The Club","Citibank","cashback","賺Club積分兌換禮品，基本1%",0.01,{},null,true),
-  mk("dbs_live","DBS Live Fresh","DBS","cashback","自選類別5.4%(4揀1)，需App揀+單筆$300",0.004,{onlineHKD:0.054},"月度$4,000上限(5.4%)，需InstaRedeem 45日內領取",false),
-  mk("dbs_eminent","DBS Eminent Card","DBS","cashback","餐飲/健身/運動/醫療5%，每年登記一次+單筆滿$300",0.01,{dining:0.05},"VS卡月度$8,000/白金$4,000上限(5%)",false),
+  mk("dbs_live","DBS Live Fresh","DBS","cashback","自選類別5.4%(4揀1)，需App揀+單筆$300",0.004,{onlineHKD:0.054},"月度$4,000上限(5.4%)，需InstaRedeem 45日內領取",false,null,{onlineHKD:"⚠️ 需App揀自選類別+單筆滿$300"}),
+  mk("dbs_eminent","DBS Eminent Card","DBS","cashback","餐飲/健身/運動/醫療5%，每年登記一次+單筆滿$300",0.01,{dining:0.05},"VS卡月度$8,000/白金$4,000上限(5%)",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"}),
   mk("dbs_compass","DBS Compass Visa","DBS","cashback","逢星期三超市8%(滿$300)，其他0.4%",0.004,{supermarket:0.08},"超市$2,000/月上限(8%)，只限逢星期三，推廣至2026年5月",false,null,{supermarket:"⚠️ 只限逢星期三，單筆滿$300"}),
   mk("bea_goal","BEA GOAL","BEA","cashback","運動健身消費額外獎賞",0.004,{},null,true),
-  mk("bea_world","BEA World MC","BEA","cashback","食飯/海外/電器/健身/醫療5%，App登記一次+月簽$4,000",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"5%類別合計月度$10,000上限，不計歐洲及英國實體",false),
-  mk("bea_ititan","BEA i-Titanium","BEA","cashback","網購/手機支付4%，月簽$2,000自動享有",0.004,{onlineHKD:0.04,mobilePay:0.04},"月度回贈$300上限(≈簽$7,500)，需累積零售滿$2,000",false),
+  mk("bea_world","BEA World MC","BEA","cashback","食飯/海外/電器/健身/醫療5%，App登記一次+月簽$4,000",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"5%類別合計月度$10,000上限，不計歐洲及英國實體",false,null,{dining:"⚠️ 需App登記一次+月簽滿$4,000",onlineFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",physicalFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",travelJKSTA:"⚠️ 需App登記+月簽$4,000"}),
+  mk("bea_ititan","BEA i-Titanium","BEA","cashback","網購/手機支付4%，月簽$2,000自動享有",0.004,{onlineHKD:0.04,mobilePay:0.04},"月度回贈$300上限(≈簽$7,500)，需累積零售滿$2,000",false,null,{onlineHKD:"⚠️ 需當月累積零售簽滿$2,000",mobilePay:"⚠️ 需當月累積零售簽滿$2,000"}),
   mk("bea_uni","BEA 大學/大專卡","BEA","cashback","學生專屬，永久免年費",0.004,{},null,true),
-  mk("ds_wewa","安信 WeWa Visa Signature","Dah Sing","cashback","手機支付/旅遊/海外/網上娛樂4%(選1)，需滿$1,500/月",0.004,{travelJKSTA:0.04,physicalFX:0.04,onlineFX:0.04},"月度額外$200上限(~$5,556爆Cap)",false),
-  mk("ds_earnmore","安信 EarnMORE","Dah Sing","cashback","銀聯卡本地消費2%(恆常)，外幣淨1%(有1%手續費)",0.02,{onlineFX:0.01,physicalFX:0.01,travelJKSTA:0.01},"每半年$80,000上限(2%恆常)，海外額外5%加碼至2026年3月31日",false),
-  mk("cncbi_motion","信銀國際 Motion","CNCBI","cashback","食飯/網購高達6%，毋須登記，簽滿$3,800自動享有",0.004,{dining:0.06,onlineHKD:0.06},"月度額外$200上限(~$3,571爆Cap)，需當月簽滿$3,800",false),
+  mk("ds_wewa","安信 WeWa Visa Signature","Dah Sing","cashback","手機支付/旅遊/海外/網上娛樂4%(選1)，需滿$1,500/月",0.004,{travelJKSTA:0.04,physicalFX:0.04,onlineFX:0.04},"月度額外$200上限(~$5,556爆Cap)",false,null,{travelJKSTA:"⚠️ 需當月簽滿$1,500",physicalFX:"⚠️ 需當月簽滿$1,500",onlineFX:"⚠️ 需當月簽滿$1,500"}),
+  mk("ds_earnmore","安信 EarnMORE","Dah Sing","cashback","銀聯卡本地消費2%(恆常)，外幣淨1%(有1%手續費)",0.02,{onlineFX:0.01,physicalFX:0.01,travelJKSTA:0.01},"每半年$80,000上限(2%恆常)，海外額外5%加碼至2026年3月31日",false,null,{onlineFX:"⚠️ 外幣淨回贈1%（2%-1%手續費）",physicalFX:"⚠️ 外幣淨回贈1%（2%-1%手續費）"}),
+  mk("cncbi_motion","信銀國際 Motion","CNCBI","cashback","食飯/網購高達6%，毋須登記，簽滿$3,800自動享有",0.004,{dining:0.06,onlineHKD:0.06},"月度額外$200上限(~$3,571爆Cap)，需當月簽滿$3,800",false,null,{dining:"⚠️ 需當月累積簽滿$3,800",onlineHKD:"⚠️ 需當月累積簽滿$3,800"}),
   mk("cncbi_gba","信銀國際大灣區卡","CNCBI","cashback","大灣區/外幣消費額外回贈",0.004,{onlineFX:0.015},null,true),
   mk("ds_oneplus","大新 ONE+","Dah Sing","cashback","1%無上限現金回贈",0.01,{},null,true),
   mk("ds_myauto","大新 MyAuto 車主卡","Dah Sing","cashback","油站汽車消費額外回贈",0.004,{},null,true),
   mk("ds_kitty","大新 Hello Kitty 白金卡","Dah Sing","cashback","限定版收藏卡",0.004,{},null,true),
   mk("sim_card","sim Credit Card","sim","cashback","網購高達8%，需當月非網上簽滿$1,000解鎖，免入息證明",0.004,{onlineHKD:0.08},"月度回贈$200上限(≈簽$2,500)，需非網上簽滿$1,000",false,null,{onlineHKD:"⚠️ 需當月非網上簽賬滿$1,000先解鎖8%"}),
-  mk("mox_cb","MOX（CashBack）","Mox Bank","cashback","基本1%，超市3%（外幣1.95%手續費）",0.01,{supermarket:0.03,onlineFX:0.01,physicalFX:0.01},null,true),
+  mk("mox_cb","MOX（CashBack）","Mox Bank","cashback","基本1%，超市3%（外幣1.95%手續費）",0.01,{supermarket:0.03,onlineFX:0.01,physicalFX:0.01},null,true,null,{local:"💡 維持$250K存款可升至2%",supermarket:"💡 維持$250K存款可升至5%",dining:"💡 維持$250K存款可升至2%"}),
   mk("ccb_eye","建行 eye Visa Sig","CCB Asia","cashback","網購/拍卡2%，食飯高達11%(2%基本+9%加碼)",0.004,{onlineHKD:0.02,dining:0.11},"食飯需每月1號App搶名額(~2,500個)+月簽滿$8,000，月度回贈上限$800(≈簽$8,888)",false,null,{dining:"⚠️ 需每月1號App搶名額+月簽滿$8,000"}),
   mk("aeon_basic","AEON 信用卡","AEON","cashback","AEON商店95折優惠",0.004,{},null,true),
-  mk("aeon_waku","AEON WAKUWAKU","AEON","cashback","網購6%/日本3%/本地餐飲1%，永久免年費",0.004,{onlineHKD:0.06,travelJKSTA:0.03,dining:0.01},"月度上限，海外3%只限日本",false),
+  mk("aeon_waku","AEON WAKUWAKU","AEON","cashback","網購6%/日本3%/本地餐飲1%，永久免年費",0.004,{onlineHKD:0.06,travelJKSTA:0.03,dining:0.01},"月度上限，海外3%只限日本",false,null,{travelJKSTA:"⚠️ 3%只限日本實體簽賬，其他地區只有0.4%"}),
   mk("fubon_in","富邦 iN Visa 白金卡","Fubon","cashback","主打網購額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
-  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false),
+  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false,null,{travelJKSTA:"⚠️ 推廣期優惠，至2026年12月底",physicalFX:"⚠️ 推廣期優惠，至2026年12月底"}),
   mk("icbc_star","工銀亞洲星座卡","ICBC Asia","cashback","基本回贈卡",0.004,{},null,true),
   // ── PREMIER BANKING CARDS ──
   mk("hsbc_premier","HSBC Premier MC","HSBC","both","基本$25/里(0.4%)，最紅自主類別$4.17/里(2.4%)，八達通$25/里",0.004,{octopus:0.004},null,false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25}),
   mk("sc_priority","渣打 Priority Banking MC","Standard Chartered","miles","Priority客戶專屬，本地$8/里，海外$4/里",0.005,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_ultima","Citi Ultima","Citibank","miles","頂級卡，全部$4/里+免費機場貴賓室",0.012,{},null,true,{local:4,dining:4,onlineHKD:4,onlineFX:4,travelJKSTA:4,physicalFX:4}),
-  mk("hs_prestige","恒生 Prestige Visa Infinite","Hang Seng","both","Prestige客戶，海外5%/食飯5%",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"需簽滿$6,000/月，月度$500額外上限",false,{local:10,dining:2,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4}),
+  mk("hs_prestige","恒生 Prestige Visa Infinite","Hang Seng","both","Prestige客戶，海外5%/食飯5%",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"需簽滿$6,000/月，月度$500額外上限",false,{local:10,dining:2,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$6,000",onlineFX:"⚠️ 需月簽滿$6,000",physicalFX:"⚠️ 需月簽滿$6,000",travelJKSTA:"⚠️ 需月簽滿$6,000"}),
   mk("boc_emv","中銀 Visa Infinite","Bank of China","both","中銀私銀客戶，海外3X積分",0.004,{onlineFX:0.012,physicalFX:0.012,travelJKSTA:0.012},null,true,{local:10,dining:10,onlineHKD:10,onlineFX:5,travelJKSTA:5,physicalFX:5}),
   mk("bea_sup","BEA Supreme","BEA","miles","東亞頂級卡，海外$5/里+機場Lounge",0.005,{onlineFX:0.015,physicalFX:0.015,travelJKSTA:0.015},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:5,travelJKSTA:5,physicalFX:5}),
 ];
@@ -249,11 +249,18 @@ function doCalc(sc,amt,own,mode,vs,guru,moxTier){
     r.primary.overCap=amt>g.cap;
     r.primary.capAmt=g.cap;
   }
-  // If over cap and fallback exists, swap: show fallback as primary, original as note
-  if(r.primary&&r.primary.overCap&&r.fallback){
-    r.cappedOriginal=r.primary; // keep for reference
-    r.primary={...r.fallback,swappedFrom:r.cappedOriginal.card.name};
-    r.fallback=null;
+  // If over cap: swap to best available no-cap card
+  if(r.primary&&r.primary.overCap){
+    r.cappedOriginal=r.primary;
+    if(r.fallback){
+      // User owns a no-cap fallback → use it
+      r.primary={...r.fallback,swappedFrom:r.cappedOriginal.card.name};
+      r.fallback=null;
+    }else if(r.globalBest&&r.globalBest.card.id!==r.primary.card.id){
+      // User has no owned fallback → recommend globalBest (mark as not owned)
+      r.primary={...r.globalBest,swappedFrom:r.cappedOriginal.card.name,notOwned:!own.includes(r.globalBest.card.id),fxFee:FX_SCENARIOS.includes(sc)?getFxFee(r.globalBest.card,sc):0};
+      r.fallback=null;
+    }
   }
   return r;
 }
@@ -451,7 +458,7 @@ export default function App(){
 
   const p=res?.primary,fb=res?.fallback,gb=res?.globalBest,co=res?.cappedOriginal;
   const isCB=mode==="cashback";
-  const ownsG=gb&&p&&gb.card.id===p.card.id;
+  const ownsG=gb&&p&&gb.card.id===p.card.id&&own.includes(gb.card.id);
 
   // Tutorial flow (9 steps):
   // 0=off, 1=welcome, 2=Card Holder cards, 3=HSBC settings btn,
@@ -661,15 +668,25 @@ export default function App(){
               const mRebate=mLogs.reduce((s,l)=>s+l.rebate,0);
               const mMiles=mLogs.reduce((s,l)=>s+l.miles,0);
               if(mRebate===0&&mMiles===0)return null;
+              const cLvl=mRebate>=1000?"🍣":mRebate>=500?"🥩":mRebate>=300?"🔥":mRebate>=100?"💪":"🌱";
+              const mLvl=mMiles>=20000?"✈️":mMiles>=10000?"🛫":mMiles>=5000?"🎫":mMiles>=2000?"🎯":"🌱";
+              const cMsg=mRebate>=1000?"賺咗一餐 Omakase 🍣":mRebate>=500?"賺咗一餐靚晚餐 🥩":mRebate>=300?"夠食幾餐靚 lunch 🥘":mRebate>=100?"又多杯 Starbucks ☕":"繼續加油！";
+              const mMsg=mMiles>=20000?"夠換東京來回 🗼":mMiles>=10000?"好快可以飛啦 ✈️":mMiles>=5000?"儲緊機票錢 🌏":mMiles>=2000?"開始儲里出發 🧳":"";
+              const emoji=mMiles>=20000?mLvl:mRebate>=200?cLvl:mMiles>=5000?mLvl:cLvl;
+              const topMsg=mMiles>=20000?mMsg:(mRebate>=50?cMsg:(mMsg||cMsg));
               return(
-                <div onClick={()=>setTab("tracker")} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 14px",background:"#fff",borderRadius:16,boxShadow:S.shadow,cursor:"pointer"}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{fontSize:16}}>🎯</span>
-                    <span style={{fontSize:12,color:S.sec}}>本月已賺</span>
+                <div onClick={()=>setTab("tracker")} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 14px",background:"linear-gradient(135deg, #fff 0%, #F0FFF4 100%)",borderRadius:16,boxShadow:S.shadow,cursor:"pointer",border:"1px solid rgba(52,199,89,0.1)"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8,flex:1,minWidth:0}}>
+                    <span style={{fontSize:20}}>{mMiles>=5000?mLvl:cLvl}</span>
+                    <div style={{minWidth:0}}>
+                      <span style={{fontSize:13,fontWeight:700,color:S.dark}}>本月已賺</span>
+                      {cMsg&&<p style={{fontSize:10,color:S.green,fontWeight:600,marginTop:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{cMsg}</p>}
+                      {mMsg&&<p style={{fontSize:10,color:S.blue,fontWeight:600,marginTop:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{mMsg}</p>}
+                    </div>
                   </div>
                   <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    {mRebate>0&&<span style={{fontSize:14,fontWeight:700,color:S.green}}>+${mRebate.toFixed(0)}</span>}
-                    {mMiles>0&&<span style={{fontSize:14,fontWeight:700,color:S.blue}}>+{mMiles.toLocaleString()}里</span>}
+                    {mRebate>0&&<span style={{fontSize:15,fontWeight:800,color:S.green}}>+${mRebate.toFixed(0)}</span>}
+                    {mMiles>0&&<span style={{fontSize:15,fontWeight:800,color:S.blue}}>+{mMiles.toLocaleString()}里</span>}
                     <ChevronRight size={14} color={S.label}/>
                   </div>
                 </div>
@@ -718,7 +735,9 @@ export default function App(){
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:FX_SCENARIOS.includes(sc)?6:12}}>
                 <label style={{fontSize:13,fontWeight:400,color:S.sec,letterSpacing:-0.08}}>簽賬金額</label>
                 <div style={{display:"flex",alignItems:"center",gap:6}}>
-                  {FX_SCENARIOS.includes(sc)&&<button onClick={()=>{const curs=Object.keys(FX_RATES);const i=(curs.indexOf(fxCur)+1)%curs.length;setFxCur(curs[i]);}} style={{padding:"4px 10px",borderRadius:8,background:"rgba(0,122,255,0.06)",border:`1px solid rgba(0,122,255,0.15)`,fontSize:12,fontWeight:700,color:S.blue,cursor:"pointer"}}>{fxCur} ▾</button>}
+                  {FX_SCENARIOS.includes(sc)&&<select value={fxCur} onChange={e=>setFxCur(e.target.value)} style={{padding:"4px 8px",borderRadius:8,background:"rgba(0,122,255,0.06)",border:`1px solid rgba(0,122,255,0.15)`,fontSize:12,fontWeight:700,color:S.blue,cursor:"pointer",appearance:"auto",WebkitAppearance:"menulist"}}>
+                    {Object.keys(FX_RATES).map(c=><option key={c} value={c}>{c}</option>)}
+                  </select>}
                   <div style={{display:"flex",alignItems:"center",background:"rgba(118,118,128,0.12)",borderRadius:10,padding:"6px 12px"}}>
                     <span style={{fontSize:15,fontWeight:500,color:S.sec,marginRight:4}}>{fxCur==="HKD"?"$":fxCur}</span>
                   <input type="number" inputMode="numeric" value={amt||""} onChange={e=>setAmt(Math.max(0,parseInt(e.target.value)||0))} placeholder="0" style={{width:96,textAlign:"right",fontSize:17,fontWeight:600,background:"transparent",border:"none",outline:"none",color:S.blue,letterSpacing:-0.41}}/>
@@ -794,8 +813,9 @@ export default function App(){
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16}}>
                     <div>
                       <p style={{fontSize:11,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1.5}}>推薦使用</p>
-                      <h3 style={{fontSize:20,fontWeight:800,color:S.dark,marginTop:4,letterSpacing:-0.5}}>{p.card.name}</h3>
+                      <h3 style={{fontSize:20,fontWeight:800,color:S.dark,marginTop:4,letterSpacing:-0.5}}>{p.card.name}{p.notOwned&&<span style={{fontSize:11,fontWeight:600,color:"#FF9500",marginLeft:8,verticalAlign:"middle"}}>未持有</span>}</h3>
                       <p style={{fontSize:13,color:S.sec,marginTop:4,letterSpacing:-0.08}}>{p?getScenarioDesc(p.card,sc,p.rate,isCB,vs):""}</p>
+                      {p.notOwned&&<a href={`https://www.google.com/search?q=${encodeURIComponent(p.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:4,display:"inline-block"}}>了解更多 / 申請 →</a>}
                       {p.card.cond&&p.card.cond[sc]&&(
                         <div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:"#FFF8E1",border:"1px solid #FFE082",display:"inline-block"}}>
                           <span style={{fontSize:11,color:"#FF9500",fontWeight:600}}>{p.card.cond[sc]}</span>
@@ -856,12 +876,12 @@ export default function App(){
                       <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${fb.rate}/里`}</span>{fb.notOwned&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
                     </div>
                   )}
-                  {gb&&(
+                  {gb&&gb.card.id!==p.card.id&&(
                     <div style={{background:ownsG?"rgba(52,199,89,0.06)":"#FFFBEB",borderRadius:16,padding:12}}>
                       {ownsG?<p style={{fontSize:12,fontWeight:600,color:S.green}}>🎉 你已經擁有全城最抵嘅卡！</p>
                       :<div>
                         <p style={{fontSize:11,color:S.label,marginBottom:4}}>✨ 全城最抵</p>
-                        <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{gb.card.name} <span style={{color:"#FF9500"}}>{isCB?`${(gb.rate*100).toFixed(1)}%`:`$${gb.rate}/里`}</span></p>
+                        <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{gb.card.name} <span style={{color:"#FF9500"}}>{isCB?`${(gb.rate*100).toFixed(1)}%`:`$${gb.rate}/里`}</span>{!own.includes(gb.card.id)&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
                         <a href={`https://www.google.com/search?q=${encodeURIComponent(gb.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:6,display:"inline-block"}}>了解更多 / 申請 →</a>
                       </div>}
                     </div>
@@ -903,10 +923,17 @@ export default function App(){
                     {pExhausted&&<p style={{fontSize:11,color:"#FF9500",marginBottom:8}}>⚠️ 已簽 ${pSpent.toLocaleString()} / ${pCap.toLocaleString()}，建議用保底卡</p>}
                     <p style={{fontSize:10,color:S.label,marginBottom:6}}>撳下面揀用邊張卡記賬 ↓</p>
                     <div style={{display:"flex",gap:8}}>
-                      <button onClick={()=>{addLog(p.card.id,p.card.name,sc,amt,p.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,flex:1,padding:"13px 10px",background:pExhausted?"#F2F2F7":isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",color:pExhausted?S.label:"#fff",boxShadow:pExhausted?"none":isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)",borderRadius:14}}>
-                        <PlusCircle size={14} style={{flexShrink:0}}/>
-                        <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.card.name}</span>
-                      </button>
+                      {p.notOwned?(
+                        <div style={{flex:1,padding:"13px 10px",borderRadius:14,background:"#FFFBEB",border:"1px solid #FFE082",textAlign:"center"}}>
+                          <p style={{fontSize:12,fontWeight:600,color:"#FF9500"}}>你未持有 {p.card.name}</p>
+                          <a href={`https://www.google.com/search?q=${encodeURIComponent(p.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:4,display:"inline-block"}}>了解更多 / 申請 →</a>
+                        </div>
+                      ):(
+                        <button onClick={()=>{addLog(p.card.id,p.card.name,sc,amt,p.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,flex:1,padding:"13px 10px",background:pExhausted?"#F2F2F7":isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",color:pExhausted?S.label:"#fff",boxShadow:pExhausted?"none":isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)",borderRadius:14}}>
+                          <PlusCircle size={14} style={{flexShrink:0}}/>
+                          <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.card.name}</span>
+                        </button>
+                      )}
                       {fb&&(
                         <button onClick={()=>{addLog(fb.card.id,fb.card.name,sc,amt,fb.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,flex:1,padding:"13px 10px",background:pExhausted?isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)":"#F2F2F7",color:pExhausted?"#fff":S.sec,boxShadow:pExhausted?isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)":"none",borderRadius:14}}>
                           <PlusCircle size={14} style={{flexShrink:0}}/>
@@ -939,6 +966,26 @@ export default function App(){
 
             <a href="https://forms.gle/PwkderZ1RSDW7kRNA" target="_blank" rel="noopener noreferrer" style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,padding:12,borderRadius:12,background:"#fff",fontSize:15,fontWeight:400,color:S.sec,boxShadow:S.shadow,textDecoration:"none",letterSpacing:-0.24}}><MessageSquare size={15}/> 意見回饋 / 報 Bug <ExternalLink size={11}/></a>
             <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC"}}>admin@swipewhich.com</p>
+            <details style={{background:"#fff",borderRadius:16,overflow:"hidden",boxShadow:S.shadow}}>
+              <summary style={{padding:"12px 16px",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",listStyle:"none",display:"flex",justifyContent:"space-between",alignItems:"center"}}>📋 更新日誌 <span style={{fontSize:10,color:S.label}}>v1.4</span></summary>
+              <div style={{padding:"0 16px 14px",fontSize:11,color:S.sec,lineHeight:1.8}}>
+                <p style={{fontWeight:700,color:S.dark,marginTop:8}}>v1.4 — 2026年3月10日</p>
+                <p>• 63 張卡數據經三重驗證修正</p>
+                <p>• 最紅自主獎賞擴展至 5 個官方類別</p>
+                <p>• 新增 MOX 存款等級設定</p>
+                <p>• 23 張卡加入條件提示 Badge</p>
+                <p>• 超 Cap 自動推薦保底卡</p>
+                <p>• 外幣金額轉換器（12 種貨幣）</p>
+                <p>• 定期扣款自動記帳功能</p>
+                <p>• 記帳成就系統（回贈+里數雙軌）</p>
+                <p>• 攻略排行榜顯示最紅自主命中狀態</p>
+                <p style={{fontWeight:700,color:S.dark,marginTop:8}}>v1.3 — 2026年3月9日</p>
+                <p>• 首次發佈，63 張卡</p>
+                <p>• 計算器 + 記帳 + 攻略四大功能</p>
+                <p>• iOS 原生設計系統</p>
+                <p>• 9 步新手教學</p>
+              </div>
+            </details>
           </div>
         )}
 
@@ -1095,6 +1142,21 @@ export default function App(){
                 <button onClick={()=>setGuideMode("combo")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="combo"?S.dark:S.label}}>🏆 組合</button>
               </div>
 
+              {/* HSBC settings indicator */}
+              {(()=>{
+                const vsLabels={world:"🌍 賞世界",savour:"🍴 賞滋味",home:"🏠 賞家居",lifestyle:"🎬 賞享受",shopping:"🛍️ 賞購物"};
+                const guruLabels={L1:"Lv1 GO",L2:"Lv2 GING",L3:"Lv3 GURU"};
+                return(
+                <div onClick={()=>setTab("cards")} style={{padding:"8px 12px",borderRadius:12,background:"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <div style={{fontSize:11,color:S.sec}}>
+                    <span style={{fontWeight:600}}>HSBC 最紅自主：</span><span style={{color:S.blue,fontWeight:700}}>{vsLabels[vs]}</span>
+                    <span style={{marginLeft:8,fontWeight:600}}>Guru：</span><span style={{color:S.blue,fontWeight:700}}>{guruLabels[guru]}</span>
+                    {moxTier&&<span style={{marginLeft:8}}>· <span style={{fontWeight:600}}>MOX：</span><span style={{color:S.blue,fontWeight:700}}>$250K</span></span>}
+                  </div>
+                  <span style={{fontSize:10,color:S.blue}}>更改 →</span>
+                </div>);
+              })()}
+
               {/* Rankings or Combo View */}
               {guideMode==="combo"?(
                 <div style={{display:"flex",flexDirection:"column",gap:12}}>
@@ -1119,6 +1181,7 @@ export default function App(){
                                 <p style={{fontSize:13,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{best.card.name}</p>
                                 <p style={{fontSize:13,fontWeight:700,color:S.green}}>{(best.rate*100).toFixed(1)}%</p>
                                 <p style={{fontSize:8,color:best.card.capInfo?S.red:S.label,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{best.card.capInfo||best.card.desc}</p>
+                                {best.card.cond&&best.card.cond[s.id]&&<p style={{fontSize:8,color:"#FF9500",marginTop:1}}>{best.card.cond[s.id]}</p>}
                                 {own.includes(best.card.id)?<p style={{fontSize:8,color:S.green,marginTop:2}}>✓ 已持有</p>:<p style={{fontSize:8,color:"#FF9500",marginTop:2}}>未持有</p>}
                               </div>}
                               {fb&&fb.card.id!==best?.card.id&&<div style={{flex:1,padding:"8px 10px",borderRadius:12,background:S.bg,border:`1px solid ${S.sep}`}}>
@@ -1126,6 +1189,7 @@ export default function App(){
                                 <p style={{fontSize:13,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{fb.card.name}</p>
                                 <p style={{fontSize:13,fontWeight:700,color:S.sec}}>{(fb.rate*100).toFixed(1)}%</p>
                                 <p style={{fontSize:8,color:S.label,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{fb.card.desc}</p>
+                                {own.includes(fb.card.id)?<p style={{fontSize:8,color:S.green,marginTop:2}}>✓ 已持有</p>:<p style={{fontSize:8,color:"#FF9500",marginTop:2}}>未持有</p>}
                               </div>}
                             </div>
                           </div>
@@ -1138,6 +1202,7 @@ export default function App(){
                                 <p style={{fontSize:13,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{mBest.card.name}</p>
                                 <p style={{fontSize:13,fontWeight:700,color:S.blue}}>${mBest.rate.toFixed(1)}/里</p>
                                 <p style={{fontSize:8,color:mBest.card.capInfo?S.red:S.label,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{mBest.card.capInfo||mBest.card.desc}</p>
+                                {mBest.card.cond&&mBest.card.cond[s.id]&&<p style={{fontSize:8,color:"#FF9500",marginTop:1}}>{mBest.card.cond[s.id]}</p>}
                                 {own.includes(mBest.card.id)?<p style={{fontSize:8,color:S.green,marginTop:2}}>✓ 已持有</p>:<p style={{fontSize:8,color:"#FF9500",marginTop:2}}>未持有</p>}
                               </div>
                               {mFb&&mFb.card.id!==mBest.card.id&&<div style={{flex:1,padding:"8px 10px",borderRadius:12,background:S.bg,border:`1px solid ${S.sep}`}}>
@@ -1145,6 +1210,7 @@ export default function App(){
                                 <p style={{fontSize:13,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{mFb.card.name}</p>
                                 <p style={{fontSize:13,fontWeight:700,color:S.sec}}>${mFb.rate.toFixed(1)}/里</p>
                                 <p style={{fontSize:8,color:S.label,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{mFb.card.desc}</p>
+                                {own.includes(mFb.card.id)?<p style={{fontSize:8,color:S.green,marginTop:2}}>✓ 已持有</p>:<p style={{fontSize:8,color:"#FF9500",marginTop:2}}>未持有</p>}
                               </div>}
                             </div>
                           </div>}
@@ -1174,6 +1240,8 @@ export default function App(){
                         </div>
                         <p style={{fontSize:10,color:S.label,marginTop:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.desc}</p>
                         {item.card.capInfo&&<p style={{fontSize:9,color:S.red,marginTop:2}}>⚠️ {item.card.capInfo}</p>}
+                        {item.card.cond&&item.card.cond[guideSc]&&<p style={{fontSize:9,color:"#FF9500",marginTop:2}}>{item.card.cond[guideSc]}</p>}
+                        {(()=>{const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"],lifestyle:["local"],shopping:["onlineHKD"]};if(vsCards.includes(item.card.id)&&vsMap[vs]?.includes(guideSc))return <p style={{fontSize:9,color:S.green,marginTop:2}}>✓ 命中最紅自主「{({world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[vs]}」</p>;if(vsCards.includes(item.card.id))return <p style={{fontSize:9,color:S.label,marginTop:2}}>未命中最紅自主（此場景）</p>;return null;})()}
                       </div>
                       <div style={{textAlign:"right",flexShrink:0}}>
                         {isTop3?<div style={{padding:"6px 12px",borderRadius:12,background:isCBG?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",boxShadow:isCBG?"0 3px 8px rgba(52,199,89,0.25)":"0 3px 8px rgba(0,122,255,0.25)"}}>
@@ -1252,21 +1320,63 @@ export default function App(){
                 <div style={{width:36,height:4,borderRadius:2,background:"#E5E5EA",margin:"8px auto 0"}}/>
               </div>
 
-              {/* Month summary — clean white card */}
-              <div style={{background:"#fff",borderRadius:S.rad,padding:16,boxShadow:S.shadow}}>
-                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
-                  <div>
-                    <p style={{fontSize:11,fontWeight:600,color:S.label,textTransform:"uppercase",letterSpacing:1}}>總回贈</p>
-                    {monthRebate>0&&<p style={{fontSize:28,fontWeight:800,color:S.green,letterSpacing:-0.5,marginTop:2}}>+${monthRebate.toFixed(1)}</p>}
-                    {monthMiles>0&&<p style={{fontSize:22,fontWeight:700,color:S.blue,marginTop:monthRebate>0?4:2}}>+{monthMiles.toLocaleString()} 里</p>}
-                    {monthTotal===0&&<p style={{fontSize:22,color:S.label,marginTop:2}}>—</p>}
+              {/* Month summary — gamified card */}
+              {(()=>{
+                const cLvl=monthRebate>=1000?"🍣":monthRebate>=500?"🥩":monthRebate>=300?"🔥":monthRebate>=100?"💪":"🌱";
+                const mLvl=monthMiles>=20000?"✈️":monthMiles>=10000?"🛫":monthMiles>=5000?"🎫":monthMiles>=2000?"🎯":"🌱";
+                const cMsg=monthRebate>=1000?"賺咗一餐 Omakase 🍣":monthRebate>=500?"賺咗一餐靚晚餐 🥩":monthRebate>=300?"夠食幾餐靚 lunch 🥘":monthRebate>=100?"又多杯 Starbucks ☕":"";
+                const mMsg=monthMiles>=20000?"夠換東京來回 🗼":monthMiles>=10000?"好快可以飛啦 ✈️":monthMiles>=5000?"儲緊機票錢 🌏":monthMiles>=2000?"開始儲里出發 🧳":"";
+                const cPct=Math.min(100,monthRebate/1000*100);
+                const mPct=Math.min(100,monthMiles/20000*100);
+                return(
+                <div style={{background:"linear-gradient(135deg, #fff 0%, #F0FFF4 100%)",borderRadius:S.rad,padding:16,boxShadow:S.shadow,border:"1px solid rgba(52,199,89,0.08)"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+                    <div style={{flex:1,minWidth:0}}>
+                      {/* Show both achievement lines */}
+                      {cMsg&&<div style={{display:"flex",alignItems:"center",gap:4,marginBottom:2}}>
+                        <span style={{fontSize:18}}>{cLvl}</span>
+                        <p style={{fontSize:11,fontWeight:700,color:S.green}}>{cMsg}</p>
+                      </div>}
+                      {mMsg&&<div style={{display:"flex",alignItems:"center",gap:4,marginBottom:4}}>
+                        <span style={{fontSize:18}}>{mLvl}</span>
+                        <p style={{fontSize:11,fontWeight:700,color:S.blue}}>{mMsg}</p>
+                      </div>}
+                      {!cMsg&&!mMsg&&<p style={{fontSize:11,color:S.label,marginBottom:4}}>開始記帳，解鎖成就！</p>}
+                      {monthRebate>0&&<p style={{fontSize:32,fontWeight:800,color:S.green,letterSpacing:-0.5}}>+${monthRebate.toFixed(1)}</p>}
+                      {monthMiles>0&&<p style={{fontSize:22,fontWeight:700,color:S.blue,marginTop:monthRebate>0?4:0}}>+{monthMiles.toLocaleString()} 里</p>}
+                      {monthTotal===0&&<p style={{fontSize:22,color:S.label,marginTop:2}}>—</p>}
+                    </div>
+                    <div style={{textAlign:"right",flexShrink:0}}>
+                      <p style={{fontSize:11,fontWeight:600,color:S.label,textTransform:"uppercase",letterSpacing:1}}>總簽賬</p>
+                      <p style={{fontSize:20,fontWeight:700,color:S.dark,letterSpacing:-0.3,marginTop:2}}>${monthTotal.toLocaleString()}</p>
+                    </div>
                   </div>
-                  <div style={{textAlign:"right"}}>
-                    <p style={{fontSize:11,fontWeight:600,color:S.label,textTransform:"uppercase",letterSpacing:1}}>總簽賬</p>
-                    <p style={{fontSize:20,fontWeight:700,color:S.dark,letterSpacing:-0.3,marginTop:2}}>${monthTotal.toLocaleString()}</p>
-                  </div>
-                </div>
-              </div>
+                  {/* Cashback progress */}
+                  {monthRebate>0&&<div style={{marginTop:10}}>
+                    <p style={{fontSize:9,color:S.label,marginBottom:3}}>💰 現金回贈</p>
+                    <div style={{height:6,borderRadius:3,background:"rgba(52,199,89,0.1)",overflow:"hidden"}}>
+                      <div style={{height:6,borderRadius:3,background:"linear-gradient(90deg, #34C759, #28A745)",width:`${cPct}%`,transition:"width 0.5s ease"}}/>
+                    </div>
+                    <div style={{display:"flex",justifyContent:"space-between",marginTop:3}}>
+                      {[{a:100,l:"☕$100"},{a:300,l:"🥘$300"},{a:500,l:"🥩$500"},{a:1000,l:"🍣$1k"}].map(m=>(
+                        <span key={m.a} style={{fontSize:9,color:monthRebate>=m.a?S.green:S.label,fontWeight:monthRebate>=m.a?700:400}}>{m.l}</span>
+                      ))}
+                    </div>
+                  </div>}
+                  {/* Miles progress */}
+                  {monthMiles>0&&<div style={{marginTop:8}}>
+                    <p style={{fontSize:9,color:S.label,marginBottom:3}}>✈️ 飛行里數</p>
+                    <div style={{height:6,borderRadius:3,background:"rgba(0,122,255,0.08)",overflow:"hidden"}}>
+                      <div style={{height:6,borderRadius:3,background:"linear-gradient(90deg, #007AFF, #0056D6)",width:`${mPct}%`,transition:"width 0.5s ease"}}/>
+                    </div>
+                    <div style={{display:"flex",justifyContent:"space-between",marginTop:3}}>
+                      {[{a:2000,l:"🧳2k"},{a:5000,l:"🌏5k"},{a:10000,l:"🛫10k"},{a:20000,l:"✈️20k"}].map(m=>(
+                        <span key={m.a} style={{fontSize:9,color:monthMiles>=m.a?S.blue:S.label,fontWeight:monthMiles>=m.a?700:400}}>{m.l}</span>
+                      ))}
+                    </div>
+                  </div>}
+                </div>);
+              })()}
 
               {/* Manual entry button + form */}
               <div style={{background:"#fff",borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
