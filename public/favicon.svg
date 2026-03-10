@@ -1,0 +1,19 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007AFF"/><stop offset="100%" stop-color="#34C759"/></linearGradient>
+    <linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007AFF"/><stop offset="100%" stop-color="#34C759"/></linearGradient>
+    <filter id="g"><feDropShadow dx="-2" dy="10" stdDeviation="12" flood-opacity="0.25"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="136" y="180" width="240" height="145" rx="20" fill="rgba(255,255,255,0.15)" transform="rotate(-25 140 360)"/>
+  <rect x="136" y="180" width="240" height="145" rx="20" fill="rgba(255,255,255,0.3)" transform="rotate(-10 140 360)"/>
+  <g transform="rotate(5 140 360)">
+    <rect x="136" y="180" width="240" height="145" rx="24" fill="#FFFFFF" filter="url(#g)"/>
+    <path d="M 156 250 L 196 250 L 226 210 L 326 210" fill="none" stroke="#E5E5EA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 166 280 L 216 280 L 246 250" fill="none" stroke="#E5E5EA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="196" cy="250" r="4" fill="#D1D1D6"/>
+    <circle cx="216" cy="280" r="4" fill="#D1D1D6"/>
+    <circle cx="326" cy="210" r="4" fill="#34C759"/>
+    <path d="M 256 225 Q 256 250 231 250 Q 256 250 256 275 Q 256 250 281 250 Q 256 250 256 225 Z" fill="url(#ai)"/>
+  </g>
+</svg>
