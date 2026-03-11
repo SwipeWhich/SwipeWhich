@@ -11,8 +11,10 @@ function getExpiry(card){
   if(!card.exp)return null;
   const now=new Date();const exp=new Date(card.exp+"T23:59:59");
   const diff=Math.ceil((exp-now)/(1000*60*60*24));
-  if(diff<0)return{status:"expired",text:"⏰ 此優惠已過期，回贈率可能已更新",color:"#FF3B30"};
-  if(diff<=30)return{status:"soon",text:`⏳ 此優惠將於 ${diff} 天後到期（${card.exp.slice(5).replace("-","/")}）`,color:"#FF9500"};
+  const labels={hs_mmpower:"5%/6%回贈",hsbc_red:"指定商戶8%",ds_earnmore:"海外加碼",dbs_compass:"超市8%",ae_plat_charge:"外幣$2/里",fubon_plat:"日韓台加碼"};
+  const what=labels[card.id]||"優惠";
+  if(diff<0)return{status:"expired",text:`⏰ ${what}已過期，回贈率可能已更新`,color:"#FF3B30",short:`⏰ ${what}已過期`};
+  if(diff<=30)return{status:"soon",text:`⏳ ${what}將於 ${diff} 天後到期（${card.exp.slice(5).replace("-","/")}）`,color:"#FF9500",short:`⏳ ${what} ${card.exp.slice(5).replace("-","/")}到期`};
   return null;
 }
 
@@ -1278,7 +1280,7 @@ export default function App(){
                     <div style={{flex:1,minWidth:0}}>
                       <p style={{fontSize:15,fontWeight:sel?600:400,color:sel?S.dark:"#AEAEB2",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",letterSpacing:-0.24}}>{c.name}</p>
                       <p style={{fontSize:12,color:"#C7C7CC",marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.desc}</p>
-                      <div style={{marginTop:4,display:"flex",alignItems:"center",gap:6}}><Badge type={c.type}/>{(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:8,color:ex.color,fontWeight:600}}>{ex.status==="expired"?"⏰ 已過期":"⏳ 即將到期"}</span>:null;})()}</div>
+                      <div style={{marginTop:4,display:"flex",alignItems:"center",gap:6}}><Badge type={c.type}/>{(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:8,color:ex.color,fontWeight:600}}>{ex.short}</span>:null;})()}</div>
                     </div>
                     {sel?<div style={{width:24,height:24,borderRadius:12,background:S.blue,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Check size={14} color="#fff" strokeWidth={3}/></div>:<div style={{width:24,height:24,borderRadius:12,border:"2px solid #C7C7CC",flexShrink:0}}/>}
                   </button>
