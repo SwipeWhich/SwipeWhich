@@ -69,7 +69,7 @@ const CARDS=[
   mk("ae_blue","AE Blue Cash","American Express","cashback","1.2%所有消費，FCC 2%但CBF 0%",0.012,{},null,true),
   mk("sc_cathay","渣打國泰萬事達卡","Standard Chartered","miles","食飯/酒店/海外$4/里，其他$6/里",0.006,{dining:0.018,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:4,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("ds_ba","大新英國航空白金卡","Dah Sing","miles","Avios里數直接入賬，本地$6/Avios，外幣$4/Avios",0.006,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
-  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$0.71/里。每季需簽$12K豁免年費。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,onlineFX:5,travelJKSTA:0.71,physicalFX:0.71},{travelJKSTA:"⚠️ 加碼需登記Travel Guru，基本只有$5/里",physicalFX:"⚠️ 加碼需登記Travel Guru，基本只有$5/里"}),
+  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$0.71/里。每季需簽$12K豁免年費。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,octopus:12.5,onlineFX:5,travelJKSTA:0.71,physicalFX:0.71},{travelJKSTA:"⚠️ 加碼需登記Travel Guru，基本只有$5/里",physicalFX:"⚠️ 加碼需登記Travel Guru，基本只有$5/里"}),
   mk("citi_pm","Citi PremierMiles","Citibank","miles","外幣$4/里(滿$2萬$3/里)，里數永不過期",0.005,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_prestige","Citi Prestige","Citibank","miles","高端卡，外幣$4/里+酒店住四送一",0.006,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_rewards_m","Citi Rewards","Citibank","both","指定購物/娛樂$3/里(≈1.85%)，流動支付5X≈1%，其他$15/里",0.003,{onlineHKD:0.0185,mobilePay:0.01},null,true,{local:15,dining:15,onlineHKD:3,onlineFX:15,travelJKSTA:15,physicalFX:15}),
@@ -197,7 +197,6 @@ function getRate(c,s,vs,guru,moxTier,dbsLfFx){
 
 function getMPD(c,s,vs,guru,moxTier,dbsLfFx){
   if(!c.milesPerDollar)return null;
-  if(s==="octopus")return null;
   // MOX tiered
   if(c.id==="mox_miles"&&moxTier)return 4; // $4/里 with $250k savings
   const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
