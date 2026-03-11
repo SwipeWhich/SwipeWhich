@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { Wallet, Plane, Check, HelpCircle, X, AlertTriangle, MessageSquare, ExternalLink, RotateCcw, Calculator, BookOpen, PlusCircle, ClipboardList, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
 
-/* 碌邊張 SwipeWhich v1.4 © 2026 */
+/* 碌邊張 SwipeWhich v1.5 © 2026 */
 
 function mk(id,n,iss,ty,desc,base,ov,cap,nc,mpr,cond,exp){
   const cb={local:base,dining:base,onlineHKD:base,mobilePay:base,octopus:0,supermarket:base,onlineFX:base,travelJKSTA:base,physicalFX:base,...ov};
@@ -43,7 +43,8 @@ const CAP_AMT={
   boc_sogo:{mobilePay:2000},
   cncbi_motion:{dining:3571,onlineHKD:3571},
   dbs_live:{onlineHKD:4000},
-  dbs_eminent:{dining:8000},
+  dbs_eminent_vs:{dining:8000},
+  dbs_eminent_plat:{dining:4000},
   dbs_compass:{supermarket:2000},
   aeon_waku:{onlineHKD:3571,travelJKSTA:3571},
   ds_wewa:{travelJKSTA:5556,physicalFX:5556,onlineFX:5556},
@@ -66,7 +67,7 @@ const CARDS=[
   mk("ae_blue","AE Blue Cash","American Express","cashback","1.2%所有消費，FCC 2%但CBF 0%",0.012,{},null,true),
   mk("sc_cathay","渣打國泰萬事達卡","Standard Chartered","miles","食飯/酒店/海外$4/里，其他$6/里",0.006,{dining:0.018,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:4,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("ds_ba","大新英國航空白金卡","Dah Sing","miles","Avios里數直接入賬，本地$6/Avios，外幣$4/Avios",0.006,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
-  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$0.71/里。不適用最紅自主。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,onlineFX:5,travelJKSTA:0.71,physicalFX:0.71},{travelJKSTA:"⚠️ 加碼需登記Travel Guru，基本只有$5/里",physicalFX:"⚠️ 加碼需登記Travel Guru，基本只有$5/里"}),
+  mk("hsbc_everymile","HSBC EveryMile","HSBC","miles","本地$5/里(1%)，指定日常$2/里(2.5%)，海外配Travel Guru低至$0.71/里。每季需簽$12K豁免年費。",0.01,{physicalFX:0.01,travelJKSTA:0.01,octopus:0.004,supermarket:0.004},"年度簽$80,000豁免年費",false,{local:5,dining:5,onlineHKD:5,supermarket:12.5,onlineFX:5,travelJKSTA:0.71,physicalFX:0.71},{travelJKSTA:"⚠️ 加碼需登記Travel Guru，基本只有$5/里",physicalFX:"⚠️ 加碼需登記Travel Guru，基本只有$5/里"}),
   mk("citi_pm","Citi PremierMiles","Citibank","miles","外幣$4/里(滿$2萬$3/里)，里數永不過期",0.005,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_prestige","Citi Prestige","Citibank","miles","高端卡，外幣$4/里+酒店住四送一",0.006,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true,{local:6,dining:6,onlineHKD:6,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_rewards_m","Citi Rewards","Citibank","both","指定購物/娛樂$3/里(≈1.85%)，流動支付5X≈1%，其他$15/里",0.003,{onlineHKD:0.0185,mobilePay:0.01},null,true,{local:15,dining:15,onlineHKD:3,onlineFX:15,travelJKSTA:15,physicalFX:15}),
@@ -81,7 +82,7 @@ const CARDS=[
   mk("hsbc_pulse","HSBC 銀聯 Pulse","HSBC","cashback","銀聯雙幣，內地消費免手續費，可配最紅自主+Guru",0.004,{octopus:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_easy","HSBC easy 卡","HSBC","cashback","最紅自主2.4%，配合易賞錢最高4.8%，海外配Guru最高8.4%",0.004,{octopus:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_student","HSBC 學生卡","HSBC","cashback","大學生專屬，可配最紅自主+Travel Guru",0.004,{octopus:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
-  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，需每月登記",0.004,{onlineHKD:0.05,onlineFX:0.06},"需簽滿$5,000，月度$500額外上限，優惠至2026年3月31日",false,null,{onlineHKD:"⚠️ 需每月登記+月簽滿$5,000，優惠至2026/3/31",onlineFX:"⚠️ 需每月登記+月簽滿$5,000，優惠至2026/3/31"},"2026-03-31"),
+  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，一經登記即享，月簽$5K門檻",0.004,{onlineHKD:0.05,onlineFX:0.06},"需簽滿$5,000，月度$500額外上限，優惠至2026年3月31日",false,null,{onlineHKD:"⚠️ 一經登記+月簽滿$5,000，優惠至2026/3/31",onlineFX:"⚠️ 一經登記+月簽滿$5,000，優惠至2026/3/31"},"2026-03-31"),
   mk("hs_travel","恒生 Travel+","Hang Seng","cashback","日韓泰中台澳門實體7%，其他外幣/餐飲5%",0.004,{travelJKSTA:0.07,physicalFX:0.05,dining:0.05},"登記一次即可，簽滿$6,000起，月度$500額外上限，只計實體",false,null,{travelJKSTA:"⚠️ 需登記一次+月簽滿$6,000，只計實體",physicalFX:"⚠️ 需登記一次+月簽滿$6,000，只計實體",dining:"⚠️ 需登記一次+月簽滿$6,000"}),
   mk("hs_enjoy","恒生 enJoy 卡","Hang Seng","cashback","百佳屈臣氏豐澤指定商戶優惠",0.004,{},null,true),
   mk("hs_muji","恒生 Muji 卡","Hang Seng","cashback","MUJI消費額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
@@ -91,14 +92,16 @@ const CARDS=[
   mk("sc_apoint","渣打 A. Point Card","Standard Chartered","cashback","積分兌換禮品或現金回贈",0.004,{},null,true),
   mk("boc_sogo","中銀 SOGO Visa Sig","Bank of China","cashback","流動支付5.4%，SOGO消費額外積分",0.004,{mobilePay:0.054},"手機支付月度$2,000上限(額外5%)",false,null,{mobilePay:"💡 疊加狂賞派紅日可達5.4%+5%（需登記）",dining:"💡 疊加狂賞派紅日可+5%（需登記搶名額）"}),
   mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購/海外5%，Chill商戶10%(需月簽$1,500實體)，日常0.4%",0.004,{onlineHKD:0.05,onlineFX:0.05},"月度額外$150上限(~$3,260爆Cap)",false,null,{onlineHKD:"💡 疊加狂賞派紅日可達5%+5%=10%（需登記）",onlineFX:"💡 疊加狂賞飛可+高達6%（需登記搶名額）"}),
-  mk("boc_cheers","中銀 Cheers Card VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k月度上限，需簽滿$5,000/月",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞派紅日可+5%",onlineFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",physicalFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%"}),
+  mk("boc_cheers","中銀 Cheers VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%，年薪$60萬",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k月度上限，需簽滿$5,000/月",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞派紅日可+5%",onlineFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",physicalFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%"}),
+  mk("boc_cheers_vs","中銀 Cheers VS","Bank of China","both","食飯8X=$1.9/里或3.2%，外幣3.2%，年薪$15萬",0.004,{dining:0.032,onlineFX:0.032,physicalFX:0.032,travelJKSTA:0.032},"食飯$7.5k/外幣$18.75k月度上限，需簽滿$5,000/月",false,{local:10,dining:1.9,onlineHKD:10,onlineFX:4.7,travelJKSTA:4.7,physicalFX:4.7},{dining:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞派紅日可+5%",onlineFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",physicalFX:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡疊加狂賞飛可+6%"}),
   mk("boc_taobao","中銀淘寶卡","Bank of China","cashback","淘寶RMB消費0%手續費+額外積分",0.004,{onlineHKD:0.006},null,true,null,{onlineHKD:"💡 疊加狂賞派紅日可+5%（需登記搶名額）"}),
   mk("citi_cashback","Citi Cash Back","Citibank","cashback","食飯/酒店/外幣2%無上限，其他1%",0.01,{dining:0.02,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02},null,true),
   mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true,null,{octopus:"💡 車費15%回贈需所有Citi卡月簽滿$4,000"}),
   mk("citi_hktv","Citi HKTVMALL","Citibank","cashback","逢星期四HKTVmall 95折，其他0.4%",0.004,{onlineHKD:0.005},"星期四HKTVmall限定",false),
   mk("citi_club","Citi The Club","Citibank","cashback","賺Club積分兌換禮品，基本1%",0.01,{},null,true),
-  mk("dbs_live","DBS Live Fresh","DBS","cashback","自選類別5.4%(4揀1)，需App揀+單筆$300",0.004,{onlineHKD:0.054},"月度$4,000上限(5.4%)，需InstaRedeem 45日內領取",false,null,{onlineHKD:"⚠️ 需App揀自選類別+單筆滿$300"}),
-  mk("dbs_eminent","DBS Eminent Card","DBS","cashback","餐飲/健身/運動/醫療5%，每年登記一次+單筆滿$300",0.01,{dining:0.05},"VS卡月度$8,000/白金$4,000上限(5%)",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"}),
+  mk("dbs_live","DBS Live Fresh","DBS","cashback","自選類別網購5%+基本0.4%=5.4%，網上外幣1%無上限，揀外幣類達6%",0.004,{onlineHKD:0.054,onlineFX:0.01},"自選5%月度$4,000上限，需App揀+單筆$300，需InstaRedeem領",false,null,{onlineHKD:"⚠️ 需DBS Card+ App揀自選類別+單筆滿$300",onlineFX:"💡 揀「外幣」類別可達6%(5%+1%)"}),
+  mk("dbs_eminent_vs","DBS Eminent VS","DBS","cashback","餐飲/健身/運動/醫療5%，Visa Sig版，每年登記+單筆$300",0.01,{dining:0.05},"月度$8,000上限(5%)，其他首$20K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"}),
+  mk("dbs_eminent_plat","DBS Eminent 白金","DBS","cashback","餐飲/健身/運動/醫療5%，白金版，每年登記+單筆$300",0.01,{dining:0.05},"月度$4,000上限(5%)，其他首$15K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"}),
   mk("dbs_compass","DBS Compass Visa","DBS","cashback","逢星期三超市8%(滿$300)，其他0.4%",0.004,{supermarket:0.08},"超市$2,000/月上限(8%)，只限逢星期三，推廣至2026年5月",false,null,{supermarket:"⚠️ 只限逢星期三，單筆滿$300"},"2026-05-31"),
   mk("bea_goal","BEA GOAL","BEA","cashback","運動健身消費額外獎賞",0.004,{},null,true),
   mk("bea_world","BEA World MC","BEA","cashback","食飯/海外/電器/健身/醫療5%，App登記一次+月簽$4,000",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"5%類別合計月度$10,000上限，不計歐洲及英國實體",false,null,{dining:"⚠️ 需App登記一次+月簽滿$4,000",onlineFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",physicalFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",travelJKSTA:"⚠️ 需App登記+月簽$4,000"}),
@@ -106,7 +109,7 @@ const CARDS=[
   mk("bea_uni","BEA 大學/大專卡","BEA","cashback","學生專屬，永久免年費",0.004,{},null,true),
   mk("ds_wewa","安信 WeWa Visa Signature","Dah Sing","cashback","手機支付/旅遊/海外/網上娛樂4%(選1)，需滿$1,500/月",0.004,{travelJKSTA:0.04,physicalFX:0.04,onlineFX:0.04},"月度額外$200上限(~$5,556爆Cap)",false,null,{travelJKSTA:"⚠️ 需當月簽滿$1,500",physicalFX:"⚠️ 需當月簽滿$1,500",onlineFX:"⚠️ 需當月簽滿$1,500"}),
   mk("ds_earnmore","安信 EarnMORE","Dah Sing","cashback","銀聯卡本地消費2%(恆常)，外幣淨1%(有1%手續費)",0.02,{onlineFX:0.01,physicalFX:0.01,travelJKSTA:0.01},"每半年$80,000上限(2%恆常)，海外額外5%加碼至2026年3月31日",false,null,{onlineFX:"⚠️ 外幣淨回贈1%（2%-1%手續費）",physicalFX:"⚠️ 外幣淨回贈1%（2%-1%手續費）"},"2026-03-31"),
-  mk("cncbi_motion","信銀國際 Motion","CNCBI","cashback","食飯/網購高達6%，毋須登記，簽滿$3,800自動享有",0.004,{dining:0.06,onlineHKD:0.06},"月度額外$200上限(~$3,571爆Cap)，需當月簽滿$3,800",false,null,{dining:"⚠️ 需當月累積簽滿$3,800",onlineHKD:"⚠️ 需當月累積簽滿$3,800"}),
+  mk("cncbi_motion","信銀國際 Motion","CNCBI","cashback","食飯/網購6%（實際~5.7%因門檻>Cap），毋須登記",0.004,{dining:0.06,onlineHKD:0.06},"額外$200/月(簽$3,571爆Cap)，需當月零售簽滿$3,800",false,null,{dining:"⚠️ 需月簽滿$3,800，實際回贈約5.7%",onlineHKD:"⚠️ 需月簽滿$3,800，實際回贈約5.7%"}),
   mk("cncbi_gba","信銀國際大灣區卡","CNCBI","cashback","大灣區/外幣消費額外回贈",0.004,{onlineFX:0.015},null,true),
   mk("ds_oneplus","大新 ONE+","Dah Sing","cashback","1%無上限現金回贈",0.01,{},null,true),
   mk("ds_myauto","大新 MyAuto 車主卡","Dah Sing","cashback","油站汽車消費額外回贈",0.004,{},null,true),
@@ -115,16 +118,15 @@ const CARDS=[
   mk("mox_cb","MOX（CashBack）","Mox Bank","cashback","基本1%，超市3%（外幣1.95%手續費）",0.01,{supermarket:0.03,onlineFX:0.01,physicalFX:0.01},null,true,null,{local:"💡 維持$250K存款可升至2%",supermarket:"💡 維持$250K存款可升至5%",dining:"💡 維持$250K存款可升至2%"}),
   mk("ccb_eye","建行 eye Visa Sig","CCB Asia","cashback","網購/拍卡2%，食飯高達11%(2%基本+9%加碼)",0.004,{onlineHKD:0.02,dining:0.11},"食飯需每月1號App搶名額(~2,500個)+月簽滿$8,000，月度回贈上限$800(≈簽$8,888)",false,null,{dining:"⚠️ 需每月1號App搶名額+月簽滿$8,000"}),
   mk("aeon_basic","AEON 信用卡","AEON","cashback","AEON商店95折優惠",0.004,{},null,true),
-  mk("aeon_waku","AEON WAKUWAKU","AEON","cashback","網購6%/日本3%/本地餐飲1%，永久免年費",0.004,{onlineHKD:0.06,travelJKSTA:0.03,dining:0.01},"月度上限，海外3%只限日本",false,null,{travelJKSTA:"⚠️ 3%只限日本實體簽賬，其他地區只有0.4%"}),
+  mk("aeon_waku","AEON WAKUWAKU","AEON","cashback","網購6%/日本3%/本地餐飲1%，永久免年費",0.004,{onlineHKD:0.06,travelJKSTA:0.03,dining:0.01},"月度上限，海外3%只限日本",false,null,{onlineHKD:"⚠️ 以月結單日計算（非曆月）",travelJKSTA:"⚠️ 3%只限日本實體簽賬 · 以月結單日計算",dining:"⚠️ 以月結單日計算（非曆月）"}),
   mk("fubon_in","富邦 iN Visa 白金卡","Fubon","cashback","主打網購額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
-  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false,null,{travelJKSTA:"⚠️ 推廣期優惠，至2026年12月底",physicalFX:"⚠️ 推廣期優惠，至2026年12月底"},"2026-12-31"),
+  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false,null,{travelJKSTA:"⚠️ 推廣期優惠至2026年底 · 以月結單日計算",physicalFX:"⚠️ 推廣期優惠至2026年底 · 以月結單日計算"},"2026-12-31"),
   mk("icbc_star","工銀亞洲星座卡","ICBC Asia","cashback","基本回贈卡",0.004,{},null,true),
   // ── PREMIER BANKING CARDS ──
   mk("hsbc_premier","HSBC Premier MC","HSBC","both","基本$25/里(0.4%)，最紅自主類別$4.17/里(2.4%)，配Travel Guru海外最高8.4%",0.004,{octopus:0.004},null,false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3"}),
   mk("sc_priority","渣打 Priority Banking MC","Standard Chartered","miles","Priority客戶專屬，本地$8/里，海外$4/里",0.005,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("citi_ultima","Citi Ultima","Citibank","miles","頂級卡，全部$4/里+免費機場貴賓室",0.012,{},null,true,{local:4,dining:4,onlineHKD:4,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("hs_prestige","恒生 Prestige Visa Infinite","Hang Seng","both","Prestige客戶，海外5%/食飯5%",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"需簽滿$6,000/月，月度$500額外上限",false,{local:10,dining:2,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$6,000",onlineFX:"⚠️ 需月簽滿$6,000",physicalFX:"⚠️ 需月簽滿$6,000",travelJKSTA:"⚠️ 需月簽滿$6,000"}),
-  mk("boc_emv","中銀 Visa Infinite","Bank of China","both","中銀私銀客戶，海外3X積分",0.004,{onlineFX:0.012,physicalFX:0.012,travelJKSTA:0.012},null,true,{local:10,dining:10,onlineHKD:10,onlineFX:5,travelJKSTA:5,physicalFX:5},{physicalFX:"💡 疊加狂賞飛可+高達6%（需登記搶名額）",travelJKSTA:"💡 疊加狂賞飛可+高達6%（需登記搶名額）"}),
   mk("boc_bliss","中銀 Bliss Card","Bank of China","both","指定網購6%/$1里，其他網購4%/$1.5里，實體0.4%",0.004,{onlineHKD:0.04},"月度$10,000上限(網購)，指定商戶6%",false,{local:25,dining:25,onlineHKD:1.5,onlineFX:25,travelJKSTA:25,physicalFX:25},{onlineHKD:"💡 指定商戶(Amazon/FARFETCH等)可達6%，疊加狂賞派紅日+5%"}),
   mk("bea_sup","BEA Supreme","BEA","miles","東亞頂級卡，海外$5/里+機場Lounge",0.005,{onlineFX:0.015,physicalFX:0.015,travelJKSTA:0.015},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:5,travelJKSTA:5,physicalFX:5}),
 ];
@@ -144,10 +146,17 @@ const ALL_SCENARIOS=[...SCENARIOS,{id:"travelJKSTA",emoji:"🇯🇵",label:"日�
 const ISSUERS=["HSBC","American Express","Hang Seng","Standard Chartered","Bank of China","Citibank","DBS","BEA","Dah Sing","CNCBI","Mox Bank","CCB Asia","AEON","Fubon","ICBC Asia","sim"];
 const S={bg:"#F2F2F7",dark:"#1C1C1E",label:"#8E8E93",sec:"#3C3C43",sep:"rgba(0,0,0,0.05)",blue:"#007AFF",green:"#34C759",red:"#FF3B30",shadow:"0 14px 34px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)",rad:24};
 
-function getRate(c,s,vs,guru,moxTier){
+function getRate(c,s,vs,guru,moxTier,dbsLfFx){
   // MOX tiered rewards
   if(c.id==="mox_cb"&&moxTier)return s==="supermarket"?0.05:0.02; // 5% super, 2% others
   if(c.id==="mox_miles"&&moxTier)return 0.01; // $4/里 = 1.25% RC equivalent
+
+  // DBS Live Fresh self-select: 外幣=onlineFX 6%, 其他=onlineHKD 5.4%
+  if(c.id==="dbs_live"){
+    if(dbsLfFx&&s==="onlineFX")return 0.06; // 5% self-select + 1% FX base
+    if(dbsLfFx&&s==="onlineHKD")return 0.004; // base only when FX selected
+    // default: onlineHKD=0.054 from override, onlineFX=0.01 from override
+  }
 
   // 最紅自主獎賞 — 適用 VS/白金/金卡/easy/Premier/Pulse/Student (NOT Red, NOT EveryMile)
   const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
@@ -184,7 +193,7 @@ function getRate(c,s,vs,guru,moxTier){
   return c.cashback[s]||0;
 }
 
-function getMPD(c,s,vs,guru,moxTier){
+function getMPD(c,s,vs,guru,moxTier,dbsLfFx){
   if(!c.milesPerDollar)return null;
   if(s==="octopus")return null;
   // MOX tiered
@@ -224,24 +233,24 @@ function getMPD(c,s,vs,guru,moxTier){
   return mpd||null;
 }
 
-function doCalc(sc,amt,own,mode,vs,guru,moxTier){
+function doCalc(sc,amt,own,mode,vs,guru,moxTier,dbsLfFx){
   const r={primary:null,fallback:null,globalBest:null};
   if(!amt||amt<=0)return r;
   try{
     const oc=CARDS.filter(c=>own.includes(c.id));
     if(mode==="cashback"){
-      let b=null,br=-1;oc.forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier);if(x>br){br=x;b=c;}});
+      let b=null,br=-1;oc.forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx);if(x>br){br=x;b=c;}});
       if(b){const cap=CAP_AMT[b.id]&&CAP_AMT[b.id][sc];r.primary={card:b,rate:br,val:amt*br,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(b,sc):0,overCap:cap?amt>cap:false,capAmt:cap||0};}
       // Fallback: first try owned no-cap cards, then all cards
       if(b&&!b.noCap){
         let f=null,fr=-1;
-        oc.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier);if(x>fr){fr=x;f=c;}});
+        oc.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx);if(x>fr){fr=x;f=c;}});
         if(f){r.fallback={card:f,rate:fr,val:amt*fr,notOwned:false,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
-        else{CARDS.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier);if(x>fr){fr=x;f=c;}});if(f)r.fallback={card:f,rate:fr,val:amt*fr,notOwned:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
+        else{CARDS.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx);if(x>fr){fr=x;f=c;}});if(f)r.fallback={card:f,rate:fr,val:amt*fr,notOwned:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
       }
       // GlobalBest: find best card that can actually handle this amount
       let g=null,gr=-1;CARDS.forEach(c=>{
-        const x=getRate(c,sc,vs,guru,moxTier);
+        const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx);
         const cap=CAP_AMT[c.id]&&CAP_AMT[c.id][sc];
         if(cap&&amt>cap)return;
         if(["hsbc_everymile","hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"].includes(c.id)&&["physicalFX","travelJKSTA"].includes(sc)){
@@ -251,22 +260,22 @@ function doCalc(sc,amt,own,mode,vs,guru,moxTier){
         if(x>gr){gr=x;g=c;}
       });
       // If no uncapped card found, fallback to best noCap card
-      if(!g){CARDS.filter(c=>c.noCap).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier);if(x>gr){gr=x;g=c;}});}
+      if(!g){CARDS.filter(c=>c.noCap).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx);if(x>gr){gr=x;g=c;}});}
       if(g)r.globalBest={card:g,rate:gr,val:amt*gr};
     }else{
       const im=c=>c.type==="miles"||c.type==="both";
-      let b=null,bm=Infinity;oc.filter(im).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier);if(m&&m<bm){bm=m;b=c;}});
+      let b=null,bm=Infinity;oc.filter(im).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier,dbsLfFx);if(m&&m<bm){bm=m;b=c;}});
       if(b&&bm<Infinity){const cap=CAP_AMT[b.id]&&CAP_AMT[b.id][sc];r.primary={card:b,rate:bm,val:amt/bm,miles:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(b,sc):0,overCap:cap?amt>cap:false,capAmt:cap||0};}
       // Fallback: first try owned no-cap miles cards, then all
       if(b&&!b.noCap){
         let f=null,fm=Infinity;
-        oc.filter(c=>im(c)&&c.noCap&&c.id!==b.id).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier);if(m&&m<fm){fm=m;f=c;}});
+        oc.filter(c=>im(c)&&c.noCap&&c.id!==b.id).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier,dbsLfFx);if(m&&m<fm){fm=m;f=c;}});
         if(f&&fm<Infinity){r.fallback={card:f,rate:fm,val:amt/fm,miles:true,notOwned:false,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
-        else{CARDS.filter(c=>im(c)&&c.noCap&&c.id!==b.id).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier);if(m&&m<fm){fm=m;f=c;}});if(f&&fm<Infinity)r.fallback={card:f,rate:fm,val:amt/fm,miles:true,notOwned:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
+        else{CARDS.filter(c=>im(c)&&c.noCap&&c.id!==b.id).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier,dbsLfFx);if(m&&m<fm){fm=m;f=c;}});if(f&&fm<Infinity)r.fallback={card:f,rate:fm,val:amt/fm,miles:true,notOwned:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
       }
       // GlobalBest miles: check cap (including EveryMile dynamic cap)
       let g=null,gm=Infinity;CARDS.filter(im).forEach(c=>{
-        const m=getMPD(c,sc,vs,guru,moxTier);
+        const m=getMPD(c,sc,vs,guru,moxTier,dbsLfFx);
         const cap=CAP_AMT[c.id]&&CAP_AMT[c.id][sc];
         if(cap&&amt>cap)return;
         // EveryMile dynamic cap
@@ -276,7 +285,7 @@ function doCalc(sc,amt,own,mode,vs,guru,moxTier){
         }
         if(m&&m<gm){gm=m;g=c;}
       });
-      if(!g){CARDS.filter(c=>im(c)&&c.noCap).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier);if(m&&m<gm){gm=m;g=c;}});}
+      if(!g){CARDS.filter(c=>im(c)&&c.noCap).forEach(c=>{const m=getMPD(c,sc,vs,guru,moxTier,dbsLfFx);if(m&&m<gm){gm=m;g=c;}});}
       if(g&&gm<Infinity)r.globalBest={card:g,rate:gm,val:amt/gm,miles:true};
     }
   }catch(e){console.error(e);}
@@ -344,6 +353,9 @@ export default function App(){
   const[trackerSort,setTrackerSort]=useState("desc"); // "desc" high→low, "asc" low→high
   const[logDate,setLogDate]=useState(()=>new Date().toISOString().slice(0,10));
   const[logMemo,setLogMemo]=useState("");
+  const[logOther,setLogOther]=useState(false);
+  const[logCash,setLogCash]=useState(false);
+  // cycleDay removed — use calendar month, warn about statement dates
   const[manualOpen,setManualOpen]=useState(false);
   const[resetStep,setResetStep]=useState(0);
   const[manualAmt,setManualAmt]=useState("");
@@ -361,13 +373,15 @@ export default function App(){
   const[quickAmts,setQuickAmts]=useState([50,100,200,500,1000]);
   const[hsbcOpen,setHsbcOpen]=useState(false);
   const[moxTier,setMoxTier]=useState(false);
-  const[moxOpen,setMoxOpen]=useState(false); // false=basic, true=$250k savings
+  const[dbsLfFx,setDbsLfFx]=useState(false); // DBS Live Fresh: true=外幣類別, false=其他類別
+  const[moxOpen,setMoxOpen]=useState(false);
+  const[dbsOpen,setDbsOpen]=useState(false); // false=basic, true=$250k savings
   const[toast,setToast]=useState(null); // {msg, type}
   const[bankFilter,setBankFilter]=useState([]); // [] = show all, or array of issuer names
   const[histMonth,setHistMonth]=useState(()=>{const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}`;});
   // Tracker state
   const[logs,setLogs]=useState([]);
-  const[cycleDay,setCycleDay]=useState(1);
+  // cycleDay removed in v1.5
   const[recurring,setRecurring]=useState([]);
   const[recForm,setRecForm]=useState(null); // null or {memo,amount,day,cardName,sc} // [{id,cardId,cardName,sc,amount,memo,dayOfMonth,isMiles,rate}]
   const[loaded,setLoaded]=useState(false);
@@ -384,8 +398,8 @@ export default function App(){
         const already=logs.some(l=>l.memo===`🔄 ${r.memo}`&&l.date.startsWith(ym));
         if(!already){
           const card=CARDS.find(c=>c.id===r.cardId);
-          const rate=card?getRate(card,r.sc,vs,guru,moxTier):0;
-          const mpd=card?getMPD(card,r.sc,vs,guru,moxTier):null;
+          const rate=card?getRate(card,r.sc,vs,guru,moxTier,dbsLfFx):0;
+          const mpd=card?getMPD(card,r.sc,vs,guru,moxTier,dbsLfFx):null;
           const isMiles=!!mpd&&mpd<50;
           newLogs.push({id:Date.now()+Math.random(),cardId:r.cardId,cardName:r.cardName,scenario:r.sc,amount:r.amount,rate:isMiles?mpd:rate,rebate:isMiles?0:r.amount*rate,miles:isMiles?Math.round(r.amount/mpd):0,isMiles,date:dueDate+"T00:00:00.000Z",memo:`🔄 ${r.memo}`});
         }
@@ -404,7 +418,6 @@ export default function App(){
           if(!d._v||d._v<3){d.quickAmts=d.quickAmts||[50,100,200,500,1000];d.mode=d.mode||"cashback";d.recurring=d.recurring||[];d.moxTier=d.moxTier||false;d._v=3;}
           if(d.own)setOwn(d.own);
           if(d.logs)setLogs(d.logs);
-          if(d.cycleDay)setCycleDay(d.cycleDay);
           
           if(d.vs)setVs(d.vs);
           if(d.guru)setGuru(d.guru);
@@ -413,7 +426,7 @@ export default function App(){
           if(d.quickAmts&&Array.isArray(d.quickAmts))setQuickAmts(d.quickAmts);
           if(d.mode)setMode(d.mode);
           if(d.recurring&&Array.isArray(d.recurring))setRecurring(d.recurring);
-          if(d.moxTier)setMoxTier(d.moxTier);
+          if(d.moxTier)setMoxTier(d.moxTier);if(d.dbsLfFx)setDbsLfFx(d.dbsLfFx);
         }
       }catch(e){/* first time */}
       setLoaded(true);
@@ -426,19 +439,18 @@ export default function App(){
     clearTimeout(saveRef.current);
     saveRef.current=setTimeout(() => {
       try{
-        localStorage.setItem("sw_data",JSON.stringify({_v:3,own,logs,cycleDay,vs,guru,sMax:sMax>0?sMax:3000,seen,quickAmts,mode,recurring,moxTier}));
+        localStorage.setItem("sw_data",JSON.stringify({_v:3,own,logs,vs,guru,sMax:sMax>0?sMax:3000,seen,quickAmts,mode,recurring,moxTier,dbsLfFx}));
       }catch(e){}
     },500);
-  },[own,logs,cycleDay,vs,guru,sMax,seen,loaded,quickAmts,mode,recurring,moxTier]);
+  },[own,logs,vs,guru,sMax,seen,loaded,quickAmts,mode,recurring,moxTier,dbsLfFx]);
 
-  // Compute current billing cycle range
+  // Compute current calendar month range (v1.5: simplified, no cycleDay)
   const getCycleRange=useCallback(()=>{
     const now=new Date();
-    let start=new Date(now.getFullYear(),now.getMonth(),cycleDay);
-    if(now<start)start=new Date(now.getFullYear(),now.getMonth()-1,cycleDay);
-    let end=new Date(start.getFullYear(),start.getMonth()+1,cycleDay);
+    let start=new Date(now.getFullYear(),now.getMonth(),1);
+    let end=new Date(now.getFullYear(),now.getMonth()+1,1);
     return{start,end};
-  },[cycleDay]);
+  },[]);
 
   // Filter logs to current cycle
   const cycleLogs=useMemo(()=>{
@@ -487,7 +499,7 @@ export default function App(){
 
   useEffect(()=>{if(loaded&&!seen){setTut(1);setSeen(true);}},[loaded]);
 
-  const res=useMemo(()=>{try{return doCalc(sc,amt,own,mode,vs,guru,moxTier);}catch{return{primary:null,fallback:null,globalBest:null};}},[sc,amt,own,mode,vs,guru,moxTier]);
+  const res=useMemo(()=>{try{return doCalc(sc,amt,own,mode,vs,guru,moxTier,dbsLfFx);}catch{return{primary:null,fallback:null,globalBest:null};}},[sc,amt,own,mode,vs,guru,moxTier]);
   const toggle=useCallback(id=>setOwn(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]),[]);
   const noCards=own.length===0;
   const grouped=useMemo(()=>{const g={};CARDS.forEach(c=>{if(!g[c.issuer])g[c.issuer]=[];g[c.issuer].push(c);});return g;},[]);
@@ -737,7 +749,7 @@ export default function App(){
               <p style={{marginTop:16}}><strong>8. 管轄法律</strong><br/>本免責聲明及使用條款受香港特別行政區法律管轄，並按其詮釋。</p>
               <p style={{marginTop:16}}><strong>9. 聯絡我們</strong><br/>如有任何查詢、建議或投訴，請電郵至 <a href="mailto:admin@swipewhich.com" style={{color:S.blue}}>admin@swipewhich.com</a></p>
             </div>
-            <div style={{padding:"12px 20px",textAlign:"center",fontSize:11,color:"#C7C7CC",borderTop:`1px solid ${S.sep}`}}>v1.4.0 · 資料庫更新：2026年3月10日<br/>© 2026 碌邊張 SwipeWhich. All rights reserved.<br/>聯絡：admin@swipewhich.com</div>
+            <div style={{padding:"12px 20px",textAlign:"center",fontSize:11,color:"#C7C7CC",borderTop:`1px solid ${S.sep}`}}>v1.5.0 · 資料庫更新：2026年3月11日<br/>© 2026 碌邊張 SwipeWhich. All rights reserved.<br/>聯絡：admin@swipewhich.com</div>
             <div style={{padding:"0 20px 20px"}}><button onClick={()=>setModal(null)} style={{width:"100%",padding:14,borderRadius:S.rad,background:S.blue,color:"#fff",fontSize:15,fontWeight:600,border:"none",cursor:"pointer"}}>了解</button></div>
           </div>
         </div>
@@ -1049,25 +1061,62 @@ export default function App(){
                     </div>
                     {pExhausted&&<p style={{fontSize:11,color:"#FF9500",marginBottom:8}}>⚠️ 已簽 ${pSpent.toLocaleString()} / ${pCap.toLocaleString()}，建議用保底卡</p>}
                     <p style={{fontSize:10,color:S.label,marginBottom:6}}>撳下面揀用邊張卡記賬 ↓</p>
-                    <div style={{display:"flex",gap:8}}>
+                    {/* 2x2 grid: 推薦 | 保底 / 其他 | 現金 */}
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                      {/* Row 1 Left: 推薦卡 */}
                       {p.notOwned?(
-                        <div style={{flex:1,padding:"13px 10px",borderRadius:14,background:"#FFFBEB",border:"1px solid #FFE082",textAlign:"center"}}>
-                          <p style={{fontSize:12,fontWeight:600,color:"#FF9500"}}>你未持有 {p.card.name}</p>
-                          <a href={`https://www.google.com/search?q=${encodeURIComponent(p.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:4,display:"inline-block"}}>了解更多 / 申請 →</a>
+                        <div style={{padding:"12px 10px",borderRadius:14,background:"#FFFBEB",border:"1px solid #FFE082",textAlign:"center"}}>
+                          <p style={{fontSize:11,fontWeight:600,color:"#FF9500"}}>未持有 {p.card.name}</p>
                         </div>
                       ):(
-                        <button onClick={()=>{addLog(p.card.id,p.card.name,sc,amt,p.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,flex:1,padding:"13px 10px",background:pExhausted?"#F2F2F7":isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",color:pExhausted?S.label:"#fff",boxShadow:pExhausted?"none":isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)",borderRadius:14}}>
+                        <button onClick={()=>{addLog(p.card.id,p.card.name,sc,amt,p.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,padding:"12px 10px",background:pExhausted?"#F2F2F7":isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",color:pExhausted?S.label:"#fff",boxShadow:pExhausted?"none":isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)",borderRadius:14}}>
                           <PlusCircle size={14} style={{flexShrink:0}}/>
-                          <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.card.name}</span>
+                          <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",fontSize:12}}>{p.card.name}</span>
                         </button>
                       )}
-                      {fb&&(
-                        <button onClick={()=>{addLog(fb.card.id,fb.card.name,sc,amt,fb.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,flex:1,padding:"13px 10px",background:pExhausted?isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)":"#F2F2F7",color:pExhausted?"#fff":S.sec,boxShadow:pExhausted?isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)":"none",borderRadius:14}}>
-                          <PlusCircle size={14} style={{flexShrink:0}}/>
-                          <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>🛡️ {fb.card.name}</span>
+                      {/* Row 1 Right: 保底卡 */}
+                      {fb?(
+                        <button onClick={()=>{addLog(fb.card.id,fb.card.name,sc,amt,fb.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,padding:"12px 10px",background:pExhausted?isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)":"#F2F2F7",color:pExhausted?"#fff":S.sec,boxShadow:pExhausted?isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)":"none",borderRadius:14}}>
+                          <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",fontSize:12}}>🛡️ {fb.card.name}</span>
                         </button>
+                      ):(
+                        <div style={{padding:"12px 10px",borderRadius:14,background:"#F2F2F7",textAlign:"center"}}>
+                          <p style={{fontSize:11,color:S.label}}>冇保底卡</p>
+                        </div>
                       )}
+                      {/* Row 2 Left: 其他卡 */}
+                      <button onClick={()=>{setLogOther(o=>!o);setLogCash(false);}} style={{...btnBase,padding:"12px 10px",background:logOther?"rgba(0,122,255,0.08)":"#F2F2F7",color:S.dark,borderRadius:14,border:logOther?`2px solid ${S.blue}`:"2px solid transparent"}}>
+                        <span style={{fontSize:12}}>📋 {logOther?"收起":"其他卡"}</span>
+                      </button>
+                      {/* Row 2 Right: 現金/八達通 */}
+                      <button onClick={()=>{setLogCash(o=>!o);setLogOther(false);}} style={{...btnBase,padding:"12px 10px",background:logCash?"rgba(255,159,10,0.08)":"#F2F2F7",color:S.dark,borderRadius:14,border:logCash?`2px solid #FF9500`:"2px solid transparent"}}>
+                        <span style={{fontSize:12}}>💵 {logCash?"收起":"現金/其他"}</span>
+                      </button>
                     </div>
+                    {/* 現金/八達通/其他 expandable */}
+                    {logCash&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginTop:8}}>
+                      {[{id:"_cash",label:"💴 現金",emoji:"💴"},{id:"_octopus",label:"🐙 八達通",emoji:"🐙"},{id:"_other",label:"🔄 其他",emoji:"🔄"}].map(o=>
+                        <button key={o.id} onClick={()=>{addLog(o.id,o.label.slice(2),sc,amt,0,false,mkDate(),logMemo);setLogCash(false);scrollTop();}} style={{...btnBase,padding:"12px 8px",background:"#fff",color:S.dark,borderRadius:14,border:`1px solid ${S.sep}`,justifyContent:"center"}}>
+                          <span style={{fontSize:12}}>{o.label}</span>
+                        </button>
+                      )}
+                    </div>}
+                    {/* 其他卡 expandable list */}
+                    {logOther&&own.length>0&&<div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}}>
+                      {own.filter(id=>(!p||p.notOwned||id!==p.card.id)&&(!fb||id!==fb.card.id)).map(id=>{
+                        const c=CARDS.find(x=>x.id===id);
+                        if(!c)return null;
+                        const r=isCB?getRate(c,sc,vs,guru,moxTier,dbsLfFx):getMPD(c,sc,vs,guru,moxTier,dbsLfFx);
+                        if(!r||r<=0)return null;
+                        return <button key={id} onClick={()=>{addLog(c.id,c.name,sc,amt,r,!isCB,mkDate(),logMemo);setLogOther(false);scrollTop();}} style={{...btnBase,padding:"13px 14px",background:"#fff",color:S.dark,borderRadius:14,fontSize:13,justifyContent:"space-between",border:`1px solid ${S.sep}`}}>
+                          <span style={{display:"flex",alignItems:"center",gap:8,overflow:"hidden"}}>
+                            <PlusCircle size={14} style={{flexShrink:0,color:S.label}}/>
+                            <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.name}</span>
+                          </span>
+                          <span style={{color:isCB?S.green:S.blue,fontSize:12,fontWeight:700,flexShrink:0}}>{isCB?`${(r*100).toFixed(1)}%`:`$${parseFloat(r.toFixed(2))}/里`}</span>
+                        </button>;
+                      })}
+                    </div>}
                   </div>
                 );
               })():(
@@ -1155,6 +1204,7 @@ export default function App(){
                   <p style={{fontSize:15,fontWeight:600,letterSpacing:-0.24,color:S.sec}}>{iss}</p>
                   {iss==="HSBC"&&<button id="tut-hsbc-btn" onClick={()=>setHsbcOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:tut===3?"#fff":hsbcOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:hsbcOpen?S.blue:S.label,...hlStyle("hsbcbtn")}}>{hsbcOpen?"收起 ▲":"最紅自主 & Guru ⚙️"}</button>}
                   {iss==="Mox Bank"&&<button onClick={()=>setMoxOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:moxOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:moxOpen?S.blue:S.label}}>{moxOpen?"收起 ▲":"存款設定 ⚙️"}</button>}
+                  {iss==="DBS"&&own.includes("dbs_live")&&<button onClick={()=>setDbsOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:dbsOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:dbsOpen?S.blue:S.label}}>{dbsOpen?"收起 ▲":"Live Fresh 自選 ⚙️"}</button>}
                 </div>
                 {/* Step 2 inline tooltip — only when panel is closed */}
                 {iss==="HSBC"&&tut===3&&!hsbcOpen&&(
@@ -1200,6 +1250,16 @@ export default function App(){
                     </div>
                   </div>
                 )}
+                {iss==="DBS"&&dbsOpen&&own.includes("dbs_live")&&(
+                  <div style={{padding:"14px 16px",background:"rgba(0,122,255,0.02)",borderBottom:"1px solid rgba(0,0,0,0.06)"}}>
+                    <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>DBS Live Fresh 自選類別</p>
+                    <p style={{fontSize:10,color:S.label,marginBottom:8}}>喺 DBS Card+ App 登記嘅網上簽賬類別</p>
+                    <div style={{display:"flex",gap:8}}>
+                      <button onClick={()=>setDbsLfFx(false)} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:!dbsLfFx?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:!dbsLfFx?"rgba(0,122,255,0.06)":"#fff",color:!dbsLfFx?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>🎭 娛樂/服飾/旅遊</div><div style={{fontSize:9,marginTop:2,opacity:0.7}}>網購HKD 5.4%</div></button>
+                      <button onClick={()=>setDbsLfFx(true)} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx?"rgba(0,122,255,0.06)":"#fff",color:dbsLfFx?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>🌍 外幣</div><div style={{fontSize:9,marginTop:2,opacity:0.7}}>網上外幣 6%</div></button>
+                    </div>
+                  </div>
+                )}
                 {filteredGrouped[iss].map((c,i)=>{const sel=own.includes(c.id);return(
                   <button key={c.id} onClick={()=>toggle(c.id)} style={{width:"100%",display:"flex",alignItems:"center",gap:12,padding:"12px 16px",textAlign:"left",background:sel?"rgba(0,122,255,0.04)":"#fff",border:"none",borderBottom:i<filteredGrouped[iss].length-1?"0.5px solid rgba(60,60,67,0.12)":"none",cursor:"pointer",minHeight:44,boxSizing:"border-box"}}>
                     <div style={{flex:1,minWidth:0}}>
@@ -1215,7 +1275,7 @@ export default function App(){
             ))}
             <div style={{display:"flex",gap:8}}>
               <button onClick={()=>setTut(1)} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><HelpCircle size={14}/> 睇教學</button>
-              <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;setOwn([]);setAmt(0);setVs("world");setGuru("L3");setSMax(3000);setLogs([]);setCycleDay(1);setSeen(false);try{localStorage.removeItem("sw_data");}catch(e){}}} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
+              <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;setOwn([]);setAmt(0);setVs("world");setGuru("L3");setSMax(3000);setLogs([]);setSeen(false);try{localStorage.removeItem("sw_data");}catch(e){}}} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
             </div>
             <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:8}}>© 2026 碌邊張 SwipeWhich · v1.4</p>
           </div>
@@ -1227,9 +1287,9 @@ export default function App(){
           const isCBG=guideMode==="cashback"||guideMode==="combo";
           let ranked=[];
           if(guideMode==="cashback"||guideMode==="combo"){
-            ranked=CARDS.map(c=>{const r=getRate(c,guideSc,vs,guru,moxTier);return{card:c,rate:r,val:r};}).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
+            ranked=CARDS.map(c=>{const r=getRate(c,guideSc,vs,guru,moxTier,dbsLfFx);return{card:c,rate:r,val:r};}).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
           }else{
-            ranked=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>{const m=getMPD(c,guideSc,vs,guru,moxTier);return{card:c,rate:m,val:m};}).filter(x=>x.rate&&x.rate<Infinity&&x.rate<50).sort((a,b)=>a.rate-b.rate);
+            ranked=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>{const m=getMPD(c,guideSc,vs,guru,moxTier,dbsLfFx);return{card:c,rate:m,val:m};}).filter(x=>x.rate&&x.rate<Infinity&&x.rate<50).sort((a,b)=>a.rate-b.rate);
           }
           const scenarioLabel=ALL_SCENARIOS.find(s=>s.id===guideSc);
           return(
@@ -1269,16 +1329,18 @@ export default function App(){
                 <button onClick={()=>setGuideMode("combo")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="combo"?S.dark:S.label}}>🏆 組合</button>
               </div>
 
-              {/* HSBC settings indicator */}
+              {/* Settings indicator */}
               {(()=>{
                 const vsLabels={world:"🌍 賞世界",savour:"🍴 賞滋味",home:"🏠 賞家居",lifestyle:"🎬 賞享受",shopping:"🛍️ 賞購物"};
                 const guruLabels={L1:"Lv1 GO",L2:"Lv2 GING",L3:"Lv3 GURU"};
+                const dbsLfLabel=dbsLfFx?"🌍 外幣6%":"🎭 娛樂/服飾5.4%";
                 return(
                 <div onClick={()=>setTab("cards")} style={{padding:"8px 12px",borderRadius:12,background:"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                  <div style={{fontSize:11,color:S.sec}}>
-                    <span style={{fontWeight:600}}>HSBC 最紅自主：</span><span style={{color:S.blue,fontWeight:700}}>{vsLabels[vs]}</span>
-                    <span style={{marginLeft:8,fontWeight:600}}>Guru：</span><span style={{color:S.blue,fontWeight:700}}>{guruLabels[guru]}</span>
-                    {moxTier&&<span style={{marginLeft:8}}>· <span style={{fontWeight:600}}>MOX：</span><span style={{color:S.blue,fontWeight:700}}>$250K</span></span>}
+                  <div style={{fontSize:11,color:S.sec,lineHeight:1.6}}>
+                    <span style={{fontWeight:600}}>HSBC：</span><span style={{color:S.blue,fontWeight:700}}>{vsLabels[vs]}</span>
+                    <span style={{marginLeft:6,fontWeight:600}}>Guru：</span><span style={{color:S.blue,fontWeight:700}}>{guruLabels[guru]}</span>
+                    {moxTier&&<span style={{marginLeft:6}}>· <span style={{fontWeight:600}}>MOX：</span><span style={{color:S.blue,fontWeight:700}}>$250K</span></span>}
+                    {own.includes("dbs_live")&&<><br/><span style={{fontWeight:600}}>DBS Live Fresh：</span><span style={{color:S.blue,fontWeight:700}}>{dbsLfLabel}</span></>}
                   </div>
                   <span style={{fontSize:10,color:S.blue}}>更改 →</span>
                 </div>);
@@ -1288,9 +1350,9 @@ export default function App(){
               {guideMode==="combo"?(
                 <div style={{display:"flex",flexDirection:"column",gap:12}}>
                   {ALL_SCENARIOS.map(s=>{
-                    const cbRank=CARDS.map(c=>({card:c,rate:getRate(c,s.id,vs,guru,moxTier)})).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
+                    const cbRank=CARDS.map(c=>({card:c,rate:getRate(c,s.id,vs,guru,moxTier,dbsLfFx)})).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
                     const best=cbRank[0];const fb=cbRank.find(x=>x.card.noCap&&x.card.id!==(best?.card.id));
-                    const miRank=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>({card:c,rate:getMPD(c,s.id,vs,guru,moxTier)})).filter(x=>x.rate&&x.rate<50).sort((a,b)=>a.rate-b.rate);
+                    const miRank=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>({card:c,rate:getMPD(c,s.id,vs,guru,moxTier,dbsLfFx)})).filter(x=>x.rate&&x.rate<50).sort((a,b)=>a.rate-b.rate);
                     const mBest=miRank[0];const mFb=miRank.find(x=>x.card.noCap&&x.card.id!==(mBest?.card.id));
                     return(
                       <div key={s.id} style={{background:"#fff",borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
@@ -1392,8 +1454,8 @@ export default function App(){
         {tab==="tracker"&&(()=>{
           const[y,m]=histMonth.split("-").map(Number);
           const shiftMonth=(d)=>{const dt=new Date(y,m-1+d,1);setHistMonth(`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}`);};
-          const monthStart=new Date(y,m-1,cycleDay);
-          const monthEnd=new Date(y,m,cycleDay);
+          const monthStart=new Date(y,m-1,1);
+          const monthEnd=new Date(y,m,1);
           const monthLogs=logs.filter(l=>{const d=new Date(l.date);return d>=monthStart&&d<monthEnd;}).sort((a,b)=>new Date(b.date)-new Date(a.date));
           const monthTotal=monthLogs.reduce((s,l)=>s+l.amount,0);
           const monthRebate=monthLogs.reduce((s,l)=>s+(l.rebate||0),0);
@@ -1438,10 +1500,9 @@ export default function App(){
                   <div style={{flex:1,textAlign:"center",userSelect:"none"}}>
                     <p style={{fontSize:18,fontWeight:700,color:S.dark,letterSpacing:-0.3}}>{y}年{m}月</p>
                     <p style={{fontSize:11,color:S.label}}>
-                      截數日：
-                      <input type="number" min={1} max={28} value={cycleDay} onChange={e=>setCycleDay(Math.min(28,Math.max(1,parseInt(e.target.value)||1)))} style={{width:28,background:"transparent",border:"none",outline:"none",textAlign:"center",fontSize:11,fontWeight:700,color:S.blue}}/>
-                      號 · {monthLogs.length} 筆
+                      曆月計算 · {monthLogs.length} 筆
                     </p>
+                    <p style={{fontSize:9,color:"#C7C7CC",marginTop:2}}>⚠️ 部分銀行以月結單日（非曆月）計算上限</p>
                   </div>
                   <button onClick={()=>shiftMonth(1)} disabled={histMonth>=curKey} style={{padding:8,background:"none",border:"none",cursor:histMonth>=curKey?"default":"pointer",opacity:histMonth>=curKey?0.3:1,flexShrink:0}}><ChevronRight size={20} color={S.sec}/></button>
                 </div>
@@ -1774,8 +1835,7 @@ export default function App(){
 
               <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:8,lineHeight:1.5}}>所有資料保存喺你裝置本地瀏覽器<br/>清除瀏覽器數據會消失 · 建議定期匯出備份</p>
               <div style={{display:"flex",gap:8}}>
-                <button onClick={()=>{try{const d=JSON.stringify({_v:2,own,logs,cycleDay,vs,guru,sMax,seen,quickAmts,mode,recurring,moxTier},null,2);const b=new Blob([d],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=`swipewhich_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();showToast("✅ 備份已下載");}catch(e){showToast("❌ 匯出失敗");}}} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.blue,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>📤 匯出備份</button>
-                <label style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.green,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>📥 匯入備份<input type="file" accept=".json" style={{display:"none"}} onChange={e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.own)setOwn(d.own);if(d.logs)setLogs(d.logs);if(d.cycleDay)setCycleDay(d.cycleDay);if(d.vs)setVs(d.vs);if(d.guru)setGuru(d.guru);if(d.sMax)setSMax(d.sMax);if(d.quickAmts)setQuickAmts(d.quickAmts);if(d.mode)setMode(d.mode);if(d.recurring)setRecurring(d.recurring);if(d.moxTier)setMoxTier(d.moxTier);showToast("✅ 備份已匯入");}catch(err){showToast("❌ 檔案格式錯誤");}};r.readAsText(f);e.target.value="";}}/></label>
+                <button onClick={()=>{try{const d=JSON.stringify({_v:2,own,logs,vs,guru,sMax,seen,quickAmts,mode,recurring,moxTier,dbsLfFx},null,2);const b=new Blob([d],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=`swipewhich_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();showToast("✅ 備份已下載");}catch(e){showToast("❌ 匯出失敗");}}} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.blue,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>📤 匯出備份</button>
               </div>
               {/* Triple-confirm reset */}
               {resetStep===0&&(
