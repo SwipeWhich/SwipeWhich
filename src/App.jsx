@@ -1143,8 +1143,21 @@ export default function App(){
             <a href="https://forms.gle/PwkderZ1RSDW7kRNA" target="_blank" rel="noopener noreferrer" style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,padding:12,borderRadius:12,background:"#fff",fontSize:15,fontWeight:400,color:S.sec,boxShadow:S.shadow,textDecoration:"none",letterSpacing:-0.24}}><MessageSquare size={15}/> 意見回饋 / 報 Bug <ExternalLink size={11}/></a>
             <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC"}}>admin@swipewhich.com</p>
             <details style={{background:"#fff",borderRadius:16,overflow:"hidden",boxShadow:S.shadow}}>
-              <summary style={{padding:"12px 16px",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",listStyle:"none",display:"flex",justifyContent:"space-between",alignItems:"center"}}>📋 更新日誌 <span style={{fontSize:10,color:S.label}}>v1.4</span></summary>
+              <summary style={{padding:"12px 16px",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",listStyle:"none",display:"flex",justifyContent:"space-between",alignItems:"center"}}>📋 更新日誌 <span style={{fontSize:10,color:S.label}}>v1.5</span></summary>
               <div style={{padding:"0 16px 14px",fontSize:11,color:S.sec,lineHeight:1.8}}>
+                <p style={{fontWeight:700,color:S.dark,marginTop:8}}>v1.5 — 2026年3月11日</p>
+                <p>• 65 張卡（+BOC Cheers VS、DBS Eminent 白金、BOC Bliss）</p>
+                <p>• HSBC Travel Guru 疊加所有最紅自主卡（VS 最高 9.6%）</p>
+                <p>• DBS Live Fresh 自選類別設定（外幣6%/娛樂5.4%）</p>
+                <p>• DBS Eminent 拆分 VS ($8K) + 白金 ($4K)</p>
+                <p>• BOC Cheers 拆分 VI (4%) + VS (3.2%)</p>
+                <p>• MMPOWER/Motion/AEON/Fubon 回贈條件修正</p>
+                <p>• 記帳新增「其他卡」+「現金/八達通/其他」選項</p>
+                <p>• 推廣到期提醒系統（6 張卡）</p>
+                <p>• PWA 加入主畫面教學（iOS + Android）</p>
+                <p>• 攻略 banner 顯示 DBS 自選設定</p>
+                <p>• 刪除截數日設定，改為月結單日提示</p>
+                <p>• BOC 狂賞派/狂賞飛 cond 提示</p>
                 <p style={{fontWeight:700,color:S.dark,marginTop:8}}>v1.4 — 2026年3月10日</p>
                 <p>• 63 張卡數據經三重驗證修正</p>
                 <p>• 最紅自主獎賞擴展至 5 個官方類別</p>
@@ -1277,7 +1290,7 @@ export default function App(){
               <button onClick={()=>setTut(1)} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><HelpCircle size={14}/> 睇教學</button>
               <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;setOwn([]);setAmt(0);setVs("world");setGuru("L3");setSMax(3000);setLogs([]);setSeen(false);try{localStorage.removeItem("sw_data");}catch(e){}}} style={{flex:1,padding:12,borderRadius:S.rad,background:"#fff",border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
             </div>
-            <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:8}}>© 2026 碌邊張 SwipeWhich · v1.4</p>
+            <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:8}}>© 2026 碌邊張 SwipeWhich · v1.5</p>
           </div>
         )}
 
@@ -1446,7 +1459,7 @@ export default function App(){
               {ranked.length>20&&<p style={{textAlign:"center",fontSize:11,color:S.label}}>顯示頭 20 張最佳卡片</p>}
               </div>)}
 
-              <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:16}}>© 2026 碌邊張 SwipeWhich · v1.4</p>
+              <p style={{textAlign:"center",fontSize:10,color:"#C7C7CC",padding:16}}>© 2026 碌邊張 SwipeWhich · v1.5</p>
             </div>
           );
         })()}
