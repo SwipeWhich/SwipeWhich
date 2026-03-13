@@ -1054,7 +1054,7 @@ export default function App(){
             })()}
 
             {/* Wallet + Scenario area (highlighted together in tutorial) */}
-            <div style={tut===4?{position:"relative",zIndex:9990,outline:"3px solid #007AFF",outlineOffset:4,borderRadius:20,padding:2,background:S.bg}:{}}>
+            <div style={{display:"flex",flexDirection:"column",gap:10,...(tut===4?{position:"relative",zIndex:9990,outline:"3px solid #007AFF",outlineOffset:4,borderRadius:20,padding:2,background:S.bg}:{})}}>
 
             {/* Wallet Cheat Sheet */}
             {own.length>=2&&<div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
@@ -2144,21 +2144,26 @@ export default function App(){
 
               {/* Recurring entries management */}
               <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
-                <div style={{padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:(recurring.length>0||recForm)?`1px solid ${S.sep}`:"none"}}>
+                <button onClick={()=>setRecForm(recForm?null:{memo:"",amount:"",day:"1",cardId:"",cardName:"",sc:"onlineHKD",isMiles:false,currency:"HKD"})} style={{width:"100%",padding:"12px 16px",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:(recurring.length>0||recForm)?`1px solid ${S.sep}`:"none"}}>
                   <div style={{display:"flex",alignItems:"center",gap:8}}>
                     <span style={{fontSize:16}}>🔄</span>
                     <span style={{fontSize:14,fontWeight:600,color:S.dark}}>定期扣款</span>
                     {recurring.length>0&&<span style={{fontSize:11,color:S.label}}>{recurring.length} 項</span>}
                   </div>
-                  <button onClick={()=>setRecForm(recForm?null:{memo:"",amount:"",day:"1",cardId:"",cardName:"",sc:"onlineHKD"})} style={{padding:"6px 12px",borderRadius:10,background:recForm?"rgba(255,59,48,0.06)":S.bg,border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:recForm?S.red:S.blue}}>{recForm?"取消":"＋ 新增"}</button>
-                </div>
+                  <span style={{fontSize:12,color:recForm?S.red:S.label}}>{recForm?"取消":"＋"}</span>
+                </button>
                 {/* Inline add form */}
-                {recForm&&(
+                {recForm&&(()=>{
+                  const isFx=FX_SCENARIOS.includes(recForm.sc);
+                  return(
                   <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)"}}>
                     <div style={{display:"flex",gap:8,marginBottom:8}}>
                       <input type="text" value={recForm.memo} onChange={e=>setRecForm(p=>({...p,memo:e.target.value}))} placeholder="洗費 (e.g. YouTube)" style={{flex:1,padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,minWidth:0}}/>
-                      <div style={{width:90,display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0}}>
-                        <span style={{fontSize:12,color:S.label}}>$</span>
+                      <div style={{display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0,minWidth:isFx?130:90}}>
+                        {isFx&&<select value={recForm.currency||"HKD"} onChange={e=>setRecForm(p=>({...p,currency:e.target.value}))} style={{border:"none",outline:"none",fontSize:11,fontWeight:700,color:S.blue,background:"transparent",appearance:"auto",padding:0}}>
+                          {["HKD","USD","JPY","EUR","GBP","CNY","TWD","THB","KRW","SGD","AUD","CAD"].map(c=><option key={c} value={c}>{c}</option>)}
+                        </select>}
+                        {!isFx&&<span style={{fontSize:12,color:S.label}}>$</span>}
                         <input type="number" value={recForm.amount} onChange={e=>setRecForm(p=>({...p,amount:e.target.value}))} placeholder="金額" style={{width:"100%",border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,background:"transparent"}}/>
                       </div>
                     </div>
@@ -2173,19 +2178,23 @@ export default function App(){
                         {CARDS.filter(c=>own.includes(c.id)).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
                       </select>
                     </div>
+                    <div style={{display:"flex",gap:6,marginBottom:8}}>
+                      <button onClick={()=>setRecForm(p=>({...p,isMiles:false}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:!recForm.isMiles?`2px solid ${S.green}`:`2px solid ${S.sep}`,background:!recForm.isMiles?"rgba(52,199,89,0.06)":S.card,color:!recForm.isMiles?S.green:S.label,cursor:"pointer"}}>💰 現金回贈</button>
+                      <button onClick={()=>setRecForm(p=>({...p,isMiles:true}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:recForm.isMiles?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:recForm.isMiles?"rgba(0,122,255,0.06)":S.card,color:recForm.isMiles?S.blue:S.label,cursor:"pointer"}}>✈️ 飛行里數</button>
+                    </div>
                     <div style={{display:"flex",gap:4,marginBottom:10,overflowX:"auto"}}>
                       {SCENARIOS.map(s=>(
-                        <button key={s.id} onClick={()=>setRecForm(p=>({...p,sc:s.id}))} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:recForm.sc===s.id?"rgba(0,122,255,0.08)":S.card,color:recForm.sc===s.id?S.blue:S.label,border:recForm.sc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
+                        <button key={s.id} onClick={()=>setRecForm(p=>({...p,sc:s.id,currency:FX_SCENARIOS.includes(s.id)?(p.currency==="HKD"?"USD":p.currency):"HKD"}))} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:recForm.sc===s.id?"rgba(0,122,255,0.08)":S.card,color:recForm.sc===s.id?S.blue:S.label,border:recForm.sc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
                       ))}
                     </div>
-                    <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:false,rate:0}]);setRecForm(null);showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
-                  </div>
-                )}
+                    <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:recForm.isMiles,rate:0,currency:isFx?(recForm.currency||"USD"):"HKD"}]);setRecForm(null);showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
+                  </div>);
+                })()}
                 {recurring.map(r=>(
                   <div key={r.id} style={{padding:"10px 16px",display:"flex",alignItems:"center",borderBottom:`1px solid ${S.sep}`}}>
                     <div style={{flex:1,minWidth:0}}>
                       <p style={{fontSize:13,fontWeight:500,color:S.dark}}>{r.memo}</p>
-                      <p style={{fontSize:11,color:S.label}}>{r.cardName} · 每月{r.dayOfMonth}號 · ${r.amount}</p>
+                      <p style={{fontSize:11,color:S.label}}>{r.cardName} · 每月{r.dayOfMonth}號 · {r.currency&&r.currency!=="HKD"?`${r.currency} ${r.amount}`:`$${r.amount}`} · {r.isMiles?"✈️ 里數":"💰 回贈"}</p>
                     </div>
                     <button onClick={()=>setRecurring(p=>p.filter(x=>x.id!==r.id))} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
                   </div>
@@ -2333,8 +2342,8 @@ export default function App(){
                     const PieChart=({slices,centerTop,centerBot})=>(
                       <div style={{display:"flex",justifyContent:"center",marginBottom:14}}>
                         <svg width={180} height={180} viewBox="0 0 180 180">
-                          {slices.map((s,i)=><path key={i} d={s.d} fill={s.color} stroke="#fff" strokeWidth={2}/>)}
-                          <circle cx={90} cy={90} r={40} fill="#fff"/>
+                          {slices.map((s,i)=><path key={i} d={s.d} fill={s.color} stroke={S.card} strokeWidth={2}/>)}
+                          <circle cx={90} cy={90} r={40} fill={S.card}/>
                           <text x={90} y={85} textAnchor="middle" style={{fontSize:14,fontWeight:800,fill:S.dark}}>{centerTop}</text>
                           <text x={90} y={102} textAnchor="middle" style={{fontSize:10,fill:S.label}}>{centerBot}</text>
                         </svg>
