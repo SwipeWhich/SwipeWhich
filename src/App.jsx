@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { Wallet, Plane, Check, HelpCircle, X, AlertTriangle, MessageSquare, ExternalLink, RotateCcw, Calculator, BookOpen, PlusCircle, ClipboardList, ChevronRight, ChevronLeft, CalendarDays } from "lucide-react";
 
-/* 碌邊張 SwipeWhich v1.2 © 2026 */
+/* 碌邊張 SwipeWhich v1.3 © 2026 */
 
 function mk(id,n,iss,ty,desc,base,ov,cap,nc,mpr,cond,exp){
   const cb={local:base,dining:base,onlineHKD:base,mobilePay:base,octopus:0,octopusManual:0,supermarket:base,onlineFX:base,travelJKSTA:base,physicalFX:base,...ov};
@@ -14,7 +14,7 @@ function getExpiry(card){
   const labels={hs_mmpower:"5%/6%回贈",hsbc_red:"4%網購$10K上限",ds_earnmore:"2%加碼回贈",dbs_compass:"超市8%",ae_plat_charge:"外幣$2/里",fubon_plat:"日韓台加碼",cncbi_motion:"6%食飯/網購",dbs_live:"5%自選類別",dbs_eminent_vs:"5%餐飲加碼",dbs_eminent_plat:"5%餐飲加碼",aeon_waku:"網購6%/日本3%",hs_travel:"7%/5%外幣回贈"};
   const what=labels[card.id]||"優惠";
   if(diff<0)return{status:"expired",text:`⏰ ${what}已過期，回贈率可能已更新`,color:"#FF3B30",short:`⏰ ${what}已過期`};
-  if(diff<=30)return{status:"soon",text:`⏳ ${what}將於 ${diff} 天後到期（${card.exp.slice(5).replace("-","/")}）`,color:"#FF9500",short:`⏳ ${what} ${card.exp.slice(5).replace("-","/")}到期`};
+  if(diff<=30)return{status:"soon",text:`⏳ ${what}將於 ${diff} 天後到期（${card.exp.slice(5).replace("-","/")}）`,color:"#E8850C",short:`⏳ ${what} ${card.exp.slice(5).replace("-","/")}到期`};
   return null;
 }
 
@@ -112,7 +112,7 @@ const CARDS=[
 
   // ── CASHBACK ──
   mk("hsbc_red","HSBC Red","HSBC","both","網購4%/$2.5里(月$10K)+指定商戶8%(壽司郎/譚仔/GU，月$1,250)，其他0.4%",0.004,{onlineHKD:0.04},"網購月度$10,000/指定商戶$1,250上限",false,{local:25,dining:25,onlineHKD:2.5,onlineFX:25,travelJKSTA:25,physicalFX:25},null,"2026-03-31"),
-  mk("hsbc_vs","HSBC Visa Signature","HSBC","both","最紅自主9X=3.6%/$2.78里，配Travel Guru海外最高9.6%",0.004,{},"年度$100,000上限(最紅額外)",false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3"}),
+  mk("hsbc_vs","HSBC Visa Signature","HSBC","both","最紅自主9X=3.6%/$2.78里，五大類別基本4X=1.6%/$6.25里，配Travel Guru海外最高9.6%",0.004,{},"年度$100,000上限(最紅額外)",false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3"}),
   mk("hsbc_plat","HSBC Visa 白金卡","HSBC","cashback","基本0.4%獎賞錢，可配最紅自主+Travel Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_gold","HSBC 金卡","HSBC","cashback","入門級，0.4%獎賞錢，可配最紅自主+Travel Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_pulse","HSBC 銀聯 Pulse","HSBC","cashback","銀聯雙幣，內地消費免手續費，可配最紅自主+Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
@@ -135,7 +135,7 @@ const CARDS=[
   mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true,null,{octopus:"💡 車費15%回贈需所有Citi卡月簽滿$4,000"}),
   mk("citi_hktv","Citi HKTVMALL","Citibank","cashback","逢星期四HKTVmall 95折，其他0.4%",0.004,{onlineHKD:0.005},"星期四HKTVmall限定",true),
   mk("citi_club","Citi The Club","Citibank","cashback","賺Club積分兌換禮品，基本1%",0.01,{},null,true),
-  mk("dbs_live","DBS Live Fresh","DBS","cashback","自選類別網購5%+基本0.4%=5.4%，網上外幣1%無上限，揀外幣類達6%",0.004,{onlineHKD:0.054,onlineFX:0.01},"自選5%月度$4,000上限，需App揀+單筆$300，基本0.4%需單筆$250，需InstaRedeem領",false,null,{onlineHKD:"⚠️ 需DBS Card+ App揀自選類別+單筆滿$300",onlineFX:"💡 揀「外幣」類別可達6%(5%+1%)"},"2026-06-30"),
+  mk("dbs_live","DBS Live Fresh","DBS","cashback","4大自選類別5%回贈(指定商戶)，網上外幣1%無上限，揀「網上外幣」可達6%",0.004,{onlineFX:0.01},"自選5%月度$4,000上限，需App揀+單筆$300，基本0.4%需單筆$250，需InstaRedeem領",false,null,{onlineFX:"💡 揀「網上外幣」類別可達6%(5%+1%)",onlineHKD:"⚠️ 5%只限自選類別內指定商戶(旅遊娛樂/潮流教主等)，一般網購只有0.4%"},"2026-06-30"),
   mk("dbs_eminent_vs","DBS Eminent VS","DBS","cashback","餐飲/健身/運動/醫療5%，Visa Sig版，每年登記+單筆$300",0.01,{dining:0.05},"月度$8,000上限(5%)，其他首$20K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"},"2026-12-31"),
   mk("dbs_eminent_plat","DBS Eminent 白金","DBS","cashback","餐飲/健身/運動/醫療5%，白金版，每年登記+單筆$300",0.01,{dining:0.05},"月度$4,000上限(5%)，其他首$15K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"},"2026-12-31"),
   mk("dbs_compass","DBS Compass Visa","DBS","cashback","逢星期三超市8%(滿$300)，其他0.4%",0.004,{supermarket:0.08},"超市$2,000/月上限(8%)，只限逢星期三，推廣至2026年5月",false,null,{supermarket:"⚠️ 只限逢星期三，單筆滿$300"},"2026-05-31"),
@@ -143,8 +143,8 @@ const CARDS=[
   mk("bea_world","BEA World MC","BEA","cashback","食飯/海外/電器/健身/醫療5%，App登記一次+月簽$4,000",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"5%類別合計月度$10,000上限，不計歐洲及英國實體",false,null,{dining:"⚠️ 需App登記一次+月簽滿$4,000",onlineFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",physicalFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",travelJKSTA:"⚠️ 需App登記+月簽$4,000"}),
   mk("bea_ititan","BEA i-Titanium","BEA","cashback","網購/手機支付4%，月簽$2,000自動享有",0.004,{onlineHKD:0.04,mobilePay:0.04},"月度回贈$300上限(≈簽$7,500)，需累積零售滿$2,000",false,null,{onlineHKD:"⚠️ 需當月累積零售簽滿$2,000",mobilePay:"⚠️ 需當月累積零售簽滿$2,000"}),
   mk("bea_uni","BEA 大學/大專卡","BEA","cashback","學生專屬，永久免年費",0.004,{},null,true),
-  mk("ds_wewa_vs","安信 WeWa Visa Sig","安信","cashback","Visa Sig版，手機支付/旅遊/海外/網上娛樂4%(4選1)，需滿$1,500/月",0.004,{},"月度額外$200上限(~$5,556爆Cap)",false,null,{travelJKSTA:"⚠️ 4%需自選此類別+當月簽滿$1,500",physicalFX:"⚠️ 4%需自選此類別+當月簽滿$1,500",onlineFX:"⚠️ 4%需自選此類別+當月簽滿$1,500",mobilePay:"⚠️ 4%需自選此類別+當月簽滿$1,500"}),
-  mk("ds_wewa_up","安信 WeWa 銀聯卡","安信","cashback","銀聯版，手機支付/旅遊/海外/網上娛樂4%(4選1)，需滿$1,500/月，外幣手續費僅1%",0.004,{},"月度額外$200上限(~$5,556爆Cap)",false,null,{travelJKSTA:"⚠️ 4%需自選此類別+當月簽滿$1,500 · 銀聯FCC僅1%",physicalFX:"⚠️ 4%需自選此類別+當月簽滿$1,500 · 銀聯FCC僅1%",onlineFX:"⚠️ 4%需自選此類別+當月簽滿$1,500 · 銀聯FCC僅1%",mobilePay:"⚠️ 4%需自選此類別+當月簽滿$1,500 · 銀聯FCC僅1%"}),
+  mk("ds_wewa_vs","安信 WeWa Visa Sig","安信","cashback","Visa Sig版，手機支付/旅遊/海外/網上娛樂4%(4選1)，需滿$1,500/月",0.004,{},"月度額外$200上限(~$5,556爆Cap)",false,null,{onlineFX:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500",physicalFX:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500",travelJKSTA:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500。如揀「旅遊」則只限航空/酒店/旅行社MCC",mobilePay:"⚠️ 4%需自選「手機支付」+當月簽滿$1,500",onlineHKD:"⚠️ 「線上娛樂」4%僅限指定14個平台(Netflix/Spotify/Disney+等)，一般網購只有0.4%"}),
+  mk("ds_wewa_up","安信 WeWa 銀聯卡","安信","cashback","銀聯版，手機支付/旅遊/海外/網上娛樂4%(4選1)，需滿$1,500/月，外幣手續費僅1%",0.004,{},"月度額外$200上限(~$5,556爆Cap)",false,null,{onlineFX:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500 · 銀聯FCC僅1%",physicalFX:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500 · 銀聯FCC僅1%",travelJKSTA:"⚠️ 4%需自選「海外簽賬」+當月簽滿$1,500 · 銀聯FCC僅1%",mobilePay:"⚠️ 4%需自選「手機支付」+當月簽滿$1,500",onlineHKD:"⚠️ 「線上娛樂」4%僅限指定14個平台(Netflix/Spotify/Disney+等)，一般網購只有0.4%"}),
   mk("ds_earnmore","安信 EarnMORE","安信","cashback","銀聯卡本地消費2%(推廣至2026/6/30)，外幣同樣2%(銀聯FCC僅1%，淨賺1%)，AAVS僅0.4%但Apple Pay手動增值2%",0.02,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02,octopus:0.004,octopusManual:0.02},"每半年$80,000上限(2%推廣)",false,null,{onlineFX:"⚠️ 外幣2%回贈 − 1%銀聯手續費 = 淨1%",physicalFX:"⚠️ 外幣2%回贈 − 1%銀聯手續費 = 淨1%",travelJKSTA:"⚠️ 外幣2%回贈 − 1%銀聯手續費 = 淨1%",octopus:"⚠️ 自動增值僅0.4%，Apple Pay手動增值先有2%"},"2026-06-30"),
   mk("cncbi_motion","信銀國際 Motion","CNCBI","cashback","食飯/網購6%（實際~5.7%因門檻>Cap），毋須登記",0.004,{dining:0.06,onlineHKD:0.06},"額外$200/月(簽$3,571爆Cap)，需當月零售簽滿$3,800",false,null,{dining:"⚠️ 需月簽滿$3,800，實際回贈約5.7%",onlineHKD:"⚠️ 需月簽滿$3,800，實際回贈約5.7%"},"2026-06-30"),
   mk("cncbi_gba","信銀國際大灣區卡","CNCBI","cashback","大灣區/外幣消費額外回贈",0.004,{onlineFX:0.015},null,true),
@@ -180,8 +180,8 @@ const SCENARIOS=[
 const ALL_SCENARIOS=[...SCENARIOS,{id:"travelJKSTA",emoji:"🇯🇵",label:"日韓泰中台",sub:"實體簽賬"},{id:"octopusManual",emoji:"📱",label:"手動增值",sub:"Apple Pay/八達通App"},{id:"manual",emoji:"💵",label:"手動記賬",sub:"現金/其他"}];
 
 const ISSUERS=["HSBC","American Express","Hang Seng","Standard Chartered","Bank of China","Citibank","DBS","BEA","Dah Sing","安信","CNCBI","Mox Bank","CCB Asia","AEON","Fubon","ICBC Asia","sim"];
-const S_LIGHT={bg:"#F2F2F7",dark:"#1C1C1E",label:"#8E8E93",sec:"#3C3C43",sep:"rgba(0,0,0,0.05)",blue:"#007AFF",green:"#34C759",red:"#FF3B30",shadow:"0 14px 34px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)",rad:24,card:"#fff",headerBg:"rgba(249,249,251,0.94)",tabBg:"rgba(249,249,251,0.94)",segBg:"rgba(118,118,128,0.12)",segInd:"#fff",inputBg:"rgba(0,0,0,0.06)",subtleBg:"rgba(118,118,128,0.04)",cardAlt:"#F8F8FA"};
-const S_DARK={bg:"#000000",dark:"#F5F5F7",label:"#8E8E93",sec:"#D1D1D6",sep:"rgba(255,255,255,0.1)",blue:"#0A84FF",green:"#30D158",red:"#FF453A",shadow:"0 2px 8px rgba(0,0,0,0.4)",rad:24,card:"#1C1C1E",headerBg:"rgba(28,28,30,0.94)",tabBg:"rgba(28,28,30,0.94)",segBg:"rgba(118,118,128,0.24)",segInd:"#636366",inputBg:"rgba(255,255,255,0.08)",subtleBg:"rgba(255,255,255,0.04)",cardAlt:"#2C2C2E"};
+const S_LIGHT={bg:"#F2F2F7",dark:"#1C1C1E",label:"#8E8E93",sec:"#3C3C43",sep:"rgba(0,0,0,0.05)",blue:"#007AFF",green:"#34C759",red:"#FF3B30",shadow:"0 14px 34px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)",rad:24,card:"#fff",headerBg:"rgba(249,249,251,0.94)",tabBg:"rgba(249,249,251,0.94)",segBg:"rgba(118,118,128,0.12)",segInd:"#fff",inputBg:"rgba(0,0,0,0.06)",subtleBg:"rgba(118,118,128,0.04)",cardAlt:"#F8F8FA",promo:"#FF9500",cond:"#BF6900",muted:"#AEAEB2"};
+const S_DARK={bg:"#000000",dark:"#F5F5F7",label:"#8E8E93",sec:"#D1D1D6",sep:"rgba(255,255,255,0.1)",blue:"#0A84FF",green:"#30D158",red:"#FF453A",shadow:"0 2px 8px rgba(0,0,0,0.4)",rad:24,card:"#1C1C1E",headerBg:"rgba(28,28,30,0.94)",tabBg:"rgba(28,28,30,0.94)",segBg:"rgba(118,118,128,0.24)",segInd:"#636366",inputBg:"rgba(255,255,255,0.08)",subtleBg:"rgba(255,255,255,0.04)",cardAlt:"#2C2C2E",promo:"#FF9F0A",cond:"#E6A817",muted:"#98989D"};
 
 // 2026 H1 BOC 狂賞派/飛「紅日」列表（星期日+公眾假期+BOC額外紅日）
 const BOC_RED_DAYS=new Set([
@@ -218,13 +218,16 @@ function getRate(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,bocMs,bocMf,regs){
     if(dbsLfFx==="none")return s==="onlineFX"?0.01:0.004; // 未登記，外幣仍有1%
     if(dbsLfFx==="fx"&&s==="onlineFX")return 0.06; // 5% self-select + 1% FX base
     if(dbsLfFx==="fx"&&s==="onlineHKD")return 0.004; // base only when FX selected
+    // travel/fashion/charity are merchant-specific, cannot reliably map to our scenarios
+    // They still get 1% on onlineFX and 0.4% base on everything else
     // default "other": onlineHKD=0.054 from override, onlineFX=0.01 from override
   }
 
   // WeWa 4選1 dynamic category
   if(c.id==="ds_wewa_vs"||c.id==="ds_wewa_up"){
-    const wewaMap={travel:["travelJKSTA","physicalFX"],overseas:["onlineFX"],mobilePay:["mobilePay"],entertainment:["onlineHKD"]};
-    const boosted=(wewaMap[wewaCat||"travel"])||[];
+    const wewaMap={overseas:["onlineFX","physicalFX","travelJKSTA"],mobilePay:["mobilePay"]};
+    // travel (航空/酒店/旅行社 MCC) and entertainment (14 specific platforms) cannot be reliably mapped to our scenarios
+    const boosted=(wewaMap[wewaCat||"overseas"])||[];
     return boosted.includes(s)?0.04:0.004;
   }
 
@@ -239,7 +242,7 @@ function getRate(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,bocMs,bocMf,regs){
   // 最紅自主獎賞 + Travel Guru — 適用 VS/白金/金卡/easy/Premier/Pulse/Student (NOT Red, NOT EveryMile)
   const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
   if(vsCards.includes(c.id)){
-    const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"],lifestyle:["local"],shopping:["onlineHKD"]};
+    const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"]};
     const boosted=(vs&&vs!=="none")?(vsMap[vs]||[]):[];
     const isBoosted=boosted.includes(s);
 
@@ -257,10 +260,14 @@ function getRate(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,bocMs,bocMf,regs){
 
     // Non-guru scenarios: 最紅自主 only
     if(isBoosted){
-      if(c.id==="hsbc_vs")return 0.036;
-      if(c.id==="hsbc_premier")return 0.024;
-      return 0.024;
+      if(c.id==="hsbc_vs")return 0.036; // 9X
+      if(c.id==="hsbc_premier")return 0.024; // 6X
+      return 0.024; // 6X for other HSBC cards with self-selected category
     }
+    // VS gets 3X (4X total = 1.6%) for scenarios clearly in one of the 5 categories
+    // Note: local/onlineHKD/mobilePay are NOT in any specific category (賞購物/賞享受 are merchant-specific)
+    const allCatScenarios=["onlineFX","physicalFX","travelJKSTA","dining","supermarket"];
+    if(c.id==="hsbc_vs"&&allCatScenarios.includes(s))return 0.016; // 4X = 1.6%
     return c.cashback[s]||0;
   }
   // BOC 狂賞派/飛: NOT added to getRate — displayed separately in UI
@@ -301,7 +308,7 @@ function getMPD(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,regs){
 
   const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
   if(vsCards.includes(c.id)&&c.milesPerDollar){
-    const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"],lifestyle:["local"],shopping:["onlineHKD"]};
+    const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"]};
     const boosted=(vs&&vs!=="none")?(vsMap[vs]||[]):[];
     const isBoosted=boosted.includes(s);
 
@@ -327,6 +334,8 @@ function getMPD(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,regs){
       if(c.id==="hsbc_premier")return 4.17; // 6X
       return 4.17; // 6X for other HSBC cards
     }
+    const allCatScenarios=["onlineFX","physicalFX","travelJKSTA","dining","supermarket"];
+    if(c.id==="hsbc_vs"&&allCatScenarios.includes(s))return 6.25; // 4X = $6.25/mile
     return c.milesPerDollar[s]||c.milesPerDollar["local"]||null;
   }
   const mpd=c.milesPerDollar[s]||c.milesPerDollar["local"];
@@ -472,9 +481,10 @@ export default function App(){
   useEffect(()=>{try{localStorage.setItem("sw_dark",darkPref);}catch{}},[darkPref]);
   const[themeModal,setThemeModal]=useState(false);
   const S=darkMode?S_DARK:S_LIGHT;
+  const gEvent=(name,params)=>{try{window.gtag?.("event",name,params);}catch{}};
   const[tab,setTabRaw]=useState("calc");
   const scrollTop=()=>window.scrollTo({top:0,behavior:"smooth"});
-  const setTab=(t)=>{setTabRaw(t);setTimeout(()=>window.scrollTo({top:0,behavior:"smooth"}),50);};
+  const setTab=(t)=>{setTabRaw(t);gEvent("tab_change",{tab:t});setTimeout(()=>window.scrollTo({top:0,behavior:"smooth"}),50);};
   const[mode,setMode]=useState("cashback");
   const[sc,setSc]=useState("local");
   const[amt,setAmt]=useState(0);
@@ -486,11 +496,17 @@ export default function App(){
   const[tut,setTut]=useState(0);
   const[seen,setSeen]=useState(false);
   const[search,setSearch]=useState("");
+  const[bankState,setBankState]=useState({}); // {issuer: true/false} explicit overrides
+  const toggleBank=(iss)=>setBankState(p=>({...p,[iss]:!isBankOpen(iss)}));
+  const isBankOpen=(iss)=>{
+    if(bankState[iss]!==undefined)return bankState[iss];
+    return(grouped[iss]||[]).some(c=>own.includes(c.id)); // default: open if has owned
+  };
   const[guideMode,setGuideMode]=useState("cashback");
   const[guideSc,setGuideSc]=useState("local");
-  const[guideSettings,setGuideSettings]=useState(false);
   const[guideExpanded,setGuideExpanded]=useState(new Set());
-  const[guideOvr,setGuideOvr]=useState(null); // null=use global, object=guide-local overrides
+  const[guideSettings,setGuideSettings]=useState(false);
+  const[guideOvr,setGuideOvr]=useState(null); // null=use auto-optimal, object=user override
   const[guideToast,setGuideToast]=useState(null);
   const showGuideToast=(msg)=>{setGuideToast(msg);setTimeout(()=>setGuideToast(null),2500);};
   const[trackerView,setTrackerView]=useState("card");
@@ -534,8 +550,8 @@ export default function App(){
   const[quickAmts,setQuickAmts]=useState([50,100,200,500,1000]);
   const[hsbcOpen,setHsbcOpen]=useState(false);
   const[moxTier,setMoxTier]=useState(false);
-  const[dbsLfFx,setDbsLfFx]=useState("none"); // DBS Live Fresh: "none"=未登記, "other"=娛樂/服飾/旅遊, "fx"=外幣
-  const[wewaCategory,setWewaCategory]=useState("travel"); // WeWa 4選1: travel/overseas/mobilePay/entertainment
+  const[dbsLfFx,setDbsLfFx]=useState("none"); // DBS Live Fresh: "none"=未登記, "fx"=網上外幣, "travel"=旅遊娛樂, "fashion"=潮流教主, "charity"=慈善關愛
+  const[wewaCategory,setWewaCategory]=useState("none"); // WeWa 4選1: none/overseas/mobilePay (travel/entertainment not reliably mappable)
   const[bocMs,setBocMs]=useState("none"); // BOC 狂賞派 (Visa only): none/registered
   const[bocMf,setBocMf]=useState("none"); // BOC 狂賞飛 (Visa/MC, 排除銀聯): none/registered
   const[moxOpen,setMoxOpen]=useState(false);
@@ -567,6 +583,8 @@ export default function App(){
   const[logs,setLogs]=useState([]);
   // cycleDay removed in v1.5
   const[recurring,setRecurring]=useState([]);
+  const[customPromos,setCustomPromos]=useState([]); // [{id,cardId,cardName,sc,rate,memo,isMiles}]
+  const[promoForm,setPromoForm]=useState(null); // {cardId,scs:[],rate,memo,isMiles,editId?}
   const[recForm,setRecForm]=useState(null); // null or {memo,amount,day,cardName,sc} // [{id,cardId,cardName,sc,amount,memo,dayOfMonth,isMiles,rate}]
   const[loaded,setLoaded]=useState(false);
   const showToast=(msg)=>{setToast(msg);setTimeout(()=>setToast(null),3500);};
@@ -618,6 +636,7 @@ export default function App(){
           if(d.quickAmts&&Array.isArray(d.quickAmts))setQuickAmts(d.quickAmts);
           if(d.mode)setMode(d.mode);
           if(d.recurring&&Array.isArray(d.recurring))setRecurring(d.recurring);
+          if(d.customPromos&&Array.isArray(d.customPromos))setCustomPromos(d.customPromos);
           if(d.moxTier)setMoxTier(d.moxTier);
           // DBS backward compat: old boolean → new string
           if(d.dbsLfFx===true)setDbsLfFx("fx");else if(d.dbsLfFx===false)setDbsLfFx("none");else if(d.dbsLfFx)setDbsLfFx(d.dbsLfFx);
@@ -644,10 +663,10 @@ export default function App(){
     clearTimeout(saveRef.current);
     saveRef.current=setTimeout(() => {
       try{
-        localStorage.setItem("sw_data",JSON.stringify({_v:5,own,logs,vs,guru,sMax:sMax>0?sMax:3000,seen,quickAmts,mode,recurring,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg}));
+        localStorage.setItem("sw_data",JSON.stringify({_v:5,own,logs,vs,guru,sMax:sMax>0?sMax:3000,seen,quickAmts,mode,recurring,customPromos,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg}));
       }catch(e){}
     },500);
-  },[own,logs,vs,guru,sMax,seen,loaded,quickAmts,mode,recurring,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg]);
+  },[own,logs,vs,guru,sMax,seen,loaded,quickAmts,mode,recurring,customPromos,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg]);
 
   // Compute current calendar month range (v1.5: simplified, no cycleDay)
   const getCycleRange=useCallback(()=>{
@@ -688,6 +707,7 @@ export default function App(){
     const dateStr=customDate||new Date().toISOString();
     setLogs(p=>[{id:Date.now(),cardId,cardName,scenario,amount,rate,rebate,miles,isMiles:!!isMiles,date:dateStr,memo:memo||""},...p]);
     setLogMemo("");
+    gEvent("log_entry",{scenario,mode:isMiles?"miles":"cashback"});
     showToast(`✅ 已記錄 $${amount.toLocaleString()} → ${cardName}`);
   };
   const addManualLog=()=>{
@@ -696,16 +716,50 @@ export default function App(){
     const dateStr=new Date(manualDate+"T"+new Date().toTimeString().slice(0,8)).toISOString();
     setLogs(p=>[{id:Date.now(),cardId:"_manual_"+manualType,cardName:typeLabels[manualType],scenario:manualSc,amount:a,rate:0,rebate:0,miles:0,isMiles:false,date:dateStr,memo:manualMemo,isManual:true},...p]);
     showToast(`✅ 已記錄 ${typeLabels[manualType]} $${a.toLocaleString()}`);
+    gEvent("manual_log",{type:manualType,scenario:manualSc});
     setManualAmt("");setManualMemo("");setManualOpen(false);
   };
-  const removeLog=(id)=>setLogs(p=>p.filter(l=>l.id!==id));
+  const removeLog=(id)=>{gEvent("log_delete",{});setLogs(p=>p.filter(l=>l.id!==id));};
 
   // Auto-reset removed — all logs kept permanently
 
   useEffect(()=>{if(loaded&&!seen){setTut(1);setSeen(true);}},[loaded]);
+  useEffect(()=>{if(loaded)gEvent("session_start_sw",{cards_owned:own.length,logs_count:logs.length,recurring_count:recurring.length,promos_count:customPromos.length,mode,theme:darkPref});},[loaded]);
+  useEffect(()=>{if(sc&&loaded)gEvent("scenario_select",{scenario:sc});},[sc]);
+  useEffect(()=>{if(loaded&&own.length===0&&tut===0)setTabRaw("cards");},[loaded,tut]);
 
-  const res=useMemo(()=>{try{return doCalc(sc,amt,own,mode,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);}catch{return{primary:null,fallback:null,globalBest:null};}},[sc,amt,own,mode,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg]);
-  const toggle=useCallback(id=>setOwn(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]),[]);
+  const res=useMemo(()=>{
+    try{
+      const r=doCalc(sc,amt,own,mode,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);
+      // Custom promo overlay: check if any promo beats the primary for this scenario
+      if(amt>0&&customPromos.length>0){
+        const promos=customPromos.filter(p=>(p.scs||[p.sc]).includes(sc));
+        if(mode==="cashback"){
+          promos.filter(p=>!p.isMiles).forEach(p=>{
+            const rate=p.rate/100;
+            const c=p.cardId==="_custom"?{id:"_custom",name:p.cardName,issuer:"自訂",type:"cashback",noCap:true}:CARDS.find(x=>x.id===p.cardId);
+            if(!c)return;
+            if(c.id!=="_custom"&&!own.includes(c.id))return;
+            if(!r.primary||rate>r.primary.rate){
+              r.primary={card:c,rate,val:amt*rate,fxFee:0,overCap:false,capAmt:0,isPromo:true,promoMemo:p.memo};
+            }
+          });
+        }else{
+          promos.filter(p=>p.isMiles).forEach(p=>{
+            const mpd=p.rate;
+            const c=p.cardId==="_custom"?{id:"_custom",name:p.cardName,issuer:"自訂",type:"both",noCap:true}:CARDS.find(x=>x.id===p.cardId);
+            if(!c)return;
+            if(c.id!=="_custom"&&!own.includes(c.id))return;
+            if(!r.primary||mpd<r.primary.rate){
+              r.primary={card:c,rate:mpd,val:amt/mpd,miles:true,fxFee:0,overCap:false,capAmt:0,isPromo:true,promoMemo:p.memo};
+            }
+          });
+        }
+      }
+      return r;
+    }catch{return{primary:null,fallback:null,globalBest:null};}
+  },[sc,amt,own,mode,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg,customPromos]);
+  const toggle=useCallback(id=>{gEvent("card_toggle",{});setOwn(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);},[]);
   const noCards=own.length===0;
   const grouped=useMemo(()=>{const g={};CARDS.forEach(c=>{if(!g[c.issuer])g[c.issuer]=[];g[c.issuer].push(c);});return g;},[]);
   const filteredGrouped=useMemo(()=>{
@@ -717,11 +771,31 @@ export default function App(){
   },[search,grouped]);
 
   const p=res?.primary,fb=res?.fallback,gb=res?.globalBest,co=res?.cappedOriginal;
+  // Custom promo override: check if any user-defined promo beats the calculated result
+  const promoMatch=useMemo(()=>{
+    if(!amt||amt<=0)return null;
+    const matches=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(sc)&&(cp.cardId==="_custom"||own.includes(cp.cardId)));
+    if(!matches.length)return null;
+    const isCB2=mode==="cashback";
+    let best=null;
+    matches.forEach(cp=>{
+      const card=cp.cardId==="_custom"?{id:"_custom",name:cp.cardName,issuer:"自訂",type:isCB2?"cashback":"both",noCap:true}:CARDS.find(c=>c.id===cp.cardId);
+      if(!card)return;
+      if(isCB2&&!cp.isMiles){
+        const rate=cp.rate/100;
+        if(!best||rate>best.rate)best={card,rate,val:amt*rate,promo:cp};
+      }else if(!isCB2&&cp.isMiles){
+        const mpd=cp.rate;
+        if(!best||mpd<best.rate)best={card,rate:mpd,val:amt/mpd,miles:true,promo:cp};
+      }
+    });
+    return best;
+  },[customPromos,sc,amt,own,mode]);
   const isCB=mode==="cashback";
   const ownsG=gb&&p&&gb.card.id===p.card.id&&own.includes(gb.card.id);
 
   // Tutorial flow (9 steps):
-  // 0=off, 1=welcome, 2=Card Holder cards, 3=HSBC settings btn,
+  // 0=off, 1=welcome, 2=My Cards tab, 3=HSBC settings btn,
   // 4=scenario, 5=mode toggle, 6=amount, 7=result, 8=記一筆, 9=tracker, 10=guide
   const tutNext=()=>{
     let n=tut+1;
@@ -730,8 +804,9 @@ export default function App(){
     if(n===4){setTab("calc");}
     if(n===9)setTab("tracker");
     if(n===10)setTab("guide");
-    if(n>11){setTut(0);return;}
+    if(n>11){setTut(0);gEvent("tutorial_complete",{});return;}
     setTut(n);
+    gEvent("tutorial_step",{step:n});
   };
 
   // Auto-scroll to highlighted element on tutorial step change
@@ -804,7 +879,7 @@ export default function App(){
               <button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button>
             </div>
           </div>
-          <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",marginLeft:"37%"}}/>
+          <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",marginLeft:"auto",marginRight:24}}/>
         </div>
       )}
       {tut===9&&(
@@ -824,7 +899,7 @@ export default function App(){
         </div>
       )}
       {tut===10&&(
-        <div style={{position:"fixed",bottom:76,right:8,zIndex:9995,maxWidth:300,width:"calc(100% - 80px)"}}>
+        <div style={{position:"fixed",bottom:76,left:8,zIndex:9995,maxWidth:300,width:"calc(100% - 80px)"}}>
           <div style={{background:S.card,borderRadius:16,padding:16,boxShadow:darkMode?"0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)":"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
               <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 8/9</span>
@@ -836,7 +911,7 @@ export default function App(){
               <button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button>
             </div>
           </div>
-          <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",marginLeft:"auto",marginRight:24}}/>
+          <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",marginLeft:24}}/>
         </div>
       )}
 
@@ -857,7 +932,7 @@ export default function App(){
               <h2 style={{fontSize:20,fontWeight:700,color:S.dark,marginBottom:4}}>加入主畫面</h2>
               <p style={{fontSize:13,color:S.sec}}>一撳即開，同 App 一樣快！</p>
             </div>
-            {installPrompt&&<div style={{padding:"8px 24px"}}><button onClick={async()=>{installPrompt.prompt();const r=await installPrompt.userChoice;if(r.outcome==="accepted"){setInstallPrompt(null);setTut(0);showToast("✅ 已安裝到主畫面！");}}} style={{width:"100%",padding:14,borderRadius:16,background:"linear-gradient(135deg, #34C759, #28A745)",color:"#fff",fontSize:15,fontWeight:700,border:"none",cursor:"pointer",boxShadow:"0 4px 12px rgba(52,199,89,0.3)"}}>⚡ 一鍵安裝到主畫面</button></div>}
+            {installPrompt&&<div style={{padding:"8px 24px"}}><button onClick={async()=>{installPrompt.prompt();const r=await installPrompt.userChoice;if(r.outcome==="accepted"){setInstallPrompt(null);setTut(0);gEvent("pwa_install",{});showToast("✅ 已安裝到主畫面！");}}} style={{width:"100%",padding:14,borderRadius:16,background:"linear-gradient(135deg, #34C759, #28A745)",color:"#fff",fontSize:15,fontWeight:700,border:"none",cursor:"pointer",boxShadow:"0 4px 12px rgba(52,199,89,0.3)"}}>⚡ 一鍵安裝到主畫面</button></div>}
             <div style={{padding:"8px 24px"}}>
               <div style={{background:S.cardAlt,borderRadius:14,padding:14}}>
                 <p style={{fontSize:13,fontWeight:700,color:S.dark,marginBottom:10}}>{isIOS?(isSafari?"🍎 Safari（你而家用緊）":"🍎 iPhone / iPad"):isAndroid?"🤖 Android":"🖥️ 電腦瀏覽器"}</p>
@@ -934,7 +1009,7 @@ export default function App(){
               <p style={{marginTop:16}}><strong>9. 管轄法律</strong><br/>本免責聲明及使用條款受香港特別行政區法律管轄，並按其詮釋。</p>
               <p style={{marginTop:16}}><strong>10. 聯絡我們</strong><br/>如有任何查詢、建議或投訴，請電郵至 <a href="mailto:admin@swipewhich.com" style={{color:S.blue}}>admin@swipewhich.com</a></p>
             </div>
-            <div style={{padding:"12px 20px",textAlign:"center",fontSize:11,color:S.label,borderTop:`1px solid ${S.sep}`}}>v1.2.0 · 資料庫更新：2026年3月14日<br/>© 2026 碌邊張 SwipeWhich. All rights reserved.<br/>聯絡：admin@swipewhich.com</div>
+            <div style={{padding:"12px 20px",textAlign:"center",fontSize:11,color:S.label,borderTop:`1px solid ${S.sep}`}}>v1.3.0 · 資料庫更新：2026年3月15日<br/>© 2026 碌邊張 SwipeWhich. All rights reserved.<br/>聯絡：admin@swipewhich.com</div>
             <div style={{padding:"0 20px 20px"}}><button onClick={()=>setModal(null)} style={{width:"100%",padding:14,borderRadius:S.rad,background:S.blue,color:"#fff",fontSize:15,fontWeight:600,border:"none",cursor:"pointer"}}>了解</button></div>
           </div>
         </div>
@@ -950,7 +1025,7 @@ export default function App(){
             </div>
             <div style={{padding:"8px 20px 20px",display:"flex",gap:10}}>
               {[{k:"auto",emoji:"📱",label:"自動",desc:"跟隨系統"},{k:"light",emoji:"☀️",label:"淺色",desc:"Light"},{k:"dark",emoji:"🌙",label:"深色",desc:"Dark"}].map(t=>(
-                <button key={t.k} onClick={()=>{setDarkPref(t.k);setThemeModal(false);}} style={{flex:1,padding:"14px 8px",borderRadius:14,border:darkPref===t.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:darkPref===t.k?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",textAlign:"center"}}>
+                <button key={t.k} onClick={()=>{setDarkPref(t.k);gEvent("theme_change",{theme:t.k});setThemeModal(false);}} style={{flex:1,padding:"14px 8px",borderRadius:14,border:darkPref===t.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:darkPref===t.k?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",textAlign:"center"}}>
                   <p style={{fontSize:24}}>{t.emoji}</p>
                   <p style={{fontSize:13,fontWeight:600,color:darkPref===t.k?S.blue:S.dark,marginTop:4}}>{t.label}</p>
                   <p style={{fontSize:10,color:S.label,marginTop:2}}>{t.desc}</p>
@@ -1176,8 +1251,8 @@ export default function App(){
             {/* 3) Mode Toggle */}
             <div id="tut-mode" style={{position:"relative",display:"flex",padding:3,borderRadius:10,background:S.segBg,...hlStyle("mode")}}>
               <div style={{position:"absolute",top:3,bottom:3,borderRadius:8,background:S.segInd,boxShadow:darkMode?"0 1px 4px rgba(0,0,0,0.4)":"0 3px 8px rgba(0,0,0,0.12), 0 3px 1px rgba(0,0,0,0.04)",transition:"all 0.2s ease",width:"calc(50% - 3px)",left:mode==="cashback"?3:"calc(50%)"}}/>
-              <button onClick={()=>setMode("cashback")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:13,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:mode==="cashback"?S.dark:S.label}}>💰 現金回贈</button>
-              <button onClick={()=>setMode("miles")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:13,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:mode==="miles"?S.dark:S.label}}>✈️ 飛行里數</button>
+              <button onClick={()=>{setMode("cashback");gEvent("mode_switch",{mode:"cashback"});}} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:13,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:mode==="cashback"?S.dark:S.label}}>💰 現金回贈</button>
+              <button onClick={()=>{setMode("miles");gEvent("mode_switch",{mode:"miles"});}} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:13,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:mode==="miles"?S.dark:S.label}}>✈️ 飛行里數</button>
             </div>
             {/* Inline tooltip for step 4: mode toggle */}
             {tut===5&&<div style={{position:"relative",zIndex:9995}}>
@@ -1199,6 +1274,7 @@ export default function App(){
               </div>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",margin:"0 auto"}}/>
             </div>}
+            {(()=>{const activePromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(sc));return activePromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:11,color:S.promo,fontWeight:600}}>計算結果已包含 {activePromos.length} 項特選優惠</span><button onClick={()=>{setTab("calc");setTimeout(()=>document.getElementById("promo-section")?.scrollIntoView({behavior:"smooth"}),100);}} style={{marginLeft:"auto",fontSize:10,color:S.blue,background:"none",border:"none",cursor:"pointer",fontWeight:600}}>管理 →</button></div>:null;})()}
             <div id="tut-result" style={{borderRadius:22,padding:22,background:S.card,border:p?`1px solid rgba(52,199,89,0.15)`:`1px solid ${S.sep}`,boxShadow:S.shadow,...hlStyle("result")}}>
               {!p?(
                 <div style={{textAlign:"center",padding:"20px 0",cursor:noCards?"pointer":undefined}} onClick={()=>noCards&&setTab("cards")}>
@@ -1206,22 +1282,22 @@ export default function App(){
                   <p style={{color:S.dark,fontWeight:600,fontSize:16}}>{noCards?"先去揀你有嘅信用卡":amt===0?"揀好場景，輸入金額即刻計":mode==="miles"?"你持有嘅卡冇適用嘅里數回贈":"你持有嘅卡冇適用嘅現金回贈"}</p>
                   {noCards?<div style={{marginTop:10,padding:"10px 20px",borderRadius:14,background:S.blue,display:"inline-block",cursor:"pointer"}}><span style={{color:"#fff",fontSize:13,fontWeight:700}}>去揀卡 →</span></div>
                   :amt===0?<p style={{color:S.label,fontSize:12,marginTop:8}}>撳上面嘅快捷金額或拉動滑桿</p>
-                  :amt>0&&<p style={{color:S.label,fontSize:12,marginTop:8}}>試下切換{mode==="miles"?"「現金回贈」":"「飛行里數」"}模式，或者去 Card Holder 加多張卡</p>}
+                  :amt>0&&<p style={{color:S.label,fontSize:12,marginTop:8}}>試下切換{mode==="miles"?"「現金回贈」":"「飛行里數」"}模式，或者去 My Cards 加多張卡</p>}
                 </div>
               ):(
                 <div>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16}}>
                     <div>
-                      <p style={{fontSize:11,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1.5}}>推薦使用</p>
-                      <h3 style={{fontSize:20,fontWeight:800,color:S.dark,marginTop:4,letterSpacing:-0.5}}>{p.card.name}{p.notOwned&&<span style={{fontSize:11,fontWeight:600,color:"#FF9500",marginLeft:8,verticalAlign:"middle"}}>未持有</span>}</h3>
-                      <p style={{fontSize:13,color:S.sec,marginTop:4,letterSpacing:-0.08}}>{p?getScenarioDesc(p.card,sc,p.rate,isCB,vs):""}</p>
+                      <p style={{fontSize:11,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1.5}}>推薦使用{p.isPromo&&<span style={{fontSize:9,fontWeight:700,color:S.promo,background:`rgba(${darkMode?"255,159,10":"255,149,0"},0.12)`,padding:"2px 6px",borderRadius:4,marginLeft:6,textTransform:"none",letterSpacing:0}}>🎯 特選優惠</span>}</p>
+                      <h3 style={{fontSize:20,fontWeight:800,color:S.dark,marginTop:4,letterSpacing:-0.5}}>{p.card.name}{p.notOwned&&<span style={{fontSize:11,fontWeight:600,color:S.muted,marginLeft:8,verticalAlign:"middle"}}>未持有</span>}</h3>
+                      <p style={{fontSize:13,color:S.sec,marginTop:4,letterSpacing:-0.08}}>{p.isPromo?p.promoMemo:(p?getScenarioDesc(p.card,sc,p.rate,isCB,vs):"")}</p>
                       {p.notOwned&&<a href={`https://www.google.com/search?q=${encodeURIComponent(p.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:4,display:"inline-block"}}>了解更多 / 申請 →</a>}
                       {p.card.cond&&p.card.cond[sc]&&(
-                        <div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,149,0,0.12)":"#FFF8E1",border:darkMode?"1px solid rgba(255,149,0,0.3)":"1px solid #FFE082",display:"inline-block"}}>
-                          <span style={{fontSize:11,color:"#FF9500",fontWeight:600}}>{p.card.cond[sc]}</span>
+                        <div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,159,10,0.2)":"#FFF8E1",border:darkMode?"1px solid rgba(255,159,10,0.4)":"1px solid #FFE082",display:"inline-block"}}>
+                          <span style={{fontSize:11,color:S.cond,fontWeight:600}}>{p.card.cond[sc]}</span>
                         </div>
                       )}
-                      {p.minWarning&&<div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,59,48,0.12)":"#FFF1F0",border:darkMode?"1px solid rgba(255,59,48,0.3)":"1px solid #FFD1D1",display:"inline-block"}}><span style={{fontSize:11,color:S.red,fontWeight:600}}>{p.minWarning}</span></div>}
+                      {p.minWarning&&<div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",border:darkMode?"1px solid rgba(255,69,58,0.4)":"1px solid #FFD1D1",display:"inline-block"}}><span style={{fontSize:11,color:S.red,fontWeight:600}}>{p.minWarning}</span></div>}
                       {(()=>{const ex=getExpiry(p.card);return ex?<p style={{fontSize:10,color:ex.color,fontWeight:600,marginTop:4}}>{ex.text}</p>:null;})()}
                     </div>
                     <div style={{width:36,height:36,borderRadius:18,background:isCB?"rgba(52,199,89,0.04)":"rgba(0,122,255,0.04)",display:"flex",alignItems:"center",justifyContent:"center"}}>{isCB?<Wallet size={18} color={S.green}/>:<Plane size={18} color={S.blue}/>}</div>
@@ -1272,21 +1348,21 @@ export default function App(){
                   </div>
                   {/* Swapped from capped card note */}
                   {co&&(
-                    <div style={{background:darkMode?"rgba(255,149,0,0.12)":"#FFF8E1",borderRadius:16,padding:12,marginBottom:10,border:darkMode?"1px solid rgba(255,149,0,0.3)":"1px solid #FFE082"}}>
-                      <p style={{fontSize:12,fontWeight:700,color:"#FF9500",marginBottom:4}}>🚨 {co.card.name} 已超出回贈上限</p>
+                    <div style={{background:darkMode?"rgba(255,159,10,0.2)":"#FFF8E1",borderRadius:16,padding:12,marginBottom:10,border:darkMode?"1px solid rgba(255,159,10,0.4)":"1px solid #FFE082"}}>
+                      <p style={{fontSize:12,fontWeight:700,color:S.red,marginBottom:4}}>🚨 {co.card.name} 已超出回贈上限</p>
                       <p style={{fontSize:11,color:S.sec,lineHeight:1.5}}>簽 ${amt.toLocaleString()} 超出上限 {co.capAmt?`$${co.capAmt.toLocaleString()}/月`:""}，自動推薦保底卡</p>
                     </div>
                   )}
                   {p.card.capInfo&&(
-                    <div style={{background:p.overCap?(darkMode?"rgba(255,149,0,0.12)":"#FFF8E1"):(darkMode?"rgba(255,59,48,0.12)":"#FFF1F0"),borderRadius:S.rad,padding:14,marginBottom:10,border:p.overCap?(darkMode?"1px solid rgba(255,149,0,0.3)":"1px solid #FFE082"):(darkMode?"1px solid rgba(255,59,48,0.3)":"1px solid #FFD1D1")}}>
+                    <div style={{background:p.overCap?(darkMode?"rgba(255,159,10,0.2)":"#FFF8E1"):(darkMode?"rgba(255,69,58,0.2)":"#FFF1F0"),borderRadius:S.rad,padding:14,marginBottom:10,border:p.overCap?(darkMode?"1px solid rgba(255,159,10,0.4)":"1px solid #FFE082"):(darkMode?"1px solid rgba(255,69,58,0.4)":"1px solid #FFD1D1")}}>
                       {p.overCap?(
                         <div>
-                          <p style={{fontSize:13,fontWeight:700,color:"#FF9500",marginBottom:6}}>🚨 已超出此卡回贈上限</p>
+                          <p style={{fontSize:13,fontWeight:700,color:S.red,marginBottom:6}}>🚨 已超出此卡回贈上限</p>
                           <p style={{fontSize:12,color:S.sec,lineHeight:1.6}}>上限 <strong style={{color:S.dark}}>${p.capAmt.toLocaleString()}/月</strong>，超出部分只得基本回贈{(()=>{const spent=(cardSpending.cards[p.card.id]?.byScenario?.[sc]?.spent)||0;return spent>0?`\n本期已簽 $${spent.toLocaleString()}`:"";})()}</p>
                           {fb&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${S.sep}`}}>
                             <p style={{fontSize:11,color:S.label,marginBottom:4}}>👉 建議改用{fb.notOwned?"（市面推薦）":""}</p>
-                            <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
-                            {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:"#FF9500",marginTop:2}}>{fb.card.cond[sc]}</p>}
+                            <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:S.muted,fontSize:11,marginLeft:6}}>未持有</span>}</p>
+                            {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:S.cond,marginTop:2}}>{fb.card.cond[sc]}</p>}
                           </div>}
                         </div>
                       ):(
@@ -1295,21 +1371,21 @@ export default function App(){
                           <p style={{fontSize:12,color:S.sec,lineHeight:1.5}}>{p.card.capInfo}</p>
                           {(()=>{const spent=(cardSpending.cards[p.card.id]?.byScenario?.[sc]?.spent)||0;const cap=p.capAmt;if(!cap)return null;const pct=Math.min((spent/cap)*100,100);const afterPct=Math.min(((spent+amt)/cap)*100,100);const isOver=spent>=cap;const willOver=(spent+amt)>cap;return(
                             <div style={{marginTop:8}}>
-                              <div style={{display:"flex",justifyContent:"space-between",fontSize:10,color:isOver?"#FF9500":S.sec,marginBottom:3}}>
+                              <div style={{display:"flex",justifyContent:"space-between",fontSize:10,color:isOver?S.red:S.sec,marginBottom:3}}>
                                 <span>本月已簽 ${spent.toLocaleString()}</span>
                                 <span>上限 ${cap.toLocaleString()}</span>
                               </div>
                               <div style={{height:8,borderRadius:4,background:darkMode?"#3A3A3C":"#E5E5EA",overflow:"hidden",position:"relative"}}>
-                                <div style={{height:"100%",borderRadius:4,background:isOver?"#FF9500":willOver?"#FF9500":S.green,width:`${pct}%`,transition:"width 0.3s"}}/>
+                                <div style={{height:"100%",borderRadius:4,background:isOver?S.red:willOver?S.red:S.green,width:`${pct}%`,transition:"width 0.3s"}}/>
                                 {amt>0&&!isOver&&<div style={{position:"absolute",top:0,left:`${pct}%`,height:"100%",borderRadius:4,background:willOver?"rgba(255,59,48,0.3)":"rgba(52,199,89,0.3)",width:`${Math.min(afterPct-pct,100-pct)}%`}}/>}
                               </div>
-                              <p style={{fontSize:10,color:willOver?"#FF9500":S.label,marginTop:3}}>{isOver?"已爆 Cap！超出部分只得基本回贈":willOver?`⚠️ 加埋今筆 $${amt.toLocaleString()} 會超出上限`:`剩餘 $${(cap-spent).toLocaleString()}`}</p>
+                              <p style={{fontSize:10,color:willOver?S.red:S.label,marginTop:3}}>{isOver?"已爆 Cap！超出部分只得基本回贈":willOver?`⚠️ 加埋今筆 $${amt.toLocaleString()} 會超出上限`:`剩餘 $${(cap-spent).toLocaleString()}`}</p>
                             </div>
                           );})()}
                           {fb&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${S.sep}`}}>
-                            <p style={{fontSize:11,color:S.label,marginBottom:4}}>{fb.notOwned?"💡 市面最佳保底卡":"🛡️ 保底可用"}</p>
-                            <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
-                            {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:"#FF9500",marginTop:2}}>{fb.card.cond[sc]}</p>}
+                            <p style={{fontSize:11,color:S.label,marginBottom:4}}>{fb.notOwned?"💡 市面最佳保底卡":"🛡️ 保底唔洗煩"}</p>
+                            <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:S.muted,fontSize:11,marginLeft:6}}>未持有</span>}</p>
+                            {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:S.cond,marginTop:2}}>{fb.card.cond[sc]}</p>}
                           </div>}
                         </div>
                       )}
@@ -1318,19 +1394,19 @@ export default function App(){
                   {/* Fallback when no capInfo but fallback exists */}
                   {!p.card.capInfo&&fb&&(
                     <div style={{background:S.bg,borderRadius:16,padding:12,marginBottom:10}}>
-                      <p style={{fontSize:11,color:S.label,marginBottom:4}}>{fb.notOwned?"💡 市面最佳保底卡":"🛡️ 保底可用"}</p>
-                      <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
-                      {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:"#FF9500",marginTop:2}}>{fb.card.cond[sc]}</p>}
+                      <p style={{fontSize:11,color:S.label,marginBottom:4}}>{fb.notOwned?"💡 市面最佳保底卡":"🛡️ 保底唔洗煩"}</p>
+                      <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{fb.card.name} <span style={{color:isCB?S.green:S.blue}}>{isCB?`${(fb.rate*100).toFixed(1)}%`:`$${parseFloat(fb.rate.toFixed(2))}/里`}</span>{fb.notOwned&&<span style={{color:S.muted,fontSize:11,marginLeft:6}}>未持有</span>}</p>
+                      {fb.card.cond&&fb.card.cond[sc]&&<p style={{fontSize:11,color:S.cond,marginTop:2}}>{fb.card.cond[sc]}</p>}
                     </div>
                   )}
                   {gb&&(
-                    <div style={{background:gb.card.id===p.card.id?(darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)"):(darkMode?"rgba(255,149,0,0.1)":"#FFFBEB"),borderRadius:16,padding:12}}>
+                    <div style={{background:gb.card.id===p.card.id?(darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)"):(darkMode?"rgba(255,159,10,0.18)":"#FFFBEB"),borderRadius:16,padding:12}}>
                       {gb.card.id===p.card.id?<p style={{fontSize:12,fontWeight:600,color:S.green}}>🎉 推薦俾你嘅卡已經係全城最抵！</p>
                       :ownsG?<p style={{fontSize:12,fontWeight:600,color:S.green}}>🎉 你已經擁有全城最抵嘅卡！</p>
                       :<div>
                         <p style={{fontSize:11,color:S.label,marginBottom:4}}>✨ 全城最抵</p>
-                        <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{gb.card.name} <span style={{color:"#FF9500"}}>{isCB?`${(gb.rate*100).toFixed(1)}%`:`$${parseFloat(gb.rate.toFixed(2))}/里`}</span>{!own.includes(gb.card.id)&&<span style={{color:"#FF9500",fontSize:11,marginLeft:6}}>未持有</span>}</p>
-                        {gb.card.cond&&gb.card.cond[sc]&&<p style={{fontSize:11,color:"#FF9500",marginTop:2}}>{gb.card.cond[sc]}</p>}
+                        <p style={{fontSize:14,fontWeight:600,color:S.dark}}>{gb.card.name} <span style={{color:S.promo}}>{isCB?`${(gb.rate*100).toFixed(1)}%`:`$${parseFloat(gb.rate.toFixed(2))}/里`}</span>{!own.includes(gb.card.id)&&<span style={{color:S.muted,fontSize:11,marginLeft:6}}>未持有</span>}</p>
+                        {gb.card.cond&&gb.card.cond[sc]&&<p style={{fontSize:11,color:S.cond,marginTop:2}}>{gb.card.cond[sc]}</p>}
                         <a href={`https://www.google.com/search?q=${encodeURIComponent(gb.card.name+" 申請 香港")}`} target="_blank" rel="noopener noreferrer" style={{fontSize:11,color:S.blue,marginTop:6,display:"inline-block"}}>了解更多 / 申請 →</a>
                       </div>}
                     </div>
@@ -1343,6 +1419,30 @@ export default function App(){
                       <p style={{fontSize:10,color:S.sec,marginTop:3,lineHeight:1.6}}>回贈 {(p.rate*100).toFixed(2)}% − 手續費 {(fee*100).toFixed(2)}% = <strong style={{color:net>0?S.green:S.red}}>淨回贈 {(net*100).toFixed(2)}%</strong>{net<=0?" ⚠️ 蝕手續費！":""}</p>
                     </div>;
                   })()}
+                  {/* Custom promo match */}
+                  {promoMatch&&(()=>{
+                    const pm=promoMatch;
+                    const beats=isCB?(pm.rate>p.rate):(pm.rate<p.rate);
+                    const ic=ISSUER_COLORS[pm.card.issuer]||{bg:"#8E8E93",short:"?"};
+                    return <div style={{marginTop:12,padding:12,borderRadius:14,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:"1px solid rgba(255,149,0,0.2)"}}>
+                      <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:6}}>
+                        <span style={{fontSize:10,fontWeight:700,color:S.promo,letterSpacing:1}}>🔥 特選優惠</span>
+                        {beats&&<span style={{fontSize:10,fontWeight:700,color:S.green,padding:"1px 6px",borderRadius:4,background:"rgba(52,199,89,0.08)"}}>更抵！</span>}
+                      </div>
+                      <div style={{display:"flex",alignItems:"center",gap:8}}>
+                        <div style={{padding:"3px 8px",borderRadius:6,background:ic.bg}}><span style={{fontSize:9,fontWeight:700,color:"#fff"}}>{ic.short}</span></div>
+                        <div style={{flex:1}}>
+                          <p style={{fontSize:13,fontWeight:600,color:S.dark}}>{pm.card.name}</p>
+                          <p style={{fontSize:10,color:S.label}}>{pm.promo.memo||"自訂優惠"}</p>
+                        </div>
+                        <div style={{textAlign:"right"}}>
+                          <p style={{fontSize:16,fontWeight:700,color:S.promo}}>{isCB?`${(pm.rate*100).toFixed(1)}%`:`$${parseFloat(pm.rate.toFixed(2))}/里`}</p>
+                          {isCB&&<p style={{fontSize:11,color:S.sec}}>≈ ${(pm.val).toFixed(1)}</p>}
+                        </div>
+                      </div>
+                    </div>;
+                  })()}
+
                   {/* More top cards — market-wide */}
                   {amt>0&&p&&(()=>{
                     const allRanked=isCB
@@ -1365,7 +1465,7 @@ export default function App(){
                               </div>
                               <div style={{textAlign:"right",flexShrink:0}}>
                                 <p style={{fontSize:14,fontWeight:700,color:isCB?S.green:S.blue}}>{isCB?`${(x.rate*100).toFixed(1)}%`:`$${parseFloat(x.rate.toFixed(2))}/里`}</p>
-                                <p style={{fontSize:10,color:isOwned?S.green:"#FF9500",marginTop:1}}>{isOwned?"✓ 持有":"未持有"}</p>
+                                <p style={{fontSize:10,color:isOwned?S.green:S.muted,marginTop:1}}>{isOwned?"✓ 持有":"未持有"}</p>
                               </div>
                             </div>
                             {isCB&&fee>0&&<p style={{fontSize:10,color:S.sec,marginTop:4}}>💱 手續費 {(fee*100).toFixed(2)}%，淨回贈 {((x.rate-fee)*100).toFixed(2)}%</p>}
@@ -1394,7 +1494,7 @@ export default function App(){
                 return(
                   <div>
                     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-                      <p style={{fontSize:14,fontWeight:700,color:"#FF9500"}}>✏️ 記一筆</p>
+                      <p style={{fontSize:14,fontWeight:700,color:S.promo}}>✏️ 記一筆</p>
                       <div style={{display:"flex",alignItems:"center",gap:6}}>
                         {logDate!==new Date().toISOString().slice(0,10)&&<button onClick={()=>setLogDate(new Date().toISOString().slice(0,10))} style={{padding:"5px 10px",borderRadius:20,background:"rgba(52,199,89,0.08)",border:"1px solid rgba(52,199,89,0.2)",cursor:"pointer",fontSize:12,fontWeight:600,color:S.green}}>今日</button>}
                         <div style={{position:"relative"}}>
@@ -1411,14 +1511,14 @@ export default function App(){
                       <p style={{fontSize:13,color:S.sec,flexShrink:0}}>簽賬金額 <strong style={{color:S.dark,fontSize:15}}>${amt.toLocaleString()}</strong></p>
                       <input type="text" value={logMemo} onChange={e=>setLogMemo(e.target.value)} placeholder="Mark低用咗咩錢" maxLength={40} style={{flex:1,padding:"6px 10px",borderRadius:10,border:`1px solid ${S.sep}`,background:S.card,fontSize:12,outline:"none",color:S.dark,minWidth:0}}/>
                     </div>
-                    {pExhausted&&<p style={{fontSize:11,color:"#FF9500",marginBottom:8}}>⚠️ 已簽 ${pSpent.toLocaleString()} / ${pCap.toLocaleString()}，建議用保底卡</p>}
+                    {pExhausted&&<p style={{fontSize:11,color:S.red,marginBottom:8}}>⚠️ 已簽 ${pSpent.toLocaleString()} / ${pCap.toLocaleString()}，建議用保底卡</p>}
                     <p style={{fontSize:10,color:S.label,marginBottom:6}}>撳下面揀用邊張卡記賬 ↓</p>
                     {/* 2x2 grid: 推薦 | 保底 / 其他 | 現金 */}
                     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
                       {/* Row 1 Left: 推薦卡 */}
                       {p.notOwned?(
-                        <div style={{padding:"12px 10px",borderRadius:14,background:darkMode?"rgba(255,149,0,0.08)":"#FFFBEB",border:darkMode?"1px solid rgba(255,149,0,0.3)":"1px solid #FFE082",textAlign:"center"}}>
-                          <p style={{fontSize:11,fontWeight:600,color:"#FF9500"}}>未持有 {p.card.name}</p>
+                        <div style={{padding:"12px 10px",borderRadius:14,background:darkMode?"rgba(255,159,10,0.15)":"#FFFBEB",border:darkMode?"1px solid rgba(255,159,10,0.4)":"1px solid #FFE082",textAlign:"center"}}>
+                          <p style={{fontSize:11,fontWeight:600,color:S.muted}}>未持有 {p.card.name}</p>
                         </div>
                       ):(
                         <button onClick={()=>{addLog(p.card.id,p.card.name,sc,amt,p.rate,!isCB,mkDate(),logMemo);scrollTop();}} style={{...btnBase,padding:"12px 10px",background:pExhausted?S.bg:isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",color:pExhausted?S.label:"#fff",boxShadow:pExhausted?"none":isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)",borderRadius:14}}>
@@ -1441,7 +1541,7 @@ export default function App(){
                         <span style={{fontSize:12}}>📋 {logOther?"收起":"其他卡"}</span>
                       </button>
                       {/* Row 2 Right: 現金/八達通 */}
-                      <button onClick={()=>{setLogCash(o=>!o);setLogOther(false);}} style={{...btnBase,padding:"12px 10px",background:logCash?"rgba(255,159,10,0.08)":S.bg,color:S.dark,borderRadius:14,border:logCash?`2px solid #FF9500`:"2px solid transparent"}}>
+                      <button onClick={()=>{setLogCash(o=>!o);setLogOther(false);}} style={{...btnBase,padding:"12px 10px",background:logCash?"rgba(255,159,10,0.08)":S.bg,color:S.dark,borderRadius:14,border:logCash?`2px solid ${S.promo}`:"2px solid transparent"}}>
                         <span style={{fontSize:12}}>💵 {logCash?"收起":"現金/其他"}</span>
                       </button>
                     </div>
@@ -1473,7 +1573,7 @@ export default function App(){
                 );
               })():(
                 <div style={{textAlign:"center",padding:"4px 0"}}>
-                  <p style={{fontSize:14,fontWeight:700,color:"#FF9500"}}>✏️ 記一筆</p>
+                  <p style={{fontSize:14,fontWeight:700,color:S.promo}}>✏️ 記一筆</p>
                   <p style={{fontSize:12,color:S.label,marginTop:4}}>{noCards?"先揀卡再記帳":"輸入金額即可記帳"}</p>
                 </div>
               )}
@@ -1511,7 +1611,7 @@ export default function App(){
           <div style={{paddingTop:20,display:"flex",flexDirection:"column",gap:16}}>
             <div id="tut-cardlist" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <div>
-                <h2 style={{fontSize:22,fontWeight:700,color:S.dark,letterSpacing:-0.26}}>Card Holder</h2>
+                <h2 style={{fontSize:22,fontWeight:700,color:S.dark,letterSpacing:-0.26}}>My Cards</h2>
                 <p style={{fontSize:12,color:S.label,marginTop:2}}>已選 {own.length} / {CARDS.length} 張</p>
               </div>
               <div style={{display:"flex",gap:8}}>
@@ -1520,13 +1620,67 @@ export default function App(){
               </div>
             </div>
 
-            {noCards&&tut===0&&<div style={{background:darkMode?"rgba(255,59,48,0.12)":"#FFF1F0",borderRadius:12,padding:12,display:"flex",alignItems:"center",gap:8}}><AlertTriangle size={14} color={S.red}/><p style={{fontSize:12,fontWeight:600,color:S.red}}>請先剔選你擁有嘅信用卡</p></div>}
-            {own.length===0&&tut===0&&<div style={{background:"rgba(0,122,255,0.04)",borderRadius:14,padding:12}}>
+            {noCards&&tut===0&&<div style={{background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",borderRadius:12,padding:12,display:"flex",alignItems:"center",gap:8}}><AlertTriangle size={14} color={S.red}/><p style={{fontSize:12,fontWeight:600,color:S.red}}>請先剔選你擁有嘅信用卡</p></div>}
+            {own.length===0&&tut===0&&<div style={{background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",borderRadius:14,padding:12,border:darkMode?"1px solid rgba(0,122,255,0.2)":"none"}}>
               <p style={{fontSize:12,color:S.sec,lineHeight:1.5}}>💡 只揀你<strong>錢包入面有</strong>嘅卡。唔使全選 — 揀得越準，推薦越啱你！</p>
             </div>}
-            {own.length>0&&tut===0&&<div style={{background:"rgba(52,199,89,0.04)",borderRadius:12,padding:10,border:"1px solid rgba(52,199,89,0.08)"}}>
+            {own.length>0&&tut===0&&<div style={{background:darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.04)",borderRadius:12,padding:10,border:`1px solid rgba(52,199,89,${darkMode?0.2:0.08})`}}>
               <p style={{fontSize:11,color:S.sec,lineHeight:1.5}}>✅ 揀好卡即刻用到！下面銀行 ⚙️ 設定係<strong>進階功能</strong>（可選），唔設定一樣正常運作。</p>
             </div>}
+
+            {/* Custom Promos — top of My Cards */}
+            <div id="promo-section" style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow,border:`1px solid rgba(255,149,0,0.15)`}}>
+              <button onClick={()=>setPromoForm(promoForm?null:{cardId:"",customCardName:"",scs:["dining"],rate:"",memo:"",isMiles:false})} style={{width:"100%",padding:"12px 16px",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:(customPromos.length>0||promoForm)?`1px solid ${S.sep}`:"none"}}>
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  <span style={{fontSize:16}}>🔥</span>
+                  <span style={{fontSize:14,fontWeight:600,color:S.dark}}>特選優惠</span>
+                  {customPromos.length>0?<span style={{fontSize:11,color:S.promo,fontWeight:600}}>{customPromos.length} 項生效中</span>:<span style={{fontSize:11,color:S.label}}>選填，唔影響正常使用</span>}
+                </div>
+                <span style={{fontSize:12,color:promoForm?S.red:S.blue,fontWeight:600}}>{promoForm?"取消":"＋ 新增"}</span>
+              </button>
+              {promoForm&&(
+                <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(255,159,10,0.12)":"rgba(255,149,0,0.02)"}}>
+                  <p style={{fontSize:10,color:S.label,marginBottom:8}}>收到銀行特選優惠 SMS/Email？輸入<strong>總回贈率</strong>同場景，計算器會自動用呢個 % 比較</p>
+                  <div style={{display:"flex",gap:8,marginBottom:8}}>
+                    <select value={promoForm.cardId||""} onChange={e=>{if(e.target.value==="_custom"){setPromoForm(p=>({...p,cardId:"_custom",cardName:""}));return;}const c=CARDS.find(x=>x.id===e.target.value);setPromoForm(p=>({...p,cardId:e.target.value,cardName:c?c.name:"",customCardName:""}));}} style={{flex:1,padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:promoForm.cardId?S.dark:S.label,background:S.card,appearance:"auto"}}>
+                      <option value="" disabled>揀信用卡</option>
+                      {CARDS.filter(c=>own.includes(c.id)).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
+                      <option value="_custom">➕ 自訂卡名...</option>
+                    </select>
+                  </div>
+                  {promoForm.cardId==="_custom"&&<input type="text" value={promoForm.customCardName||""} onChange={e=>setPromoForm(p=>({...p,customCardName:e.target.value,cardName:e.target.value}))} placeholder="輸入卡名 (e.g. Citi PremierMiles)" style={{width:"100%",padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,marginBottom:8,boxSizing:"border-box"}}/>}
+                  {promoForm.cardId&&promoForm.cardId!=="_custom"&&<p style={{fontSize:10,color:S.label,marginBottom:6,lineHeight:1.4}}>💡 攻略排名將額外顯示「{promoForm.cardName}（特選優惠）」，同原本嘅卡分開排</p>}
+                  <p style={{fontSize:10,color:S.label,marginBottom:4}}>適用場景（可多選）</p>
+                  <div style={{display:"flex",gap:4,marginBottom:8,flexWrap:"wrap"}}>
+                    {SCENARIOS.map(s=>{const sel=(promoForm.scs||[]).includes(s.id);return(
+                      <button key={s.id} onClick={()=>setPromoForm(p=>{const scs=p.scs||[];return{...p,scs:sel?scs.filter(x=>x!==s.id):[...scs,s.id]};})} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:sel?`rgba(${darkMode?"255,159,10":"255,149,0"},0.12)`:S.card,color:sel?S.promo:S.label,border:sel?`1px solid rgba(255,149,0,0.3)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap"}}>{s.emoji}{s.label}</button>
+                    );})}
+                  </div>
+                  <div style={{display:"flex",gap:8,marginBottom:8}}>
+                    <div style={{display:"flex",gap:6,flex:1}}>
+                      <button onClick={()=>setPromoForm(p=>({...p,isMiles:false}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:!promoForm.isMiles?`2px solid ${S.green}`:`2px solid ${S.sep}`,background:!promoForm.isMiles?"rgba(52,199,89,0.06)":S.card,color:!promoForm.isMiles?S.green:S.label,cursor:"pointer"}}>💰 總回贈%</button>
+                      <button onClick={()=>setPromoForm(p=>({...p,isMiles:true}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:promoForm.isMiles?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:promoForm.isMiles?"rgba(0,122,255,0.06)":S.card,color:promoForm.isMiles?S.blue:S.label,cursor:"pointer"}}>✈️ $/里</button>
+                    </div>
+                    <div style={{width:100,display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0}}>
+                      <input type="number" value={promoForm.rate} onChange={e=>setPromoForm(p=>({...p,rate:e.target.value}))} placeholder={promoForm.isMiles?"e.g. 2.78":"e.g. 10"} style={{width:"100%",border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,background:"transparent"}}/>
+                      <span style={{fontSize:11,color:S.label}}>{promoForm.isMiles?"$/里":"%"}</span>
+                    </div>
+                  </div>
+                  <input type="text" value={promoForm.memo} onChange={e=>setPromoForm(p=>({...p,memo:e.target.value}))} placeholder="備註 (e.g. 特選食飯10%至6月底)" style={{width:"100%",padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,marginBottom:8,boxSizing:"border-box"}}/>
+                  <button onClick={()=>{const r=parseFloat(promoForm.rate);const scs=promoForm.scs||[];if((!promoForm.cardId&&!promoForm.customCardName)||!r||scs.length===0)return;const cName=promoForm.cardId==="_custom"?promoForm.customCardName:(promoForm.cardName||"");if(promoForm.editId){setCustomPromos(p=>p.map(x=>x.id===promoForm.editId?{...x,cardId:promoForm.cardId==="_custom"?"_custom":promoForm.cardId,cardName:cName,scs,rate:r,memo:promoForm.memo||`${cName} 特選優惠`,isMiles:promoForm.isMiles}:x));}else{setCustomPromos(p=>[...p,{id:Date.now(),cardId:promoForm.cardId==="_custom"?"_custom":promoForm.cardId,cardName:cName,scs,rate:r,memo:promoForm.memo||`${cName} 特選優惠`,isMiles:promoForm.isMiles}]);}setPromoForm(null);gEvent("promo_add",{});showToast(promoForm.editId?"✅ 已更新特選優惠":"🔥 已新增特選優惠");}} disabled={(!promoForm.cardId&&!promoForm.customCardName)||!promoForm.rate||(promoForm.scs||[]).length===0} style={{width:"100%",padding:10,borderRadius:12,background:((!promoForm.cardId&&!promoForm.customCardName)||!promoForm.rate||(promoForm.scs||[]).length===0)?S.bg:S.promo,color:((!promoForm.cardId&&!promoForm.customCardName)||!promoForm.rate||(promoForm.scs||[]).length===0)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:"pointer"}}>{promoForm.editId?"更新特選優惠":"新增特選優惠"}</button>
+                </div>
+              )}
+              {customPromos.map(cp=>{
+                const scLabels=(cp.scs||[cp.sc]).map(sid=>{const f=ALL_SCENARIOS.find(x=>x.id===sid);return f?f.emoji+f.label:sid;}).join("、");
+                return <div key={cp.id} onClick={()=>setPromoForm({cardId:cp.cardId,cardName:cp.cardName,customCardName:cp.cardId==="_custom"?cp.cardName:"",scs:cp.scs||[cp.sc],rate:String(cp.rate),memo:cp.memo||"",isMiles:cp.isMiles,editId:cp.id})} style={{padding:"10px 16px",display:"flex",alignItems:"center",borderBottom:`1px solid ${S.sep}`,cursor:"pointer"}}>
+                  <div style={{flex:1,minWidth:0}}>
+                    <p style={{fontSize:13,fontWeight:500,color:S.dark}}>{cp.cardName} · {scLabels}</p>
+                    <p style={{fontSize:11,color:S.promo,fontWeight:600}}>{cp.isMiles?`$${cp.rate}/里`:`總回贈 ${cp.rate}%`}{cp.memo?` · ${cp.memo}`:""}</p>
+                  </div>
+                  <button onClick={e=>{e.stopPropagation();setCustomPromos(p=>p.filter(x=>x.id!==cp.id));}} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
+                </div>;
+              })}
+            </div>
 
             {/* Search */}
             <div style={{position:"relative",borderRadius:12}}>
@@ -1536,22 +1690,26 @@ export default function App(){
 
             {/* Bank quick filter — multi-select */}
             <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:4,WebkitOverflowScrolling:"touch"}}>
-              {bankFilter.length>0&&<button onClick={()=>setBankFilter([])} style={{padding:"6px 14px",borderRadius:20,fontSize:11,fontWeight:600,background:darkMode?"rgba(255,59,48,0.12)":"#FFF1F0",color:S.red,border:`1px solid rgba(255,59,48,0.2)`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>重設 ✕</button>}
+              {bankFilter.length>0&&<button onClick={()=>setBankFilter([])} style={{padding:"6px 14px",borderRadius:20,fontSize:11,fontWeight:600,background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",color:S.red,border:`1px solid rgba(255,59,48,0.2)`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>重設 ✕</button>}
               {ISSUERS.map(iss=>{const cnt=(grouped[iss]||[]).filter(c=>own.includes(c.id)).length;const active=bankFilter.includes(iss);return(
                 <button key={iss} onClick={()=>setBankFilter(p=>active?p.filter(x=>x!==iss):[...p,iss])} style={{padding:"6px 12px",borderRadius:20,fontSize:11,fontWeight:600,background:active?S.blue:S.card,color:active?"#fff":S.sec,border:`1px solid ${active?S.blue:S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{iss}{cnt>0&&<span style={{marginLeft:3,fontSize:11,opacity:0.85}}>·{cnt}</span>}</button>
               );})}
             </div>
 
-            {ISSUERS.filter(x=>filteredGrouped[x]&&(bankFilter.length===0||bankFilter.includes(x))).map((iss,gi)=>(
+            {ISSUERS.filter(x=>filteredGrouped[x]&&(bankFilter.length===0||bankFilter.includes(x))).map((iss,gi)=>{
+              const bankOpen=isBankOpen(iss);
+              return(
               <div key={iss}>
               <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow,...hlStyle("cardlist")}}>
-                <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:S.subtleBg}}>
+                <div onClick={()=>toggleBank(iss)} style={{padding:"12px 16px",borderBottom:bankOpen?`1px solid ${S.sep}`:"none",background:S.subtleBg,cursor:"pointer"}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                     <div style={{display:"flex",alignItems:"center",gap:8}}>
                       {(()=>{const ic=ISSUER_COLORS[iss]||{bg:"#8E8E93",short:"?"};return <div style={{padding:"3px 8px",borderRadius:6,background:ic.bg,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><span style={{fontSize:9,fontWeight:700,color:"#fff"}}>{ic.short}</span></div>;})()}
                       <p style={{fontSize:15,fontWeight:600,letterSpacing:-0.24,color:S.sec}}>{iss}</p>
+                      {(()=>{const cnt=(grouped[iss]||[]).filter(c=>own.includes(c.id)).length;return cnt>0?<span style={{fontSize:10,fontWeight:700,color:S.blue,background:"rgba(0,122,255,0.08)",padding:"2px 6px",borderRadius:6}}>{cnt} 張</span>:null;})()}
+                      <span style={{fontSize:11,color:S.label}}>{bankOpen?"▲":"▼"}</span>
                     </div>
-                    <div style={{display:"flex",gap:4,flexWrap:"wrap",justifyContent:"flex-end"}}>
+                    <div style={{display:"flex",gap:4,flexWrap:"wrap",justifyContent:"flex-end"}} onClick={e=>e.stopPropagation()}>
                   {iss==="American Express"&&(own.includes("ae_explorer")||own.includes("ae_plat_charge"))&&<button onClick={()=>setAeOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:aeOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:aeOpen?S.blue:S.label}}>{aeOpen?"收起 ▲":"外幣優惠 ⚙️"}</button>}
                   {iss==="HSBC"&&(own.some(id=>["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier","hsbc_everymile"].includes(id)))&&<button id="tut-hsbc-btn" onClick={()=>setHsbcOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:hsbcOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:hsbcOpen?S.blue:S.label}}>{hsbcOpen?"收起 ▲":"最紅自主 & Guru ⚙️"}</button>}
                   {iss==="Hang Seng"&&(own.includes("hs_mmpower")||own.includes("hs_travel"))&&<button onClick={()=>setHsOpen(p=>!p)} style={{padding:"6px 12px",borderRadius:10,background:hsOpen?"rgba(0,122,255,0.08)":"rgba(118,118,128,0.08)",border:"none",cursor:"pointer",fontSize:11,fontWeight:600,color:hsOpen?S.blue:S.label}}>{hsOpen?"收起 ▲":"回贈登記 ⚙️"}</button>}
@@ -1564,9 +1722,10 @@ export default function App(){
                     </div>
                   </div>
                 </div>
+                {bankOpen&&<>
                 {/* AE settings panel */}
                 {iss==="American Express"&&aeOpen&&(own.includes("ae_explorer")||own.includes("ae_plat_charge"))&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:8}}>外幣優惠登記狀態</p>
                     {own.includes("ae_explorer")&&<div style={{marginBottom:8}}>
                       <div style={{display:"flex",alignItems:"center",gap:6}}>
@@ -1583,15 +1742,15 @@ export default function App(){
                 )}
                 {/* HSBC settings panel */}
                 {iss==="HSBC"&&hsbcOpen&&(
-                  <div id="tut-settings" style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>                    <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>最紅自主獎賞</p>
+                  <div id="tut-settings" style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>                    <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>最紅自主獎賞</p>
                     <p style={{fontSize:10,color:S.label,marginBottom:8}}>如果你有喺 HSBC App 登記「最紅自主獎賞」，揀返你嗰個類別</p>
                     <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6,marginBottom:14}}>
-                      {[{k:"none",l:"❌ 冇登記",d:"無額外加碼"},{k:"world",l:"🌍 賞世界",d:"海外/外幣"},{k:"savour",l:"🍴 賞滋味",d:"食飯"},{k:"home",l:"🏠 賞家居",d:"超市/電器/電訊"},{k:"lifestyle",l:"🎬 賞享受",d:"戲院/健身/SPA"},{k:"shopping",l:"🛍️ 賞購物",d:"百貨/時裝/護膚"}].map(o=><button key={o.k} onClick={()=>setVs(o.k)} style={{padding:"8px 4px",borderRadius:10,fontSize:11,fontWeight:600,border:vs===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`2px solid ${S.sep}`,background:vs===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:vs===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer",textAlign:"center"}}><div>{o.l}</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>{o.d}</div></button>)}
+                      {[{k:"none",l:"❌ 冇登記",d:"無額外加碼"},{k:"world",l:"🌍 賞世界",d:"海外/外幣"},{k:"savour",l:"🍴 賞滋味",d:"食飯"},{k:"home",l:"🏠 賞家居",d:"超市/電器/電訊"},{k:"lifestyle",l:"🎬 賞享受",d:"戲院/健身/SPA"},{k:"shopping",l:"🛍️ 賞購物",d:"百貨/時裝/護膚"}].map(o=><button key={o.k} onClick={()=>{setVs(o.k);gEvent("setting_change",{setting:"hsbc_vs"});}} style={{padding:"8px 4px",borderRadius:10,fontSize:11,fontWeight:600,border:vs===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`2px solid ${S.sep}`,background:vs===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:vs===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer",textAlign:"center"}}><div>{o.l}</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>{o.d}</div></button>)}
                     </div>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>Travel Guru 等級</p>
                     <p style={{fontSize:10,color:S.label,marginBottom:8}}>所有 HSBC 信用卡嘅海外簽賬加碼等級（非只限 EveryMile）</p>
                     <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:6}}>
-                      {[{k:"none",l:"❌ 冇登記"},{k:"L1",l:"Lv1 GO +3%"},{k:"L2",l:"Lv2 GING +4%"},{k:"L3",l:"Lv3 GURU +6%"}].map(o=><button key={o.k} onClick={()=>setGuru(o.k)} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:guru===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`2px solid ${S.sep}`,background:guru===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:guru===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o.l}</button>)}
+                      {[{k:"none",l:"❌ 冇登記"},{k:"L1",l:"Lv1 GO +3%"},{k:"L2",l:"Lv2 GING +4%"},{k:"L3",l:"Lv3 GURU +6%"}].map(o=><button key={o.k} onClick={()=>{setGuru(o.k);gEvent("setting_change",{setting:"travel_guru"});}} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:guru===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`2px solid ${S.sep}`,background:guru===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:guru===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o.l}</button>)}
                     </div>
                     {own.includes("hsbc_everymile")&&<div style={{marginTop:12,paddingTop:10,borderTop:`1px solid ${S.sep}`}}>
                       <div style={{display:"flex",alignItems:"center",gap:6}}>
@@ -1603,7 +1762,7 @@ export default function App(){
                   </div>
                 )}
                 {iss==="Mox Bank"&&moxOpen&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>MOX 存款等級</p>
                     <p style={{fontSize:10,color:S.label,marginBottom:8}}>維持 $250,000 活期存款可享更高回贈</p>
                     <div style={{display:"flex",gap:8}}>
@@ -1614,7 +1773,7 @@ export default function App(){
                 )}
                 {/* Hang Seng settings */}
                 {iss==="Hang Seng"&&hsOpen&&(own.includes("hs_mmpower")||own.includes("hs_travel"))&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:8}}>回贈優惠登記狀態</p>
                     {own.includes("hs_mmpower")&&<div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
                       <span style={{fontSize:11,color:S.sec,flex:1}}>MMPOWER 回贈計劃</span>
@@ -1627,14 +1786,16 @@ export default function App(){
                   </div>
                 )}
                 {iss==="DBS"&&dbsOpen&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     {own.includes("dbs_live")&&<div style={{marginBottom:(own.includes("dbs_eminent_vs")||own.includes("dbs_eminent_plat"))?12:0}}>
                       <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>DBS Live Fresh 自選類別</p>
                       <p style={{fontSize:10,color:S.label,marginBottom:8}}>喺 DBS Card+ App 登記嘅網上簽賬類別</p>
                       <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6}}>
                         <button onClick={()=>setDbsLfFx("none")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="none"?`2px solid ${S.red}`:`2px solid ${S.sep}`,background:dbsLfFx==="none"?"rgba(255,59,48,0.06)":S.card,color:dbsLfFx==="none"?S.red:S.label,cursor:"pointer",textAlign:"center"}}><div>❌ 未登記</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>只有基本 0.4%</div></button>
-                        <button onClick={()=>setDbsLfFx("other")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="other"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="other"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="other"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>🎭 娛樂/服飾</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>網購HKD 5.4%</div></button>
-                        <button onClick={()=>setDbsLfFx("fx")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="fx"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="fx"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="fx"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>🌍 外幣</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>網上外幣 6%</div></button>
+                        <button onClick={()=>setDbsLfFx("fx")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="fx"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="fx"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="fx"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>🌍 網上外幣</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>網上外幣 6%</div></button>
+                        <button onClick={()=>setDbsLfFx("travel")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="travel"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="travel"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="travel"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>✈️ 旅遊娛樂</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>指定商戶 5%</div></button>
+                        <button onClick={()=>setDbsLfFx("fashion")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="fashion"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="fashion"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="fashion"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>👗 潮流教主</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>指定商戶 5%</div></button>
+                        <button onClick={()=>setDbsLfFx("charity")} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:dbsLfFx==="charity"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:dbsLfFx==="charity"?"rgba(0,122,255,0.06)":S.card,color:dbsLfFx==="charity"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>💝 慈善關愛</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>指定商戶 5%</div></button>
                       </div>
                     </div>}
                     {(own.includes("dbs_eminent_vs")||own.includes("dbs_eminent_plat"))&&<div style={{paddingTop:own.includes("dbs_live")?10:0,borderTop:own.includes("dbs_live")?`1px solid ${S.sep}`:"none"}}>
@@ -1647,16 +1808,16 @@ export default function App(){
                   </div>
                 )}
                 {iss==="安信"&&wewaOpen&&(own.includes("ds_wewa_vs")||own.includes("ds_wewa_up"))&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <p style={{fontSize:12,fontWeight:700,color:S.dark,marginBottom:4}}>WeWa 自選加碼類別（4 揀 1）</p>
                     <p style={{fontSize:10,color:S.label,marginBottom:8}}>揀返你 WeWa 卡 App 登記嘅 4% 加碼類別</p>
                     <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:6}}>
-                      {[{k:"travel",l:"✈️ 旅遊",d:"日韓泰中台+海外實體"},{k:"overseas",l:"🌍 海外",d:"網上外幣簽賬"},{k:"mobilePay",l:"📱 手機支付",d:"Apple/Google Pay"},{k:"entertainment",l:"🎮 網上娛樂",d:"串流/遊戲/訂閱"}].map(o=><button key={o.k} onClick={()=>setWewaCategory(o.k)} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:wewaCategory===o.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:wewaCategory===o.k?"rgba(0,122,255,0.06)":S.card,color:wewaCategory===o.k?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>{o.l}</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>{o.d}</div></button>)}
+                      {[{k:"none",l:"❌ 未登記",d:"只有0.4%基本"},{k:"overseas",l:"🌍 海外簽賬",d:"所有外幣簽賬4%"},{k:"mobilePay",l:"📱 手機支付",d:"Apple/Google Pay 4%"},{k:"travel",l:"✈️ 旅遊",d:"航空/酒店/旅行社MCC"},{k:"entertainment",l:"🎮 線上娛樂",d:"Netflix等14個指定平台"}].map(o=><button key={o.k} onClick={()=>setWewaCategory(o.k)} style={{padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:wewaCategory===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`2px solid ${S.sep}`,background:wewaCategory===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:wewaCategory===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer",textAlign:"center"}}><div>{o.l}</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>{o.d}</div></button>)}
                     </div>
                   </div>
                 )}
                 {iss==="Bank of China"&&bocOpen&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
                       <p style={{fontSize:12,fontWeight:700,color:S.dark}}>中銀狂賞派/飛 (2026 H1)</p>
                       <span style={{fontSize:10,fontWeight:700,color:isRedDay()?S.red:S.label,background:isRedDay()?"rgba(255,59,48,0.08)":"rgba(118,118,128,0.08)",padding:"2px 8px",borderRadius:8}}>{isRedDay()?"🔴 今日紅日 +5%":"⚪ 今日平日 +2%"}</span>
@@ -1677,7 +1838,7 @@ export default function App(){
                 )}
                 {/* BEA settings */}
                 {iss==="BEA"&&beaOpen&&own.includes("bea_world")&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <div style={{display:"flex",alignItems:"center",gap:6}}>
                       <span style={{fontSize:11,fontWeight:600,color:S.dark,flex:1}}>World 5% 食飯/海外回贈</span>
                       <button onClick={()=>setBeaWorldReg(p=>!p)} style={{padding:"5px 12px",borderRadius:8,fontSize:11,fontWeight:600,border:`1.5px solid ${beaWorldReg?S.green:S.red}`,background:beaWorldReg?"rgba(52,199,89,0.06)":"rgba(255,59,48,0.06)",color:beaWorldReg?S.green:S.red,cursor:"pointer"}}>{beaWorldReg?"✅ 已登記":"❌ 未登記"}</button>
@@ -1687,7 +1848,7 @@ export default function App(){
                 )}
                 {/* CCB settings */}
                 {iss==="CCB Asia"&&ccbOpen&&own.includes("ccb_eye")&&(
-                  <div style={{padding:"14px 16px",background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
+                  <div style={{padding:"14px 16px",background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)",borderBottom:`1px solid ${S.sep}`}}>
                     <div style={{display:"flex",alignItems:"center",gap:6}}>
                       <span style={{fontSize:11,fontWeight:600,color:S.dark,flex:1}}>eye 食飯 11% 加碼</span>
                       <button onClick={()=>setCcbEyeReg(p=>!p)} style={{padding:"5px 12px",borderRadius:8,fontSize:11,fontWeight:600,border:`1.5px solid ${ccbEyeReg?S.green:S.red}`,background:ccbEyeReg?"rgba(52,199,89,0.06)":"rgba(255,59,48,0.06)",color:ccbEyeReg?S.green:S.red,cursor:"pointer"}}>{ccbEyeReg?"✅ 已搶到":"❌ 未搶到"}</button>
@@ -1695,51 +1856,75 @@ export default function App(){
                     <p style={{fontSize:10,color:S.label,marginTop:3}}>每月1號 App 搶名額 + 月簽$8,000</p>
                   </div>
                 )}
-                {filteredGrouped[iss].map((c,i)=>{const sel=own.includes(c.id);return(
-                  <button key={c.id} onClick={()=>toggle(c.id)} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:"12px 16px",textAlign:"left",background:sel?"rgba(0,122,255,0.04)":S.card,border:"none",borderBottom:i<filteredGrouped[iss].length-1?`0.5px solid ${S.sep}`:"none",cursor:"pointer",minHeight:44,boxSizing:"border-box"}}>
+                </>}
+                {(bankOpen?filteredGrouped[iss]:[...filteredGrouped[iss]].sort((a,b)=>{const ao=own.includes(a.id)?0:1;const bo=own.includes(b.id)?0:1;return ao-bo;}).slice(0,3)).map((c,i)=>{const sel=own.includes(c.id);return(
+                  <button key={c.id} onClick={()=>toggle(c.id)} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:bankOpen?"12px 16px":"8px 16px",textAlign:"left",background:sel?"rgba(0,122,255,0.04)":S.card,border:"none",borderBottom:`0.5px solid ${S.sep}`,cursor:"pointer",minHeight:bankOpen?44:36,boxSizing:"border-box"}}>
                     <div style={{flex:1,minWidth:0}}>
-                      <p style={{fontSize:15,fontWeight:sel?600:400,color:sel?S.dark:S.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",letterSpacing:-0.24}}>{c.name}</p>
-                      <p style={{fontSize:12,color:S.label,marginTop:2,lineHeight:1.4}}>{c.desc}</p>
-                      <div style={{marginTop:4,display:"flex",alignItems:"center",gap:6}}><Badge type={c.type} dark={darkMode}/>{(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:10,color:ex.color,fontWeight:600}}>{ex.short}</span>:null;})()}</div>
+                      <p style={{fontSize:bankOpen?15:13,fontWeight:sel?600:400,color:sel?S.dark:S.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",letterSpacing:-0.24}}>{c.name}</p>
+                      {bankOpen&&<p style={{fontSize:12,color:S.label,marginTop:2,lineHeight:1.4}}>{c.desc}</p>}
+                      {bankOpen&&<div style={{marginTop:4,display:"flex",alignItems:"center",gap:6}}><Badge type={c.type} dark={darkMode}/>{(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:10,color:ex.color,fontWeight:600}}>{ex.short}</span>:null;})()}</div>}
                     </div>
                     {sel?<div style={{width:24,height:24,borderRadius:12,background:S.blue,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Check size={14} color="#fff" strokeWidth={3}/></div>:<div style={{width:24,height:24,borderRadius:12,border:`2px solid ${S.sep}`,flexShrink:0}}/>}
                   </button>
                 );})}
+                {!bankOpen&&filteredGrouped[iss].length>3&&<button onClick={()=>setBankState(p=>({...p,[iss]:true}))} style={{width:"100%",padding:"10px 16px",background:"none",border:"none",borderTop:`0.5px solid ${S.sep}`,cursor:"pointer",fontSize:11,fontWeight:600,color:S.blue,textAlign:"center"}}>展開全部 {filteredGrouped[iss].length} 張卡 ▼</button>}
               </div>
               </div>
-            ))}
+            );})}
+
             <div style={{display:"flex",gap:8}}>
               <button onClick={()=>setTut(1)} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><HelpCircle size={14}/> 睇教學</button>
-              <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;setOwn([]);setAmt(0);setVs("none");setGuru("none");setSMax(3000);setLogs([]);setSeen(false);try{localStorage.removeItem("sw_data");}catch(e){}}} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
+              <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;gEvent("data_reset",{});setOwn([]);setAmt(0);setVs("none");setGuru("none");setSMax(3000);setLogs([]);setSeen(false);try{localStorage.removeItem("sw_data");}catch(e){}}} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
             </div>
-            <p style={{textAlign:"center",fontSize:10,color:S.label,padding:8}}>© 2026 碌邊張 SwipeWhich · v1.2</p>
+            <p style={{textAlign:"center",fontSize:10,color:S.label,padding:8}}>© 2026 碌邊張 SwipeWhich · v1.3</p>
           </div>
         )}
 
         {/* ── GUIDE TAB ── */}
         {tab==="guide"&&(()=>{
-          // Guide-local settings (override or fallback to global)
-          const gVs=guideOvr?.vs??vs;const gGuru=guideOvr?.guru??guru;const gMox=guideOvr?.moxTier??moxTier;
-          const gDbs=guideOvr?.dbsLfFx??dbsLfFx;const gWewa=guideOvr?.wewaCategory??wewaCategory;
-          const gBocMs=guideOvr?.bocMs??bocMs;const gBocMf=guideOvr?.bocMf??bocMf;
-          const gRegs={aeExplorerReg:guideOvr?.aeExplorerReg??aeExplorerReg,aeChargeReg:guideOvr?.aeChargeReg??aeChargeReg,everyMileReg:guideOvr?.everyMileReg??everyMileReg,mmpowerReg:guideOvr?.mmpowerReg??mmpowerReg,travelPlusReg:guideOvr?.travelPlusReg??travelPlusReg,dbsEminentReg:guideOvr?.dbsEminentReg??dbsEminentReg,beaWorldReg:guideOvr?.beaWorldReg??beaWorldReg,ccbEyeReg:guideOvr?.ccbEyeReg??ccbEyeReg};
+          // Auto-optimal settings per scenario (assume all bonuses registered, best config)
+          const vsForSc={dining:"savour",supermarket:"home",onlineFX:"world",physicalFX:"world",travelJKSTA:"world"};
+          // WeWa: overseas covers all FX reliably; travel only covers travel MCC merchants; entertainment only specific platforms
+          const wewaForSc={onlineFX:"overseas",physicalFX:"overseas",travelJKSTA:"overseas",mobilePay:"mobilePay"};
+          const dbsForSc={onlineFX:"fx"};
+          const optRegs={aeExplorerReg:true,aeChargeReg:true,everyMileReg:true,mmpowerReg:true,travelPlusReg:true,dbsEminentReg:true,beaWorldReg:true,ccbEyeReg:true};
+          const optFor=(sc)=>({vs:vsForSc[sc]||"none",guru:"L3",mox:true,dbs:dbsForSc[sc]||"none",wewa:wewaForSc[sc]||"travel",bocMs:"both",bocMf:"both",regs:optRegs});
+          const o=optFor(guideSc);
+          const gVs=guideOvr?.vs??o.vs;const gGuru=guideOvr?.guru??o.guru;const gMox=guideOvr?.moxTier??o.mox;
+          const gDbs=guideOvr?.dbsLfFx??o.dbs;const gWewa=guideOvr?.wewaCategory??o.wewa;
+          const gBocMs=guideOvr?.bocMs??o.bocMs;const gBocMf=guideOvr?.bocMf??o.bocMf;
+          const gRegs={aeExplorerReg:guideOvr?.aeExplorerReg??o.regs.aeExplorerReg,aeChargeReg:guideOvr?.aeChargeReg??o.regs.aeChargeReg,everyMileReg:guideOvr?.everyMileReg??o.regs.everyMileReg,mmpowerReg:guideOvr?.mmpowerReg??o.regs.mmpowerReg,travelPlusReg:guideOvr?.travelPlusReg??o.regs.travelPlusReg,dbsEminentReg:guideOvr?.dbsEminentReg??o.regs.dbsEminentReg,beaWorldReg:guideOvr?.beaWorldReg??o.regs.beaWorldReg,ccbEyeReg:guideOvr?.ccbEyeReg??o.regs.ccbEyeReg};
           // Compute rankings for selected scenario (include BOC bonus in ranking)
           const isCBG=guideMode==="cashback"||guideMode==="combo";
           let ranked=[];
           if(guideMode==="cashback"||guideMode==="combo"){
             ranked=CARDS.map(c=>{const r=getRate(c,guideSc,gVs,gGuru,gMox,gDbs,gWewa,gBocMs,gBocMf,gRegs)+getBocBonus(c,guideSc,gBocMs,gBocMf);return{card:c,rate:r,val:r};}).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
+            // Inject custom promos as separate clone cards (never modify existing)
+            customPromos.filter(cp=>!cp.isMiles&&(cp.scs||[cp.sc]).includes(guideSc)).forEach(cp=>{
+              const rate=cp.rate/100;const baseCard=cp.cardId==="_custom"?{id:"_custom_"+cp.id,name:cp.cardName,issuer:"自訂",type:"cashback",noCap:true}:CARDS.find(x=>x.id===cp.cardId);
+              if(!baseCard)return;
+              const clone={...baseCard,id:baseCard.id+"__promo_"+cp.id,name:baseCard.name+"（特選優惠）"};
+              ranked.push({card:clone,rate,val:rate,isPromo:true,promoMemo:cp.memo});
+            });
+            ranked.sort((a,b)=>b.rate-a.rate);
           }else{
             ranked=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>{const m=getMPD(c,guideSc,gVs,gGuru,gMox,gDbs,gWewa,gRegs);return{card:c,rate:m,val:m};}).filter(x=>x.rate&&x.rate<Infinity&&x.rate<50).sort((a,b)=>a.rate-b.rate);
+            // Inject custom promo miles as separate clone cards
+            customPromos.filter(cp=>cp.isMiles&&(cp.scs||[cp.sc]).includes(guideSc)).forEach(cp=>{
+              const mpd=cp.rate;const baseCard=cp.cardId==="_custom"?{id:"_custom_"+cp.id,name:cp.cardName,issuer:"自訂",type:"both",noCap:true}:CARDS.find(x=>x.id===cp.cardId);
+              if(!baseCard)return;
+              const clone={...baseCard,id:baseCard.id+"__promo_"+cp.id,name:baseCard.name+"（特選優惠）"};
+              ranked.push({card:clone,rate:mpd,val:mpd,isPromo:true,promoMemo:cp.memo});
+            });
+            ranked.sort((a,b)=>a.rate-b.rate);
           }
           const scenarioLabel=ALL_SCENARIOS.find(s=>s.id===guideSc);
           return(
-            <div style={{paddingTop:20,display:"flex",flexDirection:"column",gap:16}}>
-              <h2 style={{fontSize:22,fontWeight:700,color:S.dark,letterSpacing:-0.26}}>攻略</h2>
-              <p style={{fontSize:12,color:S.label}}>每個消費場景嘅信用卡排名推薦</p>
+            <div style={{paddingTop:12,display:"flex",flexDirection:"column",gap:12}}>
 
               {/* Scenario selector */}
               <div>
-                <label style={{fontSize:13,fontWeight:400,color:S.sec,letterSpacing:-0.08,display:"block",marginBottom:8}}>簽賬種類</label>
+                <label style={{fontSize:13,fontWeight:600,color:S.dark,letterSpacing:-0.08,display:"block",marginBottom:8}}>簽賬種類</label>
                 <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:5}}>
                   {SCENARIOS.map(s=>{
                     const active=guideSc===s.id||(s.id==="physicalFX"&&guideSc==="travelJKSTA")||(s.id==="octopus"&&guideSc==="octopusManual");
@@ -1773,9 +1958,9 @@ export default function App(){
               {/* Mode toggle — 3 options */}
               <div style={{position:"relative",display:"flex",padding:3,borderRadius:10,background:S.segBg}}>
                 <div style={{position:"absolute",top:3,bottom:3,borderRadius:8,background:S.segInd,boxShadow:darkMode?"0 1px 4px rgba(0,0,0,0.4)":"0 3px 8px rgba(0,0,0,0.12), 0 3px 1px rgba(0,0,0,0.04)",transition:"all 0.2s ease",width:"calc(33.33% - 2px)",left:guideMode==="cashback"?3:guideMode==="miles"?"calc(33.33% + 1px)":"calc(66.67%)"}}/>
-                <button onClick={()=>setGuideMode("cashback")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="cashback"?S.dark:S.label}}>💰 現金</button>
-                <button onClick={()=>setGuideMode("miles")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="miles"?S.dark:S.label}}>✈️ 里數</button>
-                <button onClick={()=>setGuideMode("combo")} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="combo"?S.dark:S.label}}>🏆 組合</button>
+                <button onClick={()=>{setGuideMode("cashback");gEvent("guide_mode",{mode:"cashback"});}} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="cashback"?S.dark:S.label}}>💰 現金</button>
+                <button onClick={()=>{setGuideMode("miles");gEvent("guide_mode",{mode:"miles"});}} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="miles"?S.dark:S.label}}>✈️ 里數</button>
+                <button onClick={()=>{setGuideMode("combo");gEvent("guide_mode",{mode:"combo"});}} style={{position:"relative",zIndex:2,flex:1,padding:"9px 0",borderRadius:9,fontSize:12,fontWeight:600,background:"none",border:"none",cursor:"pointer",color:guideMode==="combo"?S.dark:S.label}}>🏆 組合</button>
               </div>
 
               {/* Settings indicator — pill tags + ⚙️ toggle */}
@@ -1785,38 +1970,26 @@ export default function App(){
                     <span style={{fontSize:12,fontWeight:600,color:S.dark}}>優惠等級設定</span>
                     <span style={{fontSize:11,color:S.blue,fontWeight:600,padding:"3px 10px",borderRadius:8,background:"rgba(0,122,255,0.06)"}}>{guideSettings?"收起 ▲":"⚙️ 設定"}</span>
                   </div>
-                  <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
-                    {gVs&&gVs!=="none"&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(0,122,255,0.06)",color:S.blue,fontWeight:600}}>HSBC {({world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[gVs]}</span>}
-                    {gGuru&&gGuru!=="none"&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(0,122,255,0.06)",color:S.blue,fontWeight:600}}>Guru {({L1:"Lv1",L2:"Lv2",L3:"Lv3"})[gGuru]}</span>}
-                    {gBocMs==="registered"&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(52,199,89,0.08)",color:S.green,fontWeight:600}}>狂賞派 ✓</span>}
-                    {gBocMf==="registered"&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(52,199,89,0.08)",color:S.green,fontWeight:600}}>狂賞飛 ✓</span>}
-                    {gDbs!=="none"&&own.includes("dbs_live")&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(0,122,255,0.06)",color:S.blue,fontWeight:600}}>DBS {gDbs==="fx"?"外幣":"娛樂"}</span>}
-                    {gMox&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(0,122,255,0.06)",color:S.blue,fontWeight:600}}>MOX $250K</span>}
-                    {gWewa!=="travel"&&(own.includes("ds_wewa_vs")||own.includes("ds_wewa_up"))&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(0,122,255,0.06)",color:S.blue,fontWeight:600}}>WeWa {({overseas:"海外",mobilePay:"手機",entertainment:"娛樂"})[gWewa]}</span>}
-                    {!gRegs.aeExplorerReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>AE Explorer ✗</span>}
-                    {!gRegs.aeChargeReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>AE 鋼卡 ✗</span>}
-                    {!gRegs.everyMileReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>EveryMile ✗</span>}
-                    {!gRegs.mmpowerReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>MMPOWER ✗</span>}
-                    {!gRegs.travelPlusReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>Travel+ ✗</span>}
-                    {!gRegs.dbsEminentReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>Eminent ✗</span>}
-                    {!gRegs.beaWorldReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>BEA World ✗</span>}
-                    {!gRegs.ccbEyeReg&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,59,48,0.06)",color:S.red,fontWeight:600}}>建行eye ✗</span>}
-                    {gVs==="none"&&gGuru==="none"&&gBocMs==="none"&&gBocMf==="none"&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(118,118,128,0.06)",color:S.label}}>未設定 — 撳「設定」揀返你嘅優惠等級</span>}
-                  </div>
+                  <p style={{fontSize:10,color:S.label,lineHeight:1.4}}>📊 預設假設所有優惠已登記、最紅自主獎賞揀咗相應類別{guideOvr?" · ⚠️ 你已自訂設定":""}</p>
+                  {guideOvr&&<div style={{display:"flex",flexWrap:"wrap",gap:5}}>
+                    {guideOvr.vs&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:"rgba(255,149,0,0.08)",color:S.promo,fontWeight:600}}>自訂: HSBC {({none:"冇登記",world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[guideOvr.vs]}</span>}
+                    {guideOvr.guru&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:`rgba(${darkMode?"255,159,10":"255,149,0"},0.08)`,color:S.promo,fontWeight:600}}>Guru {({none:"冇登記",L1:"Lv1",L2:"Lv2",L3:"Lv3"})[guideOvr.guru]}</span>}
+                    {guideOvr.moxTier!==undefined&&<span style={{fontSize:10,padding:"3px 8px",borderRadius:6,background:`rgba(${darkMode?"255,159,10":"255,149,0"},0.08)`,color:S.promo,fontWeight:600}}>MOX {guideOvr.moxTier?"$250K":"基本"}</span>}
+                  </div>}
                 </button>
                 {guideSettings&&(()=>{
-                  const gSet=(k,v)=>setGuideOvr(p=>({vs:p?.vs??vs,guru:p?.guru??guru,moxTier:p?.moxTier??moxTier,dbsLfFx:p?.dbsLfFx??dbsLfFx,wewaCategory:p?.wewaCategory??wewaCategory,bocMs:p?.bocMs??bocMs,bocMf:p?.bocMf??bocMf,aeExplorerReg:p?.aeExplorerReg??aeExplorerReg,aeChargeReg:p?.aeChargeReg??aeChargeReg,everyMileReg:p?.everyMileReg??everyMileReg,mmpowerReg:p?.mmpowerReg??mmpowerReg,travelPlusReg:p?.travelPlusReg??travelPlusReg,dbsEminentReg:p?.dbsEminentReg??dbsEminentReg,beaWorldReg:p?.beaWorldReg??beaWorldReg,ccbEyeReg:p?.ccbEyeReg??ccbEyeReg,[k]:v}));
+                  const gSet=(k,v)=>setGuideOvr(p=>({...p,[k]:v}));
                   return(
                   <div style={{padding:"0 14px 14px",display:"flex",flexDirection:"column",gap:14,borderTop:`1px solid ${S.sep}`}}>
                     {/* HSBC */}
                     <div style={{paddingTop:12}}>
-                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginBottom:6}}>HSBC 最紅自主獎賞</p>
+                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginBottom:6}}>HSBC 最紅自主獎賞 <span style={{fontWeight:400,color:S.label}}>（預設: {({none:"冇登記",world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[o.vs]}）</span></p>
                       <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:4}}>
-                        {[{k:"none",l:"❌ 冇登記"},{k:"world",l:"🌍 賞世界"},{k:"savour",l:"🍴 賞滋味"},{k:"home",l:"🏠 賞家居"},{k:"lifestyle",l:"🎬 賞享受"},{k:"shopping",l:"🛍️ 賞購物"}].map(o=><button key={o.k} onClick={()=>gSet("vs",o.k)} style={{padding:"6px 2px",borderRadius:8,fontSize:10,fontWeight:600,border:gVs===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gVs===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gVs===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o.l}</button>)}
+                        {[{k:"none",l:"❌ 冇登記"},{k:"world",l:"🌍 賞世界"},{k:"savour",l:"🍴 賞滋味"},{k:"home",l:"🏠 賞家居"},{k:"lifestyle",l:"🎬 賞享受"},{k:"shopping",l:"🛍️ 賞購物"}].map(o2=><button key={o2.k} onClick={()=>gSet("vs",o2.k)} style={{padding:"6px 2px",borderRadius:8,fontSize:10,fontWeight:600,border:gVs===o2.k?`2px solid ${o2.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gVs===o2.k?(o2.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gVs===o2.k?(o2.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o2.l}</button>)}
                       </div>
                       <p style={{fontSize:11,fontWeight:700,color:S.dark,marginTop:10,marginBottom:6}}>HSBC Travel Guru</p>
                       <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4}}>
-                        {[{k:"none",l:"❌ 冇登記"},{k:"L1",l:"Lv1"},{k:"L2",l:"Lv2"},{k:"L3",l:"Lv3 GURU"}].map(o=><button key={o.k} onClick={()=>gSet("guru",o.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gGuru===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gGuru===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gGuru===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o.l}</button>)}
+                        {[{k:"none",l:"❌ 冇登記"},{k:"L1",l:"Lv1"},{k:"L2",l:"Lv2"},{k:"L3",l:"Lv3 GURU"}].map(o2=><button key={o2.k} onClick={()=>gSet("guru",o2.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gGuru===o2.k?`2px solid ${o2.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gGuru===o2.k?(o2.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gGuru===o2.k?(o2.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o2.l}</button>)}
                       </div>
                     </div>
                     {/* BOC */}
@@ -1824,23 +1997,23 @@ export default function App(){
                       <p style={{fontSize:11,fontWeight:700,color:S.dark,marginBottom:6}}>中銀狂賞派（Visa only）{isRedDay()?" 🔴紅日+5%":" ⚪平日+2%"}</p>
                       <div style={{display:"flex",gap:6}}>
                         <button onClick={()=>gSet("bocMs","none")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMs==="none"?`2px solid ${S.red}`:`1px solid ${S.sep}`,background:gBocMs==="none"?"rgba(255,59,48,0.06)":S.card,color:gBocMs==="none"?S.red:S.label,cursor:"pointer"}}>❌ 未登記</button>
-                        <button onClick={()=>gSet("bocMs","registered")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMs==="registered"?`2px solid ${S.green}`:`1px solid ${S.sep}`,background:gBocMs==="registered"?darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)":S.card,color:gBocMs==="registered"?S.green:S.label,cursor:"pointer"}}>✅ 已登記</button>
+                        <button onClick={()=>gSet("bocMs","both")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMs==="both"?`2px solid ${S.green}`:`1px solid ${S.sep}`,background:gBocMs==="both"?darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)":S.card,color:gBocMs==="both"?S.green:S.label,cursor:"pointer"}}>✅ 已登記</button>
                       </div>
                       <p style={{fontSize:11,fontWeight:700,color:S.dark,marginTop:8,marginBottom:6}}>中銀狂賞飛（Visa/MC，排除銀聯）</p>
                       <div style={{display:"flex",gap:6}}>
                         <button onClick={()=>gSet("bocMf","none")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMf==="none"?`2px solid ${S.red}`:`1px solid ${S.sep}`,background:gBocMf==="none"?"rgba(255,59,48,0.06)":S.card,color:gBocMf==="none"?S.red:S.label,cursor:"pointer"}}>❌ 未登記</button>
-                        <button onClick={()=>gSet("bocMf","registered")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMf==="registered"?`2px solid ${S.green}`:`1px solid ${S.sep}`,background:gBocMf==="registered"?darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)":S.card,color:gBocMf==="registered"?S.green:S.label,cursor:"pointer"}}>✅ 已登記</button>
+                        <button onClick={()=>gSet("bocMf","both")} style={{flex:1,padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gBocMf==="both"?`2px solid ${S.green}`:`1px solid ${S.sep}`,background:gBocMf==="both"?darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.06)":S.card,color:gBocMf==="both"?S.green:S.label,cursor:"pointer"}}>✅ 已登記</button>
                       </div>
                     </div>
                     {/* DBS + WeWa + Mox */}
                     <div style={{borderTop:`1px solid ${S.sep}`,paddingTop:12}}>
-                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginBottom:6}}>DBS Live Fresh 自選類別</p>
+                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginBottom:6}}>DBS Live Fresh 自選類別 <span style={{fontWeight:400,color:S.label}}>（預設: {({none:"未登記",fx:"網上外幣",travel:"旅遊娛樂",fashion:"潮流教主",charity:"慈善關愛"})[o.dbs]||"未登記"}）</span></p>
                       <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:4}}>
-                        {[{k:"none",l:"❌ 未登記"},{k:"other",l:"🎭 娛樂/服飾"},{k:"fx",l:"🌍 外幣"}].map(o=><button key={o.k} onClick={()=>gSet("dbsLfFx",o.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gDbs===o.k?`2px solid ${o.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gDbs===o.k?(o.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gDbs===o.k?(o.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o.l}</button>)}
+                        {[{k:"none",l:"❌ 未登記"},{k:"fx",l:"🌍 網上外幣"},{k:"travel",l:"✈️ 旅遊娛樂"},{k:"fashion",l:"👗 潮流教主"},{k:"charity",l:"💝 慈善關愛"}].map(o2=><button key={o2.k} onClick={()=>gSet("dbsLfFx",o2.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gDbs===o2.k?`2px solid ${o2.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gDbs===o2.k?(o2.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gDbs===o2.k?(o2.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o2.l}</button>)}
                       </div>
-                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginTop:8,marginBottom:6}}>WeWa 自選加碼（4選1）</p>
-                      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4}}>
-                        {[{k:"travel",l:"✈️ 旅遊"},{k:"overseas",l:"🌍 海外"},{k:"mobilePay",l:"📱 手機"},{k:"entertainment",l:"🎮 娛樂"}].map(o=><button key={o.k} onClick={()=>gSet("wewaCategory",o.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gWewa===o.k?`2px solid ${S.blue}`:`1px solid ${S.sep}`,background:gWewa===o.k?"rgba(0,122,255,0.06)":S.card,color:gWewa===o.k?S.blue:S.label,cursor:"pointer"}}>{o.l}</button>)}
+                      <p style={{fontSize:11,fontWeight:700,color:S.dark,marginTop:8,marginBottom:6}}>WeWa 自選加碼（4選1）<span style={{fontWeight:400,color:S.label}}>（預設: {({none:"未登記",overseas:"海外",mobilePay:"手機",travel:"旅遊MCC",entertainment:"線上娛樂"})[o.wewa]||"海外"}）</span></p>
+                      <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:4}}>
+                        {[{k:"none",l:"❌ 未登記"},{k:"overseas",l:"🌍 海外"},{k:"mobilePay",l:"📱 手機"}].map(o2=><button key={o2.k} onClick={()=>gSet("wewaCategory",o2.k)} style={{padding:6,borderRadius:8,fontSize:10,fontWeight:600,border:gWewa===o2.k?`2px solid ${o2.k==="none"?S.red:S.blue}`:`1px solid ${S.sep}`,background:gWewa===o2.k?(o2.k==="none"?"rgba(255,59,48,0.06)":"rgba(0,122,255,0.06)"):S.card,color:gWewa===o2.k?(o2.k==="none"?S.red:S.blue):S.label,cursor:"pointer"}}>{o2.l}</button>)}
                       </div>
                       <p style={{fontSize:11,fontWeight:700,color:S.dark,marginTop:8,marginBottom:6}}>MOX 存款等級</p>
                       <div style={{display:"flex",gap:6}}>
@@ -1858,7 +2031,7 @@ export default function App(){
                         </div>
                       ))}
                     </div>
-                    <button onClick={()=>{setGuideOvr({vs:"none",guru:"none",moxTier:false,dbsLfFx:"none",wewaCategory:"travel",bocMs:"none",bocMf:"none",aeExplorerReg:true,aeChargeReg:true,everyMileReg:true,mmpowerReg:true,travelPlusReg:true,dbsEminentReg:true,beaWorldReg:true,ccbEyeReg:true});showGuideToast("⚙️ 已重設攻略設定（Card Holder 不受影響）");}} style={{padding:10,borderRadius:10,fontSize:11,fontWeight:600,border:`1px solid rgba(255,59,48,0.2)`,background:"rgba(255,59,48,0.04)",color:S.red,cursor:"pointer",textAlign:"center"}}>🔄 一鍵重設所有設定</button>
+                    <button onClick={()=>{setGuideOvr(null);showGuideToast("✅ 已重設為自動最優設定");}} style={{padding:10,borderRadius:10,fontSize:11,fontWeight:600,border:`1px solid rgba(0,122,255,0.2)`,background:"rgba(0,122,255,0.04)",color:S.blue,cursor:"pointer",textAlign:"center"}}>🔄 重設為預設（自動最優）</button>
                   </div>);
                 })()}
               </div>
@@ -1867,9 +2040,10 @@ export default function App(){
               {guideMode==="combo"?(
                 <div style={{display:"flex",flexDirection:"column",gap:12}}>
                   {ALL_SCENARIOS.map(s=>{
-                    const cbRank=CARDS.map(c=>({card:c,rate:getRate(c,s.id,gVs,gGuru,gMox,gDbs,gWewa,gBocMs,gBocMf,gRegs)+getBocBonus(c,s.id,gBocMs,gBocMf)})).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
+                    const so=optFor(s.id);
+                    const cbRank=CARDS.map(c=>({card:c,rate:getRate(c,s.id,so.vs,so.guru,so.mox,so.dbs,so.wewa,so.bocMs,so.bocMf,so.regs)+getBocBonus(c,s.id,so.bocMs,so.bocMf)})).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
                     const best=cbRank[0];const fb=cbRank.find(x=>x.card.noCap&&x.card.id!==(best?.card.id));
-                    const miRank=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>({card:c,rate:getMPD(c,s.id,gVs,gGuru,gMox,gDbs,gWewa,gRegs)})).filter(x=>x.rate&&x.rate<50).sort((a,b)=>a.rate-b.rate);
+                    const miRank=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>({card:c,rate:getMPD(c,s.id,so.vs,so.guru,so.mox,so.dbs,so.wewa,so.regs)})).filter(x=>x.rate&&x.rate<50).sort((a,b)=>a.rate-b.rate);
                     const mBest=miRank[0];const mFb=miRank.find(x=>x.card.noCap&&x.card.id!==(mBest?.card.id));
                     const comboCard=(item,label,isMiles,accent)=>{
                       if(!item)return null;
@@ -1888,10 +2062,10 @@ export default function App(){
                         {exp2&&<div style={{marginTop:4,fontSize:10,lineHeight:1.7,color:S.sec,borderTop:`1px solid ${S.sep}`,paddingTop:4}}>
                           <p>{item.card.desc}</p>
                           {item.card.capInfo&&<p style={{color:S.red}}>⚠️ {item.card.capInfo}</p>}
-                          {cond1&&<p style={{color:"#FF9500"}}>{cond1}</p>}
+                          {cond1&&<p style={{color:S.cond}}>{cond1}</p>}
                           {ex&&<p style={{color:ex.color}}>{ex.text}</p>}
                           {mf&&<p style={{color:"#AF52DE"}}>💜 轉里數：{mf.fee}（{mf.note}）</p>}
-                          {own.includes(item.card.id)?<p style={{color:S.green}}>✓ 已持有</p>:<p style={{color:"#FF9500"}}>未持有</p>}
+                          {own.includes(item.card.id)?<p style={{color:S.green}}>✓ 已持有</p>:<p style={{color:S.muted}}>未持有</p>}
                           {!own.includes(item.card.id)&&<a href={`https://www.google.com/search?q=${encodeURIComponent(item.card.name+" 申請 香港 迎新")}`} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{color:S.blue,fontWeight:600,fontSize:11}}>了解更多 / 申請 →</a>}
                         </div>}
                       </div>);
@@ -1923,6 +2097,7 @@ export default function App(){
                   })}
                 </div>
               ):(<div>
+              {(()=>{const gPromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(guideSc));return gPromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:10}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:11,color:S.promo,fontWeight:600}}>排名已包含 {gPromos.length} 項特選優惠（獨立顯示）</span></div>:null;})()}
               <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:darkMode?"none":"0 1px 2px rgba(0,0,0,0.04)"}}>
                 <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                   <span style={{fontSize:14,fontWeight:700,color:S.dark}}>{scenarioLabel?.emoji} {scenarioLabel?.label}</span>
@@ -1930,23 +2105,24 @@ export default function App(){
                 </div>
                 {ranked.length===0&&<div style={{padding:20,textAlign:"center",color:S.label,fontSize:13}}>此場景暫無適用卡片</div>}
                 {ranked.slice(0,20).map((item,i)=>{
-                  const isOwned=own.includes(item.card.id);
+                  const baseId=item.card.id.replace(/__promo_\d+$/,"");
+                  const isOwned=own.includes(baseId);
                   const isTop3=i<3;
                   const medal=i===0?"🥇":i===1?"🥈":i===2?"🥉":null;
                   const expanded=guideExpanded.has(item.card.id);
                   const toggle=()=>setGuideExpanded(p=>{const n=new Set(p);n.has(item.card.id)?n.delete(item.card.id):n.add(item.card.id);return n;});
                   const cond1=item.card.cond?.[guideSc];
-                  const ex=getExpiry(item.card);
-                  const mf=guideMode!=="cashback"?MILES_CONV_FEE[item.card.id]:null;
+                  const ex=getExpiry(item.card.id.includes("__promo_")?{...item.card,id:baseId}:item.card);
+                  const mf=guideMode!=="cashback"?MILES_CONV_FEE[baseId]:null;
                   const vsCards=["hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"];
-                  const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"],lifestyle:["local"],shopping:["onlineHKD"]};
+                  const vsMap={world:["onlineFX","physicalFX","travelJKSTA"],savour:["dining"],home:["supermarket"]};
                   return(
-                    <div key={item.card.id} onClick={toggle} style={{padding:isTop3?"12px 14px":"9px 14px",borderBottom:i<Math.min(ranked.length,20)-1?`1px solid ${S.bg}`:"none",background:expanded?"rgba(0,122,255,0.03)":isTop3?"rgba(0,122,255,0.02)":S.card,cursor:"pointer"}}>
+                    <div key={item.card.id} onClick={toggle} style={{padding:isTop3?"12px 14px":"9px 14px",borderBottom:i<Math.min(ranked.length,20)-1?`1px solid ${S.bg}`:"none",background:expanded?(darkMode?"rgba(0,122,255,0.1)":"rgba(0,122,255,0.03)"):item.isPromo?(darkMode?"rgba(255,159,10,0.12)":"#FFFBF5"):isTop3?(darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)"):S.card,cursor:"pointer"}}>
                       {/* Row 1: medal + name + rate */}
                       <div style={{display:"flex",alignItems:"center",gap:8}}>
                         <div style={{width:28,textAlign:"center",fontSize:medal?22:12,fontWeight:700,color:medal?undefined:S.label,flexShrink:0}}>{medal||i+1}</div>
                         <div style={{flex:1,minWidth:0}}>
-                          <p style={{fontSize:isTop3?15:13,fontWeight:isTop3?700:500,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.name} {isOwned?"✓":""}</p>
+                          <p style={{fontSize:isTop3?15:13,fontWeight:isTop3?700:500,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.name}{item.isPromo&&<span style={{fontSize:9,fontWeight:700,color:S.promo,background:`rgba(${darkMode?"255,159,10":"255,149,0"},0.12)`,padding:"1px 5px",borderRadius:4,marginLeft:4,verticalAlign:"middle"}}>🎯</span>} {isOwned?<span style={{fontSize:10,fontWeight:700,color:S.green,background:darkMode?"rgba(48,209,88,0.15)":"rgba(52,199,89,0.1)",padding:"2px 8px",borderRadius:6,marginLeft:4,verticalAlign:"middle"}}>持有</span>:<span style={{fontSize:10,fontWeight:600,color:S.muted,background:darkMode?"rgba(152,152,157,0.15)":"rgba(174,174,178,0.1)",padding:"2px 8px",borderRadius:6,marginLeft:4,verticalAlign:"middle"}}>未持有</span>}</p>
                         </div>
                         <div style={{flexShrink:0}}>
                           {isTop3?<div style={{padding:"5px 10px",borderRadius:10,background:isCBG?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)"}}>
@@ -1963,12 +2139,13 @@ export default function App(){
                       {expanded&&(
                         <div style={{marginTop:8,marginLeft:36,fontSize:10,lineHeight:1.7,color:S.sec,borderTop:`1px solid ${S.sep}`,paddingTop:8}}>
                           {item.card.capInfo&&<p style={{color:S.red}}>⚠️ {item.card.capInfo}</p>}
-                          {cond1&&<p style={{color:"#FF9500"}}>{cond1}</p>}
+                          {cond1&&<p style={{color:S.cond}}>{cond1}</p>}
                           {ex&&<p style={{color:ex.color,fontSize:11}}>{ex.text}</p>}
-                          {vsCards.includes(item.card.id)&&gVs&&gVs!=="none"&&vsMap[gVs]?.includes(guideSc)&&<p style={{color:S.green}}>✓ 命中最紅自主「{({world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[gVs]}」</p>}
-                          {vsCards.includes(item.card.id)&&(!gVs||gVs==="none")&&<p style={{color:"#FF9500"}}>⚠️ 未登記最紅自主</p>}
+                          {vsCards.includes(baseId)&&gVs&&gVs!=="none"&&vsMap[gVs]?.includes(guideSc)&&<p style={{color:S.green}}>✓ 命中最紅自主「{({world:"賞世界",savour:"賞滋味",home:"賞家居",lifestyle:"賞享受",shopping:"賞購物"})[gVs]}」</p>}
+                          {vsCards.includes(baseId)&&(!gVs||gVs==="none")&&<p style={{color:S.red}}>⚠️ 未登記最紅自主</p>}
                           {mf&&<p style={{color:"#AF52DE"}}>💜 轉里數：{mf.fee}（{mf.note}）</p>}
-                          {!isOwned&&<a href={`https://www.google.com/search?q=${encodeURIComponent(item.card.name+" 申請 香港 迎新")}`} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{color:S.blue,fontWeight:600,fontSize:11}}>了解更多 / 申請 →</a>}
+                          {item.isPromo&&item.promoMemo&&<p style={{color:S.promo}}>🎯 {item.promoMemo}</p>}
+                          {!isOwned&&<a href={`https://www.google.com/search?q=${encodeURIComponent(item.card.name.replace("（特選優惠）","")+" 申請 香港 迎新")}`} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{color:S.blue,fontWeight:600,fontSize:11}}>了解更多 / 申請 →</a>}
                         </div>
                       )}
                     </div>
@@ -1978,8 +2155,8 @@ export default function App(){
               {ranked.length>20&&<p style={{textAlign:"center",fontSize:11,color:S.label}}>顯示頭 20 張最佳卡片</p>}
               </div>)}
 
+              <p style={{textAlign:"center",fontSize:10,color:S.label,padding:16}}>© 2026 碌邊張 SwipeWhich · v1.3</p>
               {guideToast&&<div style={{position:"fixed",bottom:68,left:"50%",transform:"translateX(-50%)",zIndex:9999}}><div style={{background:darkMode?"#F5F5F7":"#1C1C1E",color:darkMode?"#000":"#fff",padding:"10px 18px",borderRadius:14,fontSize:13,fontWeight:600,boxShadow:"0 8px 24px rgba(0,0,0,0.3)",textAlign:"center"}}>{guideToast}</div></div>}
-              <p style={{textAlign:"center",fontSize:10,color:S.label,padding:16}}>© 2026 碌邊張 SwipeWhich · v1.2</p>
             </div>
           );
         })()}
@@ -2156,7 +2333,7 @@ export default function App(){
                 {recForm&&(()=>{
                   const isFx=FX_SCENARIOS.includes(recForm.sc);
                   return(
-                  <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(0,122,255,0.06)":"rgba(0,122,255,0.02)"}}>
+                  <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)"}}>
                     <div style={{display:"flex",gap:8,marginBottom:8}}>
                       <input type="text" value={recForm.memo} onChange={e=>setRecForm(p=>({...p,memo:e.target.value}))} placeholder="洗費 (e.g. YouTube)" style={{flex:1,padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,minWidth:0}}/>
                       <div style={{display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0,minWidth:isFx?130:90}}>
@@ -2187,7 +2364,7 @@ export default function App(){
                         <button key={s.id} onClick={()=>setRecForm(p=>({...p,sc:s.id,currency:FX_SCENARIOS.includes(s.id)?(p.currency==="HKD"?"USD":p.currency):"HKD"}))} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:recForm.sc===s.id?"rgba(0,122,255,0.08)":S.card,color:recForm.sc===s.id?S.blue:S.label,border:recForm.sc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
                       ))}
                     </div>
-                    <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:recForm.isMiles,rate:0,currency:isFx?(recForm.currency||"USD"):"HKD"}]);setRecForm(null);showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
+                    <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:recForm.isMiles,rate:0,currency:isFx?(recForm.currency||"USD"):"HKD"}]);setRecForm(null);gEvent("recurring_add",{scenario:recForm.sc});showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
                   </div>);
                 })()}
                 {recurring.map(r=>(
@@ -2196,7 +2373,7 @@ export default function App(){
                       <p style={{fontSize:13,fontWeight:500,color:S.dark}}>{r.memo}</p>
                       <p style={{fontSize:11,color:S.label}}>{r.cardName} · 每月{r.dayOfMonth}號 · {r.currency&&r.currency!=="HKD"?`${r.currency} ${r.amount}`:`$${r.amount}`} · {r.isMiles?"✈️ 里數":"💰 回贈"}</p>
                     </div>
-                    <button onClick={()=>setRecurring(p=>p.filter(x=>x.id!==r.id))} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
+                    <button onClick={()=>{gEvent("recurring_delete",{});setRecurring(p=>p.filter(x=>x.id!==r.id));}} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
                   </div>
                 ))}
               </div>
@@ -2267,7 +2444,7 @@ export default function App(){
                                 </div>
                                 <span style={{fontSize:13,fontWeight:600,color:cap&&spent>=cap?S.red:S.dark}}>${spent.toLocaleString()}{cap?<span style={{fontSize:11,fontWeight:400,color:S.label}}> / ${cap.toLocaleString()}</span>:""}</span>
                               </div>
-                              {cap&&<div style={{height:4,borderRadius:2,background:darkMode?"#3A3A3C":"#E5E5EA",overflow:"hidden"}}><div style={{height:4,borderRadius:2,background:pct>=100?S.red:pct>=80?"#FF9500":S.green,width:`${pct}%`,transition:"width 0.3s ease"}}/></div>}
+                              {cap&&<div style={{height:4,borderRadius:2,background:darkMode?"#3A3A3C":"#E5E5EA",overflow:"hidden"}}><div style={{height:4,borderRadius:2,background:pct>=100?S.red:pct>=80?S.promo:S.green,width:`${pct}%`,transition:"width 0.3s ease"}}/></div>}
                             </div>
                           );
                         })}
@@ -2377,7 +2554,7 @@ export default function App(){
 
               <p style={{textAlign:"center",fontSize:10,color:S.label,padding:8,lineHeight:1.5}}>🔒 所有資料只存你手機 · 零伺服器 · 零追蹤<br/>清除瀏覽器數據會消失 · 建議定期匯出備份</p>
               <div style={{display:"flex",gap:8}}>
-                <button onClick={()=>{try{const d=JSON.stringify({_v:5,own,logs,vs,guru,sMax,seen,quickAmts,mode,recurring,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg},null,2);const b=new Blob([d],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=`swipewhich_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();showToast("✅ 備份已下載");}catch(e){showToast("❌ 匯出失敗");}}} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.blue,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>📤 匯出備份</button>
+                <button onClick={()=>{try{const d=JSON.stringify({_v:5,own,logs,vs,guru,sMax,seen,quickAmts,mode,recurring,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,aeExplorerReg,aeChargeReg,everyMileReg,mmpowerReg,travelPlusReg,dbsEminentReg,beaWorldReg,ccbEyeReg},null,2);const b=new Blob([d],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=`swipewhich_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();gEvent("backup_export",{cards:own.length,logs:logs.length});showToast("✅ 備份已下載");}catch(e){showToast("❌ 匯出失敗");}}} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.blue,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>📤 匯出備份</button>
               </div>
               {/* Triple-confirm reset */}
               {resetStep===0&&(
@@ -2428,7 +2605,7 @@ export default function App(){
 
       {/* Bottom Tabs */}
       <nav style={{position:"fixed",bottom:0,left:0,right:0,zIndex:9991,display:"flex",borderTop:`1px solid ${S.sep}`,background:S.tabBg,backdropFilter:"blur(20px) saturate(180%)",paddingBottom:"env(safe-area-inset-bottom,8px)"}}>
-        {[{k:"calc",l:"計算器",Ic:Calculator},{k:"cards",l:"Card Holder",Ic:Wallet},{k:"tracker",l:"記帳",Ic:ClipboardList},{k:"guide",l:"攻略",Ic:BookOpen}].map(t=>(
+        {[{k:"guide",l:"攻略",Ic:BookOpen},{k:"calc",l:"計算器",Ic:Calculator},{k:"tracker",l:"記帳",Ic:ClipboardList},{k:"cards",l:"My Cards",Ic:Wallet}].map(t=>(
           <button key={t.k} onClick={()=>setTab(t.k)} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2,paddingTop:8,paddingBottom:4,background:"none",border:"none",cursor:"pointer",position:"relative",...(isHL("guidetab")&&t.k==="guide"?{outline:"3px solid #007AFF",outlineOffset:-2,borderRadius:12}:{}),...(isHL("trackertab")&&t.k==="tracker"?{outline:"3px solid #007AFF",outlineOffset:-2,borderRadius:12}:{}),...(toast&&t.k==="tracker"?{zIndex:9992}:{})}}>
             <div style={{...(toast&&t.k==="tracker"?{animation:"tabPulse 1s ease infinite",borderRadius:12,padding:4,background:"rgba(0,122,255,0.08)"}:{})}}>
               <t.Ic size={22} color={tab===t.k||toast&&t.k==="tracker"?S.blue:S.label}/>
