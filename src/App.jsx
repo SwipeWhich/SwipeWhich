@@ -151,9 +151,9 @@ const CARDS=[
   mk("sc_smart","渣打 Smart 卡","Standard Chartered","cashback","月簽$4K起0.56%（$180=$1）/$15K起1.2%，特約商戶5%，免外幣手續費",0.0056,{octopus:0.0056},"需月簽$4,000起，特約商戶月度$5,000/年度$60,000上限",false,null,{local:"⚠️ 0.56%需月簽≥$4,000，$15K起升至1.2%"}),
   mk("sc_apoint","渣打 A. Point Card","Standard Chartered","cashback","積分兌換禮品或現金回贈",0.004,{octopus:0.002},null,true),
   mk("boc_sogo","中銀 SOGO Visa Sig","Bank of China","cashback","流動支付5.4%，SOGO消費額外積分",0.004,{octopus:0.004,mobilePay:0.054},"手機支付月度$2,000上限(額外5%)",false,null,{mobilePay:"💡 狂賞派另加回贈(紅日+5%/平日+2%)，需App登記",dining:"💡 狂賞派另加回贈(紅日+5%/平日+2%)，需App登記"}),
-  mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購5%/海外5%(實體+網上均適用，無門檻)，Chill商戶10%(需月簽$1,500實體)",0.004,{octopus:0.004,onlineHKD:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"月度額外$150上限(~$3,260爆Cap)，網購+海外共用",false,null,{onlineHKD:"💡 5%無需額外門檻 · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"💡 5%無需額外門檻 · 狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"💡 海外實體同享5% · 狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",travelJKSTA:"💡 海外實體同享5% · 狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
-  mk("boc_cheers","中銀 Cheers VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%，年薪$60萬",0.004,{octopus:0.004,dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04,travelTW:0.04},"食飯$10k/外幣$25k分部上限，全部場景合共月度30萬分上限(≈$30k)，需月簽$5,000",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
-  mk("boc_cheers_vs","中銀 Cheers VS","Bank of China","both","食飯8X=$1.9/里或3.2%，外幣3.2%，年薪$15萬",0.004,{octopus:0.004,dining:0.032,onlineFX:0.032,physicalFX:0.032,travelJKSTA:0.032,travelTW:0.032},"食飯$7.5k/外幣$18.75k分部上限，全部場景合共月度18萬分上限(≈$22.5k)，需月簽$5,000",false,{local:10,dining:1.9,onlineHKD:10,onlineFX:4.7,travelJKSTA:4.7,physicalFX:4.7},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
+  mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購5%/海外5%(實體+網上均適用，無門檻)，Chill商戶10%(需月簽$1,500實體)",0.004,{octopus:0.004,onlineHKD:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"月度額外$150上限(~$3,260爆Cap)，網購+海外共用",false,null,{onlineHKD:"💡 5%無需額外門檻 · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"💡 5%無需額外門檻 · 狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",physicalFX:"💡 海外實體同享5% · 狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",travelJKSTA:"💡 海外實體同享5% · 狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)"}),
+  mk("boc_cheers","中銀 Cheers VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%，年薪$60萬",0.004,{octopus:0.004,dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04,travelTW:0.04},"食飯$10k/外幣$25k分部上限，全部場景合共月度30萬分上限(≈$30k)，需月簽$5,000",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)"}),
+  mk("boc_cheers_vs","中銀 Cheers VS","Bank of China","both","食飯8X=$1.9/里或3.2%，外幣3.2%，年薪$15萬",0.004,{octopus:0.004,dining:0.032,onlineFX:0.032,physicalFX:0.032,travelJKSTA:0.032,travelTW:0.032},"食飯$7.5k/外幣$18.75k分部上限，全部場景合共月度18萬分上限(≈$22.5k)，需月簽$5,000",false,{local:10,dining:1.9,onlineHKD:10,onlineFX:4.7,travelJKSTA:4.7,physicalFX:4.7},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)"}),
   mk("boc_taobao","中銀淘寶卡","Bank of China","cashback","淘寶RMB消費0%手續費+額外積分（銀聯卡），一般網購0.4%",0.004,{octopus:0.004},null,true,null,{onlineHKD:"⚠️ 銀聯卡，不適用狂賞派/飛 · 額外積分只限淘寶"}),
   mk("citi_cashback","Citi Cash Back","Citibank","cashback","食飯/酒店/外幣2%無上限，其他1%，八達通AAVS 1%",0.01,{dining:0.02,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02,octopus:0.01},null,true),
   mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true,null,{octopus:"💡 車費15%回贈需所有Citi卡月簽滿$4,000"}),
@@ -187,7 +187,7 @@ const CARDS=[
   mk("hsbc_premier","HSBC Premier MC","HSBC","both","基本$25/里(0.4%)，最紅自主類別$4.17/里(2.4%)，配Travel Guru海外最高8.4%",0.004,{octopus:0.004,octopusManual:0.004},"最紅自主年度$100,000上限（同其他HSBC卡共用）",false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3"}),
   mk("sc_priority","渣打 Priority Banking MC","Standard Chartered","miles","Priority客戶專屬，本地$8/里，海外$4/里",0.005,{octopus:0.008,onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4,octopus:5}),
   mk("hs_prestige","恒生 Prestige Visa Infinite","Hang Seng","both","Prestige客戶，海外5%/食飯5%",0.004,{octopus:0.004,dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"需簽滿$6,000/月，月度$500額外上限",false,{local:10,dining:2,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$6,000",onlineFX:"⚠️ 需月簽滿$6,000",physicalFX:"⚠️ 需月簽滿$6,000",travelJKSTA:"⚠️ 需月簽滿$6,000"}),
-  mk("boc_bliss","中銀 Bliss Card","Bank of China","both","指定網購6%/$1里，其他網購4%/$1.5里(含外幣網購)，實體0.4%",0.004,{octopus:0.004,onlineHKD:0.04,onlineFX:0.04},"月度$10,000上限(網購，含外幣)，指定商戶6%",false,{local:25,dining:25,onlineHKD:1.5,onlineFX:1.5,travelJKSTA:25,physicalFX:25},{onlineHKD:"💡 指定商戶(Amazon/FARFETCH等)可達6% · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"💡 外幣網購同享4% · 狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
+  mk("boc_bliss","中銀 Bliss Card","Bank of China","both","指定網購6%/$1里，其他網購4%/$1.5里(含外幣網購)，實體0.4%",0.004,{octopus:0.004,onlineHKD:0.04,onlineFX:0.04},"月度$10,000上限(網購，含外幣)，指定商戶6%",false,{local:25,dining:25,onlineHKD:1.5,onlineFX:1.5,travelJKSTA:25,physicalFX:25},{onlineHKD:"💡 指定商戶(Amazon/FARFETCH等)可達6% · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"💡 外幣網購同享4% · 狂賞飛另加3%(需App登記，每季累積制，內地/澳門可達6%)"}),
   mk("bea_sup","BEA Supreme","BEA","miles","東亞頂級卡，海外$5/里+機場Lounge",0.005,{octopus:0.004,onlineFX:0.015,physicalFX:0.015,travelJKSTA:0.015},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:5,travelJKSTA:5,physicalFX:5}),
 ];
 
@@ -302,12 +302,14 @@ function getRate(c,s,vs,guru,moxTier,dbsLfFx,wewaCat,bocMs,bocMf,regs){
 function getBocBonus(c,s,bocMs,bocMf,txDate){
   if(c.issuer!=="Bank of China"||!isBocPromoActive())return 0;
   let bonus=0;const rd=isRedDay(txDate);
+  // 狂賞派: 本地實體+網購，紅日5%/平日2% (Visa only)
   if(bocMs==="registered"&&BOC_VISA_IDS.includes(c.id)){
     if(["dining","supermarket","local"].includes(s))bonus+=rd?0.05:0.02;
     if(s==="onlineHKD")bonus+=rd?0.05:0.02;
   }
+  // 狂賞飛: 海外實體，flat 3%(其他海外）/ 6%（內地澳門，需travelCN場景，暫統一3%）
   if(bocMf==="registered"&&BOC_FLY_IDS.includes(c.id)&&["physicalFX","travelJKSTA","travelTW"].includes(s)){
-    bonus+=rd?0.05:0.02;
+    bonus+=0.03;
   }
   return bonus;
 }
@@ -1428,14 +1430,14 @@ export default function App(){
                     <div>
                       {(()=>{
                         const bocB=getBocBonus(p.card,sc,bocMs,bocMf);
-                        const rd=isRedDay();const bocLabel=["physicalFX","travelJKSTA","travelTW"].includes(sc)?"飛":"派";
+                        const rd=isRedDay();const isFly=["physicalFX","travelJKSTA","travelTW"].includes(sc);const bocLabel=isFly?"飛":"派";
                         const hasBoc=bocB>0;
                         if(isCB&&hasBoc&&!p.splitCalc){
                           const cardVal=p.val;const bocVal=amt*bocB;const total=cardVal+bocVal;
                           return <>
                             <p style={{fontSize:11,color:S.label}}>合計回贈</p>
                             <p style={{fontSize:36,fontWeight:800,color:S.green,lineHeight:1.1,letterSpacing:-0.5}}>${total.toFixed(1)}</p>
-                            <p style={{fontSize:12,color:S.sec,marginTop:4}}>卡積分 ${cardVal.toFixed(1)} ({(p.rate*100).toFixed(1)}%) + 狂賞{bocLabel}{rd?"🔴":"⚪"} ${bocVal.toFixed(1)} ({(bocB*100).toFixed(0)}%)</p>
+                            <p style={{fontSize:12,color:S.sec,marginTop:4}}>卡積分 ${cardVal.toFixed(1)} ({(p.rate*100).toFixed(1)}%) + 狂賞{bocLabel}{isFly?"":(rd?"🔴":"⚪")} ${bocVal.toFixed(1)} ({(bocB*100).toFixed(0)}%){isFly?" 每季累積制":""}</p>
                             {!p.splitCalc&&p.fxFee>0&&<p style={{fontSize:11,color:S.sec,marginTop:2}}>扣手續費後 ≈ ${(amt*(p.rate-p.fxFee)+bocVal).toFixed(1)}</p>}
                           </>;
                         }
@@ -1443,7 +1445,7 @@ export default function App(){
                           return <>
                             <p style={{fontSize:11,color:S.label}}>預期里數</p>
                             <p style={{fontSize:36,fontWeight:800,color:S.blue,lineHeight:1.1,letterSpacing:-0.5}}>{Math.round(p.val).toLocaleString()} 里</p>
-                            <p style={{fontSize:12,color:S.green,fontWeight:600,marginTop:4}}>+ 狂賞{bocLabel} {rd?"🔴紅日":"⚪平日"}另加 {(bocB*100).toFixed(0)}% 現金回贈 ≈ <span style={{fontWeight:800}}>${(amt*bocB).toFixed(1)}</span></p>
+                            <p style={{fontSize:12,color:S.green,fontWeight:600,marginTop:4}}>+ 狂賞{bocLabel} {isFly?"額外3%（每季累積制）":(rd?"🔴紅日":"⚪平日")}另加 {(bocB*100).toFixed(0)}% 現金回贈 ≈ <span style={{fontWeight:800}}>${(amt*bocB).toFixed(1)}</span></p>
                           </>;
                         }
                         return <>
@@ -1980,7 +1982,7 @@ export default function App(){
                       <p style={{fontSize:12,fontWeight:700,color:S.dark}}>中銀狂賞派/飛 (2026 H1)</p>
                       <span style={{fontSize:10,fontWeight:700,color:isRedDay()?S.red:S.label,background:isRedDay()?"rgba(255,59,48,0.08)":"rgba(118,118,128,0.08)",padding:"2px 8px",borderRadius:8}}>{isRedDay()?"🔴 今日紅日 +5%":"⚪ 今日平日 +2%"}</span>
                     </div>
-                    <p style={{fontSize:10,color:S.label,marginBottom:10}}>需要喺推廣期內登記（名額有限）。狂賞派只限 Visa 卡，狂賞飛適用 Visa/MC（不包括銀聯）。額外回贈按交易日期自動判斷紅日/平日。</p>
+                    <p style={{fontSize:10,color:S.label,marginBottom:10}}>需要喺推廣期內登記（名額有限）。狂賞派只限 Visa 卡（紅日/平日制），狂賞飛適用 Visa/MC（每季累積制，排除銀聯）。</p>
                     <p style={{fontSize:11,fontWeight:600,color:S.sec,marginBottom:4}}>狂賞派（本地食飯/網購7大類別，Visa only）</p>
                     <div style={{display:"flex",gap:8,marginBottom:12}}>
                       <button onClick={()=>setBocMs("none")} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:bocMs==="none"?`2px solid ${S.red}`:`2px solid ${S.sep}`,background:bocMs==="none"?"rgba(255,59,48,0.06)":S.card,color:bocMs==="none"?S.red:S.label,cursor:"pointer",textAlign:"center"}}><div>❌ 未登記</div></button>
@@ -1989,7 +1991,7 @@ export default function App(){
                     <p style={{fontSize:11,fontWeight:600,color:S.sec,marginBottom:4}}>狂賞飛（海外實體簽賬，Visa/MC，排除銀聯）</p>
                     <div style={{display:"flex",gap:8}}>
                       <button onClick={()=>setBocMf("none")} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:bocMf==="none"?`2px solid ${S.red}`:`2px solid ${S.sep}`,background:bocMf==="none"?"rgba(255,59,48,0.06)":S.card,color:bocMf==="none"?S.red:S.label,cursor:"pointer",textAlign:"center"}}><div>❌ 未登記</div></button>
-                      <button onClick={()=>setBocMf("registered")} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:bocMf==="registered"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:bocMf==="registered"?"rgba(0,122,255,0.06)":S.card,color:bocMf==="registered"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>✅ 已登記</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>海外$6K月Cap</div></button>
+                      <button onClick={()=>setBocMf("registered")} style={{flex:1,padding:10,borderRadius:12,fontSize:11,fontWeight:600,border:bocMf==="registered"?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:bocMf==="registered"?"rgba(0,122,255,0.06)":S.card,color:bocMf==="registered"?S.blue:S.label,cursor:"pointer",textAlign:"center"}}><div>✅ 已登記</div><div style={{fontSize:10,marginTop:2,opacity:0.85}}>其他海外3%/內地澳門6% 每季</div></button>
                     </div>
                     {!isBocPromoActive()&&<p style={{fontSize:10,color:S.red,marginTop:8,fontWeight:600}}>⚠️ 狂賞派/飛推廣已過期（2026/6/30），額外回贈不適用</p>}
                   </div>
