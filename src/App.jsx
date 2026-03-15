@@ -111,34 +111,34 @@ const CARDS=[
   mk("mox_miles","MOX（Asia Miles）","Mox Bank","miles","所有消費$8/里，Asia Miles模式0%外幣手續費",0.005,{},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:8,travelJKSTA:8,physicalFX:8},{local:"💡 維持$250K存款可升至$4/里",dining:"💡 維持$250K存款可升至$4/里",onlineFX:"💡 維持$250K存款可升至$4/里+0%手續費"}),
 
   // ── CASHBACK ──
-  mk("hsbc_red","HSBC Red","HSBC","both","網購4%/$2.5里(月$10K)+指定商戶8%(壽司郎/譚仔/GU，月$1,250)，其他0.4%",0.004,{onlineHKD:0.04},"網購月度$10,000/指定商戶$1,250上限",false,{local:25,dining:25,onlineHKD:2.5,onlineFX:25,travelJKSTA:25,physicalFX:25},null,"2026-03-31"),
+  mk("hsbc_red","HSBC Red","HSBC","both","網購4%/$2.5里(月$10K)+指定商戶8%(每期不同，月$1,250)，其他0.4%",0.004,{onlineHKD:0.04},"網購月度$10,000/指定商戶$1,250上限",false,{local:25,dining:25,onlineHKD:2.5,onlineFX:25,travelJKSTA:25,physicalFX:25},null,"2026-03-31"),
   mk("hsbc_vs","HSBC Visa Signature","HSBC","both","最紅自主9X=3.6%/$2.78里，五大類別基本4X=1.6%/$6.25里，配Travel Guru海外最高9.6%",0.004,{},"年度$100,000上限(最紅額外)",false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 9.6%需登記最紅自主賞世界+Travel Guru L3"}),
   mk("hsbc_plat","HSBC Visa 白金卡","HSBC","cashback","基本0.4%獎賞錢，可配最紅自主+Travel Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_gold","HSBC 金卡","HSBC","cashback","入門級，0.4%獎賞錢，可配最紅自主+Travel Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_pulse","HSBC 銀聯 Pulse","HSBC","cashback","銀聯雙幣，內地消費免手續費，可配最紅自主+Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_easy","HSBC easy 卡","HSBC","cashback","最紅自主2.4%，配合易賞錢最高4.8%，海外配Guru最高8.4%",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
   mk("hsbc_student","HSBC 學生卡","HSBC","cashback","大學生專屬，可配最紅自主+Travel Guru",0.004,{octopus:0.004,octopusManual:0.004},null,true,null,{physicalFX:"💡 登記Travel Guru可疊加海外+3%~6%",travelJKSTA:"💡 登記Travel Guru可疊加海外+3%~6%"}),
-  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，需登記+月簽$5K門檻",0.004,{onlineHKD:0.05,onlineFX:0.06},"需登記+簽滿$5,000，月度$500額外上限，優惠至2026年3月31日",false,null,{onlineHKD:"⚠️ 需登記+月簽滿$5,000，優惠至2026/3/31",onlineFX:"⚠️ 需登記+月簽滿$5,000，優惠至2026/3/31"},"2026-03-31"),
+  mk("hs_mmpower","恒生 MMPOWER","Hang Seng","cashback","海外外幣6%/網購5%，需登記+月簽$5K門檻",0.004,{onlineHKD:0.05,onlineFX:0.06},"需登記+簽滿$5,000，月度$500額外上限（網購+外幣共用），優惠至2026年3月31日",false,null,{onlineHKD:"⚠️ 需登記+月簽滿$5,000，$500上限與外幣共用，優惠至2026/3/31",onlineFX:"⚠️ 需登記+月簽滿$5,000，$500上限與網購共用，優惠至2026/3/31"},"2026-03-31"),
   mk("hs_travel","恒生 Travel+","Hang Seng","cashback","日韓泰中台澳門外幣7%，其他外幣/餐飲5%",0.004,{travelJKSTA:0.07,physicalFX:0.05,onlineFX:0.05,dining:0.05},"登記一次即可，簽滿$6,000起，月度$500額外上限",false,null,{travelJKSTA:"⚠️ 需登記一次+月簽滿$6,000",physicalFX:"⚠️ 需登記一次+月簽滿$6,000",onlineFX:"⚠️ 需登記一次+月簽滿$6,000",dining:"⚠️ 需登記一次+月簽滿$6,000"},"2026-12-31"),
   mk("hs_enjoy","恒生 enJoy 卡","Hang Seng","cashback","百佳屈臣氏豐澤指定商戶優惠",0.004,{},null,true),
   mk("hs_muji","恒生 Muji 卡","Hang Seng","cashback","MUJI消費額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
   mk("hs_uni","恒生大學/大專卡","Hang Seng","cashback","學生專屬，永久免年費",0.004,{},null,true),
   mk("sc_simply","渣打 Simply Cash","Standard Chartered","cashback","本地1.5%/外幣2%，無上限，八達通AAVS 1.5%",0.015,{onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02,octopus:0.015,octopusManual:0.015},null,true),
-  mk("sc_smart","渣打 Smart 卡","Standard Chartered","cashback","月簽$4K起0.56%/$15K起1.2%，特約商戶5%，免外幣手續費",0.0056,{},"需月簽$4,000起，特約商戶月度$5,000/年度$60,000上限",false,null,{local:"⚠️ 0.56%需月簽≥$4,000，$15K起升至1.2%"}),
+  mk("sc_smart","渣打 Smart 卡","Standard Chartered","cashback","月簽$4K起0.56%（$180=$1）/$15K起1.2%，特約商戶5%，免外幣手續費",0.0056,{},"需月簽$4,000起，特約商戶月度$5,000/年度$60,000上限",false,null,{local:"⚠️ 0.56%需月簽≥$4,000，$15K起升至1.2%"}),
   mk("sc_apoint","渣打 A. Point Card","Standard Chartered","cashback","積分兌換禮品或現金回贈",0.004,{},null,true),
-  mk("boc_sogo","中銀 SOGO Visa Sig","Bank of China","cashback","流動支付5.4%，SOGO消費額外積分",0.004,{mobilePay:0.054},"手機支付月度$2,000上限(額外5%)",false,null,{mobilePay:"💡 狂賞派另加現金回贈(紅日+5%/平日+2%)",dining:"💡 狂賞派另加現金回贈(紅日+5%/平日+2%)"}),
-  mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購5%/網上外幣5%(無門檻)，Chill商戶10%(需月簽$1,500實體)，海外實體0.4%",0.004,{onlineHKD:0.05,onlineFX:0.05},"月度額外$150上限(~$3,260爆Cap)",false,null,{onlineHKD:"💡 5%無需額外門檻 · 狂賞派另加現金回贈(紅日+5%/平日+2%)",onlineFX:"💡 5%無需額外門檻 · 狂賞飛另加現金回贈(紅日+5%/平日+2%)",physicalFX:"⚠️ 海外實體只有0.4%（5%只限網上外幣）"}),
-  mk("boc_cheers","中銀 Cheers VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%，年薪$60萬",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k分部上限(月合併封頂30萬分≈$30k)，需月簽$5,000",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加現金回贈(紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)"}),
-  mk("boc_cheers_vs","中銀 Cheers VS","Bank of China","both","食飯8X=$1.9/里或3.2%，外幣3.2%，年薪$15萬",0.004,{dining:0.032,onlineFX:0.032,physicalFX:0.032,travelJKSTA:0.032},"食飯$7.5k/外幣$18.75k分部上限(月合併封頂18萬分≈$22.5k)，需月簽$5,000",false,{local:10,dining:1.9,onlineHKD:10,onlineFX:4.7,travelJKSTA:4.7,physicalFX:4.7},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加現金回贈(紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加現金回贈(紅日+5%/平日+2%)"}),
+  mk("boc_sogo","中銀 SOGO Visa Sig","Bank of China","cashback","流動支付5.4%，SOGO消費額外積分",0.004,{mobilePay:0.054},"手機支付月度$2,000上限(額外5%)",false,null,{mobilePay:"💡 狂賞派另加回贈(紅日+5%/平日+2%)，需App登記",dining:"💡 狂賞派另加回贈(紅日+5%/平日+2%)，需App登記"}),
+  mk("boc_chill","中銀 Chill Card","Bank of China","cashback","網購5%/網上外幣5%(無門檻)，Chill商戶10%(需月簽$1,500實體)，海外實體0.4%",0.004,{onlineHKD:0.05,onlineFX:0.05},"月度額外$150上限(~$3,260爆Cap)",false,null,{onlineHKD:"💡 5%無需額外門檻 · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"💡 5%無需額外門檻 · 狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"⚠️ 海外實體只有0.4%（5%只限網上外幣）"}),
+  mk("boc_cheers","中銀 Cheers VI","Bank of China","both","食飯10X=$1.5/里或4%，外幣4%，年薪$60萬",0.004,{dining:0.04,onlineFX:0.04,physicalFX:0.04,travelJKSTA:0.04},"食飯$10k/外幣$25k分部上限，全部場景合共月度30萬分上限(≈$30k)，需月簽$5,000",false,{local:10,dining:1.5,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
+  mk("boc_cheers_vs","中銀 Cheers VS","Bank of China","both","食飯8X=$1.9/里或3.2%，外幣3.2%，年薪$15萬",0.004,{dining:0.032,onlineFX:0.032,physicalFX:0.032,travelJKSTA:0.032},"食飯$7.5k/外幣$18.75k分部上限，全部場景合共月度18萬分上限(≈$22.5k)，需月簽$5,000",false,{local:10,dining:1.9,onlineHKD:10,onlineFX:4.7,travelJKSTA:4.7,physicalFX:4.7},{dining:"⚠️ 需月簽滿$5,000 · 💡狂賞派另加回贈(需App登記，紅日+5%/平日+2%)",onlineFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",physicalFX:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)",travelJKSTA:"⚠️ 需月簽滿$5,000 · 💡狂賞飛另加回贈(需App登記，紅日+5%/平日+2%)"}),
   mk("boc_taobao","中銀淘寶卡","Bank of China","cashback","淘寶RMB消費0%手續費+額外積分（銀聯卡）",0.004,{onlineHKD:0.006},null,true,null,{onlineHKD:"⚠️ 銀聯卡，不適用狂賞派/飛"}),
   mk("citi_cashback","Citi Cash Back","Citibank","cashback","食飯/酒店/外幣2%無上限，其他1%，八達通AAVS 1%",0.01,{dining:0.02,onlineFX:0.02,physicalFX:0.02,travelJKSTA:0.02,octopus:0.01,octopusManual:0.01},null,true),
   mk("citi_octopus","Citi Octopus","Citibank","cashback","八達通AAVS 0.5%+車費15%回贈(需Citi卡月簽$4,000)",0.005,{octopus:0.005},null,true,null,{octopus:"💡 車費15%回贈需所有Citi卡月簽滿$4,000"}),
   mk("citi_hktv","Citi HKTVMALL","Citibank","cashback","逢星期四HKTVmall 95折，其他0.4%",0.004,{onlineHKD:0.005},"星期四HKTVmall限定",true),
   mk("citi_club","Citi The Club","Citibank","cashback","賺Club積分兌換禮品，基本1%",0.01,{},null,true),
-  mk("dbs_live","DBS Live Fresh","DBS","cashback","4大自選類別5%回贈(指定商戶)，網上外幣1%無上限，揀「網上外幣」可達6%",0.004,{onlineFX:0.01},"自選5%月度$4,000上限，需App揀+單筆$300，基本0.4%需單筆$250，需InstaRedeem領",false,null,{onlineFX:"💡 揀「網上外幣」類別可達6%(5%+1%)",onlineHKD:"⚠️ 5%只限自選類別內指定商戶(旅遊娛樂/潮流教主等)，一般網購只有0.4%"},"2026-06-30"),
+  mk("dbs_live","DBS Live Fresh","DBS","cashback","4大自選類別5%回贈(指定商戶)，網上外幣1%(需InstaRedeem)，揀「網上外幣」可達6%",0.004,{onlineFX:0.01},"自選5%月度$4,000上限($200回贈)，需App揀+單筆$300，基本0.4%需單筆$250",false,null,{onlineFX:"💡 揀「網上外幣」類別可達6%(5%+1%)，5%部分月度$3,000爆Cap",onlineHKD:"⚠️ 5%只限自選類別內指定商戶(旅遊娛樂/潮流教主等)，一般網購只有0.4%"},"2026-06-30"),
   mk("dbs_eminent_vs","DBS Eminent VS","DBS","cashback","餐飲/健身/運動/醫療5%，Visa Sig版，每年登記+單筆$300",0.01,{dining:0.05},"月度$8,000上限(5%)，其他首$20K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"},"2026-12-31"),
   mk("dbs_eminent_plat","DBS Eminent 白金","DBS","cashback","餐飲/健身/運動/醫療5%，白金版，每年登記+單筆$300",0.01,{dining:0.05},"月度$4,000上限(5%)，其他首$15K/月享1%",false,null,{dining:"⚠️ 需每年登記一次+每筆滿$300"},"2026-12-31"),
-  mk("dbs_compass","DBS Compass Visa","DBS","cashback","逢星期三超市8%(滿$300)，其他0.4%",0.004,{supermarket:0.08},"超市$2,000/月上限(8%)，只限逢星期三，推廣至2026年5月",false,null,{supermarket:"⚠️ 只限逢星期三，單筆滿$300"},"2026-05-31"),
+  mk("dbs_compass","DBS Compass Visa","DBS","cashback","逢星期三超市8%(滿$300)，其他0.4%",0.004,{supermarket:0.08},"超市$2,000/月上限(8%)，只限逢星期三，推廣至2026年5月27日",false,null,{supermarket:"⚠️ 只限逢星期三，單筆滿$300"},"2026-05-27"),
   mk("bea_goal","BEA GOAL","BEA","cashback","運動健身消費額外獎賞",0.004,{},null,true),
   mk("bea_world","BEA World MC","BEA","cashback","食飯/海外/電器/健身/醫療5%，App登記一次+月簽$4,000",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"5%類別合計月度$10,000上限，不計歐洲及英國實體",false,null,{dining:"⚠️ 需App登記一次+月簽滿$4,000",onlineFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",physicalFX:"⚠️ 需App登記+月簽$4,000，不計歐洲及英國",travelJKSTA:"⚠️ 需App登記+月簽$4,000"}),
   mk("bea_ititan","BEA i-Titanium","BEA","cashback","網購/手機支付4%，月簽$2,000自動享有",0.004,{onlineHKD:0.04,mobilePay:0.04},"月度回贈$300上限(≈簽$7,500)，需累積零售滿$2,000",false,null,{onlineHKD:"⚠️ 需當月累積零售簽滿$2,000",mobilePay:"⚠️ 需當月累積零售簽滿$2,000"}),
@@ -157,13 +157,13 @@ const CARDS=[
   mk("aeon_basic","AEON 信用卡","AEON","cashback","AEON商店95折優惠",0.004,{},null,true),
   mk("aeon_waku","AEON WAKUWAKU","AEON","cashback","網購6%/日本3%/本地餐飲1%，永久免年費",0.004,{onlineHKD:0.06,travelJKSTA:0.03,dining:0.01},"額外$200/月結單周期上限(網購簽$3,571爆Cap)，海外3%只限日本",false,null,{onlineHKD:"⚠️ 以月結單日計算（非曆月）",travelJKSTA:"⚠️ 3%只限日本實體簽賬 · 以月結單日計算",dining:"⚠️ 以月結單日計算（非曆月）"},"2026-08-31"),
   mk("fubon_in","富邦 iN Visa 白金卡","Fubon","cashback","主打網購額外積分獎賞",0.004,{onlineHKD:0.006},null,true),
-  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false,null,{travelJKSTA:"⚠️ 推廣期優惠至2026年底 · 台灣實體8%（非4%）",physicalFX:"⚠️ 推廣期優惠至2026年底 · 以月結單日計算"},"2026-12-31"),
+  mk("fubon_plat","富邦 Visa 白金卡","Fubon","cashback","日韓實體4%/台灣實體8%/其他外幣2%，推廣至2026年底",0.004,{travelJKSTA:0.04,physicalFX:0.02},"台灣月簽$5,333爆Cap/日韓月簽$16,000爆Cap",false,null,{travelJKSTA:"⚠️ 台灣8%需單筆≥NT$3,000+致電/網上登記，每月限額，推廣至2026年底",physicalFX:"⚠️ 推廣期優惠至2026年底 · 以月結單日計算"},"2026-12-31"),
   mk("icbc_star","工銀亞洲星座卡","ICBC Asia","cashback","基本回贈卡",0.004,{},null,true),
   // ── PREMIER BANKING CARDS ──
   mk("hsbc_premier","HSBC Premier MC","HSBC","both","基本$25/里(0.4%)，最紅自主類別$4.17/里(2.4%)，配Travel Guru海外最高8.4%",0.004,{octopus:0.004,octopusManual:0.004},"最紅自主年度$100,000上限（同其他HSBC卡共用）",false,{local:25,dining:25,onlineHKD:25,onlineFX:25,travelJKSTA:25,physicalFX:25},{physicalFX:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3",travelJKSTA:"⚠️ 8.4%需登記最紅自主賞世界+Travel Guru L3"}),
   mk("sc_priority","渣打 Priority Banking MC","Standard Chartered","miles","Priority客戶專屬，本地$8/里，海外$4/里",0.005,{onlineFX:0.018,physicalFX:0.018,travelJKSTA:0.018},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:4,travelJKSTA:4,physicalFX:4}),
   mk("hs_prestige","恒生 Prestige Visa Infinite","Hang Seng","both","Prestige客戶，海外5%/食飯5%",0.004,{dining:0.05,onlineFX:0.05,physicalFX:0.05,travelJKSTA:0.05},"需簽滿$6,000/月，月度$500額外上限",false,{local:10,dining:2,onlineHKD:10,onlineFX:4,travelJKSTA:4,physicalFX:4},{dining:"⚠️ 需月簽滿$6,000",onlineFX:"⚠️ 需月簽滿$6,000",physicalFX:"⚠️ 需月簽滿$6,000",travelJKSTA:"⚠️ 需月簽滿$6,000"}),
-  mk("boc_bliss","中銀 Bliss Card","Bank of China","both","指定網購6%/$1里，其他網購4%/$1.5里，實體0.4%",0.004,{onlineHKD:0.04},"月度$10,000上限(網購)，指定商戶6%",false,{local:25,dining:25,onlineHKD:1.5,onlineFX:25,travelJKSTA:25,physicalFX:25},{onlineHKD:"💡 指定商戶(Amazon/FARFETCH等)可達6% · 狂賞派另加現金回贈(紅日+5%/平日+2%)"}),
+  mk("boc_bliss","中銀 Bliss Card","Bank of China","both","指定網購6%/$1里，其他網購4%/$1.5里，實體0.4%",0.004,{onlineHKD:0.04},"月度$10,000上限(網購)，指定商戶6%",false,{local:25,dining:25,onlineHKD:1.5,onlineFX:25,travelJKSTA:25,physicalFX:25},{onlineHKD:"💡 指定商戶(Amazon/FARFETCH等)可達6% · 狂賞派另加回贈(需App登記，紅日+5%/平日+2%)"}),
   mk("bea_sup","BEA Supreme","BEA","miles","東亞頂級卡，海外$5/里+機場Lounge",0.005,{onlineFX:0.015,physicalFX:0.015,travelJKSTA:0.015},null,true,{local:8,dining:8,onlineHKD:8,onlineFX:5,travelJKSTA:5,physicalFX:5}),
 ];
 
@@ -348,25 +348,27 @@ function doCalc(sc,amt,own,mode,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf
   try{
     const oc=CARDS.filter(c=>own.includes(c.id));
     if(mode==="cashback"){
-      let b=null,br=-1;oc.forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);if(x>br){br=x;b=c;}});
-      if(b){const cap=CAP_AMT[b.id]&&CAP_AMT[b.id][sc];r.primary={card:b,rate:br,val:amt*br,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(b,sc):0,overCap:cap?amt>cap:false,capAmt:cap||0};}
+      const isFx=FX_SCENARIOS.includes(sc);
+      let b=null,br=-1;oc.forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);const net=isFx?x-getFxFee(c,sc):x;if(net>br){br=net;b=c;}});
+      if(b){const rawRate=getRate(b,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);const cap=CAP_AMT[b.id]&&CAP_AMT[b.id][sc];r.primary={card:b,rate:rawRate,val:amt*rawRate,fxFee:isFx?getFxFee(b,sc):0,overCap:cap?amt>cap:false,capAmt:cap||0};}
       // Fallback: first try owned no-cap cards, then all cards
       if(b&&!b.noCap){
         let f=null,fr=-1;
-        oc.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);if(x>fr){fr=x;f=c;}});
-        if(f){r.fallback={card:f,rate:fr,val:amt*fr,notOwned:false,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
-        else{CARDS.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);if(x>fr){fr=x;f=c;}});if(f)r.fallback={card:f,rate:fr,val:amt*fr,notOwned:true,fxFee:FX_SCENARIOS.includes(sc)?getFxFee(f,sc):0};}
+        oc.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);const net=isFx?x-getFxFee(c,sc):x;if(net>fr){fr=net;f=c;}});
+        if(f){const fRaw=getRate(f,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);r.fallback={card:f,rate:fRaw,val:amt*fRaw,notOwned:false,fxFee:isFx?getFxFee(f,sc):0};}
+        else{CARDS.filter(c=>c.noCap&&c.id!==b.id).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);const net=isFx?x-getFxFee(c,sc):x;if(net>fr){fr=net;f=c;}});if(f){const fRaw=getRate(f,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);r.fallback={card:f,rate:fRaw,val:amt*fRaw,notOwned:true,fxFee:isFx?getFxFee(f,sc):0};}}
       }
       // GlobalBest: find best card that can actually handle this amount
       let g=null,gr=-1;CARDS.forEach(c=>{
         const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);
+        const net=isFx?x-getFxFee(c,sc):x;
         const cap=CAP_AMT[c.id]&&CAP_AMT[c.id][sc];
         if(cap&&amt>cap)return;
         if(guru&&guru!=="none"&&["hsbc_everymile","hsbc_vs","hsbc_plat","hsbc_gold","hsbc_pulse","hsbc_easy","hsbc_student","hsbc_premier"].includes(c.id)&&["physicalFX","travelJKSTA"].includes(sc)){
           const eCap=guru==="L3"?36667:guru==="L2"?30000:16667;
           if(amt>eCap)return;
         }
-        if(x>gr){gr=x;g=c;}
+        if(net>gr){gr=net;g=c;}
       });
       // If no uncapped card found, fallback to best noCap card
       if(!g){CARDS.filter(c=>c.noCap).forEach(c=>{const x=getRate(c,sc,vs,guru,moxTier,dbsLfFx,wewaCategory,bocMs,bocMf,regs);if(x>gr){gr=x;g=c;}});}
@@ -495,6 +497,7 @@ export default function App(){
   const[modal,setModal]=useState(null);
   const[tut,setTut]=useState(0);
   const[seen,setSeen]=useState(false);
+  const _uiInit=(k,def)=>{try{return JSON.parse(localStorage.getItem("sw_ui")||"{}")[k]??def;}catch{return def;}};
   const[search,setSearch]=useState("");
   const[bankState,setBankState]=useState({}); // {issuer: true/false} explicit overrides
   const toggleBank=(iss)=>setBankState(p=>({...p,[iss]:!isBankOpen(iss)}));
@@ -505,18 +508,19 @@ export default function App(){
   const[guideMode,setGuideMode]=useState("cashback");
   const[guideSc,setGuideSc]=useState("local");
   const[guideExpanded,setGuideExpanded]=useState(new Set());
-  const[guideSettings,setGuideSettings]=useState(false);
+  const[guideSettings,setGuideSettings]=useState(()=>_uiInit("guideSettings",false));
   const[guideOvr,setGuideOvr]=useState(null); // null=use auto-optimal, object=user override
   const[guideToast,setGuideToast]=useState(null);
   const showGuideToast=(msg)=>{setGuideToast(msg);setTimeout(()=>setGuideToast(null),2500);};
-  const[trackerView,setTrackerView]=useState("card");
-  const[trackerSort,setTrackerSort]=useState("desc"); // "desc" high→low, "asc" low→high
+  const[trackerView,setTrackerView]=useState(()=>_uiInit("trackerView","card"));
+  const[trackerSort,setTrackerSort]=useState(()=>_uiInit("trackerSort","desc"));
   const[logDate,setLogDate]=useState(()=>new Date().toISOString().slice(0,10));
   const[logMemo,setLogMemo]=useState("");
   const[logOther,setLogOther]=useState(false);
   const[logCash,setLogCash]=useState(false);
   // cycleDay removed — use calendar month, warn about statement dates
-  const[manualOpen,setManualOpen]=useState(false);
+  const[entryOpen,setEntryOpen]=useState(()=>_uiInit("entryOpen",false));
+  const[entryTab,setEntryTab]=useState("manual"); // "manual" | "recurring"
   const[resetStep,setResetStep]=useState(0);
   const[manualAmt,setManualAmt]=useState("");
   const[manualMemo,setManualMemo]=useState("");
@@ -548,20 +552,22 @@ export default function App(){
   const[editMax,setEditMax]=useState(false);
   const[editQuick,setEditQuick]=useState(false);
   const[quickAmts,setQuickAmts]=useState([50,100,200,500,1000]);
-  const[hsbcOpen,setHsbcOpen]=useState(false);
+  const[hsbcOpen,setHsbcOpen]=useState(()=>_uiInit("hsbcOpen",false));
   const[moxTier,setMoxTier]=useState(false);
   const[dbsLfFx,setDbsLfFx]=useState("none"); // DBS Live Fresh: "none"=未登記, "fx"=網上外幣, "travel"=旅遊娛樂, "fashion"=潮流教主, "charity"=慈善關愛
   const[wewaCategory,setWewaCategory]=useState("none"); // WeWa 4選1: none/overseas/mobilePay (travel/entertainment not reliably mappable)
   const[bocMs,setBocMs]=useState("none"); // BOC 狂賞派 (Visa only): none/registered
   const[bocMf,setBocMf]=useState("none"); // BOC 狂賞飛 (Visa/MC, 排除銀聯): none/registered
-  const[moxOpen,setMoxOpen]=useState(false);
-  const[dbsOpen,setDbsOpen]=useState(false);
-  const[wewaOpen,setWewaOpen]=useState(false);
-  const[bocOpen,setBocOpen]=useState(false);
-  const[aeOpen,setAeOpen]=useState(false);
-  const[hsOpen,setHsOpen]=useState(false);
-  const[beaOpen,setBeaOpen]=useState(false);
-  const[ccbOpen,setCcbOpen]=useState(false);
+  const[moxOpen,setMoxOpen]=useState(()=>_uiInit("moxOpen",false));
+  const[dbsOpen,setDbsOpen]=useState(()=>_uiInit("dbsOpen",false));
+  const[wewaOpen,setWewaOpen]=useState(()=>_uiInit("wewaOpen",false));
+  const[bocOpen,setBocOpen]=useState(()=>_uiInit("bocOpen",false));
+  const[aeOpen,setAeOpen]=useState(()=>_uiInit("aeOpen",false));
+  const[hsOpen,setHsOpen]=useState(()=>_uiInit("hsOpen",false));
+  const[beaOpen,setBeaOpen]=useState(()=>_uiInit("beaOpen",false));
+  const[ccbOpen,setCcbOpen]=useState(()=>_uiInit("ccbOpen",false));
+  const[uiTrackerAdv,setUiTrackerAdv]=useState(()=>_uiInit("trackerAdv",false));
+  useEffect(()=>{try{const prev=JSON.parse(localStorage.getItem("sw_ui")||"{}");localStorage.setItem("sw_ui",JSON.stringify({...prev,hsbcOpen,moxOpen,dbsOpen,wewaOpen,bocOpen,aeOpen,hsOpen,beaOpen,ccbOpen,trackerView,trackerSort,entryOpen,trackerAdv:uiTrackerAdv}));}catch{}},[hsbcOpen,moxOpen,dbsOpen,wewaOpen,bocOpen,aeOpen,hsOpen,beaOpen,ccbOpen,trackerView,trackerSort,entryOpen,uiTrackerAdv]);
   // Registration toggles (v1.2)
   const[aeExplorerReg,setAeExplorerReg]=useState(true);
   const[aeChargeReg,setAeChargeReg]=useState(true);
@@ -717,7 +723,7 @@ export default function App(){
     setLogs(p=>[{id:Date.now(),cardId:"_manual_"+manualType,cardName:typeLabels[manualType],scenario:manualSc,amount:a,rate:0,rebate:0,miles:0,isMiles:false,date:dateStr,memo:manualMemo,isManual:true},...p]);
     showToast(`✅ 已記錄 ${typeLabels[manualType]} $${a.toLocaleString()}`);
     gEvent("manual_log",{type:manualType,scenario:manualSc});
-    setManualAmt("");setManualMemo("");setManualOpen(false);
+    setManualAmt("");setManualMemo("");
   };
   const removeLog=(id)=>{gEvent("log_delete",{});setLogs(p=>p.filter(l=>l.id!==id));};
 
@@ -1275,6 +1281,7 @@ export default function App(){
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",margin:"0 auto"}}/>
             </div>}
             {(()=>{const activePromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(sc));return activePromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:11,color:S.promo,fontWeight:600}}>計算結果已包含 {activePromos.length} 項特選優惠</span><button onClick={()=>{setTab("calc");setTimeout(()=>document.getElementById("promo-section")?.scrollIntoView({behavior:"smooth"}),100);}} style={{marginLeft:"auto",fontSize:10,color:S.blue,background:"none",border:"none",cursor:"pointer",fontWeight:600}}>管理 →</button></div>:null;})()}
+            {FX_SCENARIOS.includes(sc)&&amt>0&&<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>💱</span><span style={{fontSize:11,color:S.sec,lineHeight:1.4}}>結果已扣除外幣手續費（Visa/MC ~1.95%, AE ~2%, 銀聯 ~1%）。0%手續費嘅卡會標示。</span></div>}
             <div id="tut-result" style={{borderRadius:22,padding:22,background:S.card,border:p?`1px solid rgba(52,199,89,0.15)`:`1px solid ${S.sep}`,boxShadow:S.shadow,...hlStyle("result")}}>
               {!p?(
                 <div style={{textAlign:"center",padding:"20px 0",cursor:noCards?"pointer":undefined}} onClick={()=>noCards&&setTab("cards")}>
@@ -1898,15 +1905,16 @@ export default function App(){
           const isCBG=guideMode==="cashback"||guideMode==="combo";
           let ranked=[];
           if(guideMode==="cashback"||guideMode==="combo"){
-            ranked=CARDS.map(c=>{const r=getRate(c,guideSc,gVs,gGuru,gMox,gDbs,gWewa,gBocMs,gBocMf,gRegs)+getBocBonus(c,guideSc,gBocMs,gBocMf);return{card:c,rate:r,val:r};}).filter(x=>x.rate>0).sort((a,b)=>b.rate-a.rate);
+            const gIsFx=FX_SCENARIOS.includes(guideSc);
+            ranked=CARDS.map(c=>{const r=getRate(c,guideSc,gVs,gGuru,gMox,gDbs,gWewa,gBocMs,gBocMf,gRegs)+getBocBonus(c,guideSc,gBocMs,gBocMf);const fee=gIsFx?getFxFee(c,guideSc):0;return{card:c,rate:r,val:r,fxFee:fee,netRate:r-fee};}).filter(x=>x.netRate>0).sort((a,b)=>b.netRate-a.netRate);
             // Inject custom promos as separate clone cards (never modify existing)
             customPromos.filter(cp=>!cp.isMiles&&(cp.scs||[cp.sc]).includes(guideSc)).forEach(cp=>{
               const rate=cp.rate/100;const baseCard=cp.cardId==="_custom"?{id:"_custom_"+cp.id,name:cp.cardName,issuer:"自訂",type:"cashback",noCap:true}:CARDS.find(x=>x.id===cp.cardId);
               if(!baseCard)return;
               const clone={...baseCard,id:baseCard.id+"__promo_"+cp.id,name:baseCard.name+"（特選優惠）"};
-              ranked.push({card:clone,rate,val:rate,isPromo:true,promoMemo:cp.memo});
+              ranked.push({card:clone,rate,val:rate,fxFee:0,netRate:rate,isPromo:true,promoMemo:cp.memo});
             });
-            ranked.sort((a,b)=>b.rate-a.rate);
+            ranked.sort((a,b)=>(b.netRate??b.rate)-(a.netRate??a.rate));
           }else{
             ranked=CARDS.filter(c=>c.type==="miles"||c.type==="both").map(c=>{const m=getMPD(c,guideSc,gVs,gGuru,gMox,gDbs,gWewa,gRegs);return{card:c,rate:m,val:m};}).filter(x=>x.rate&&x.rate<Infinity&&x.rate<50).sort((a,b)=>a.rate-b.rate);
             // Inject custom promo miles as separate clone cards
@@ -2057,7 +2065,7 @@ export default function App(){
                           <span style={{fontSize:10,color:S.blue,fontWeight:600,padding:"1px 5px",borderRadius:5,background:"rgba(0,122,255,0.06)"}}>{exp2?"▲":"▼"}</span>
                         </div>
                         <p style={{fontSize:12,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.name}</p>
-                        <p style={{fontSize:13,fontWeight:700,color:isMiles?S.blue:label==="首選"?S.green:S.sec}}>{isMiles?`$${parseFloat(item.rate.toFixed(2))}/里`:`${(item.rate*100).toFixed(1)}%`}</p>
+                        <p style={{fontSize:13,fontWeight:700,color:isMiles?S.blue:label==="首選"?S.green:S.sec}}>{isMiles?`$${parseFloat(item.rate.toFixed(2))}/里`:`${((item.netRate??item.rate)*100).toFixed(1)}%`}{!isMiles&&item.fxFee>0&&<span style={{fontSize:9,color:S.label,fontWeight:400}}> 扣💱</span>}</p>
                         {!exp2&&<p style={{fontSize:10,color:S.label,marginTop:2,lineHeight:1.4}}>{item.card.desc}</p>}
                         {exp2&&<div style={{marginTop:4,fontSize:10,lineHeight:1.7,color:S.sec,borderTop:`1px solid ${S.sep}`,paddingTop:4}}>
                           <p>{item.card.desc}</p>
@@ -2098,6 +2106,7 @@ export default function App(){
                 </div>
               ):(<div>
               {(()=>{const gPromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(guideSc));return gPromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:10}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:11,color:S.promo,fontWeight:600}}>排名已包含 {gPromos.length} 項特選優惠（獨立顯示）</span></div>:null;})()}
+              {FX_SCENARIOS.includes(guideSc)&&<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,display:"flex",alignItems:"center",gap:6,marginBottom:10}}><span style={{fontSize:12}}>💱</span><span style={{fontSize:11,color:S.sec,lineHeight:1.4}}>排名已扣除外幣手續費（Visa/MC ~1.95%、AE ~2%、銀聯 ~1%）。0% 手續費嘅卡排名會較高。</span></div>}
               <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:darkMode?"none":"0 1px 2px rgba(0,0,0,0.04)"}}>
                 <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                   <span style={{fontSize:14,fontWeight:700,color:S.dark}}>{scenarioLabel?.emoji} {scenarioLabel?.label}</span>
@@ -2126,8 +2135,8 @@ export default function App(){
                         </div>
                         <div style={{flexShrink:0}}>
                           {isTop3?<div style={{padding:"5px 10px",borderRadius:10,background:isCBG?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)"}}>
-                            <p style={{fontSize:14,fontWeight:700,color:"#fff"}}>{isCBG?`${(item.rate*100).toFixed(1)}%`:`$${parseFloat(item.rate.toFixed(2))}/里`}</p>
-                          </div>:<p style={{fontSize:13,fontWeight:500,color:S.sec}}>{isCBG?`${(item.rate*100).toFixed(1)}%`:`$${parseFloat(item.rate.toFixed(2))}/里`}</p>}
+                            <p style={{fontSize:14,fontWeight:700,color:"#fff"}}>{isCBG?`${((item.netRate??item.rate)*100).toFixed(1)}%`:`$${parseFloat(item.rate.toFixed(2))}/里`}{isCBG&&item.fxFee>0&&<span style={{fontSize:9,opacity:0.8}}> 扣💱</span>}</p>
+                          </div>:<p style={{fontSize:13,fontWeight:500,color:S.sec}}>{isCBG?`${((item.netRate??item.rate)*100).toFixed(1)}%`:`$${parseFloat(item.rate.toFixed(2))}/里`}{isCBG&&item.fxFee>0&&<span style={{fontSize:9,color:S.label}}> 扣💱</span>}</p>}
                         </div>
                       </div>
                       {/* Row 2: always show — short desc + tap hint */}
@@ -2277,105 +2286,117 @@ export default function App(){
                 </div>);
               })()}
 
-              {/* Manual entry button + form */}
+              {/* Combined entry card — manual + recurring */}
               <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
-                <button onClick={()=>setManualOpen(p=>!p)} style={{width:"100%",padding:"12px 16px",background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                <button onClick={()=>setEntryOpen(p=>!p)} style={{width:"100%",padding:"12px 16px",background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                   <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{fontSize:18}}>💵</span>
-                    <span style={{fontSize:14,fontWeight:600,color:S.dark}}>手動記賬</span>
-                    <span style={{fontSize:11,color:S.label}}>現金 / 八達通 / 其他</span>
+                    <span style={{fontSize:18}}>✏️</span>
+                    <span style={{fontSize:14,fontWeight:600,color:S.dark}}>新增記錄</span>
+                    {recurring.length>0&&<span style={{fontSize:11,color:S.label,background:darkMode?"rgba(0,122,255,0.15)":"rgba(0,122,255,0.08)",padding:"2px 8px",borderRadius:10}}>🔄 {recurring.length}</span>}
                   </div>
-                  <span style={{fontSize:12,color:S.label}}>{manualOpen?"▲":"＋"}</span>
+                  <span style={{fontSize:12,color:S.label}}>{entryOpen?"▲":"＋"}</span>
                 </button>
-                {manualOpen&&(
-                  <div style={{padding:"0 16px 16px",borderTop:`1px solid ${S.sep}`}}>
-                    <div style={{display:"flex",gap:6,marginTop:12,marginBottom:12}}>
-                      {[{k:"cash",l:"💵 現金"},{k:"octopus",l:"🚇 八達通"},{k:"other",l:"📝 其他"}].map(t=>(
-                        <button key={t.k} onClick={()=>setManualType(t.k)} style={{flex:1,padding:"8px 4px",borderRadius:10,fontSize:11,fontWeight:600,border:manualType===t.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:manualType===t.k?"rgba(0,122,255,0.06)":S.card,color:manualType===t.k?S.blue:S.label,cursor:"pointer"}}>{t.l}</button>
+                {entryOpen&&(
+                  <div style={{borderTop:`1px solid ${S.sep}`}}>
+                    {/* Segmented control */}
+                    <div style={{display:"flex",padding:"10px 16px 0",gap:0}}>
+                      {[{k:"manual",l:"💵 手動記賬"},{k:"recurring",l:`🔄 定期扣款${recurring.length>0?` (${recurring.length})`:""}`}].map(t=>(
+                        <button key={t.k} onClick={()=>setEntryTab(t.k)} style={{flex:1,padding:"8px 0",fontSize:12,fontWeight:600,background:"none",border:"none",borderBottom:entryTab===t.k?`2px solid ${S.blue}`:`2px solid transparent`,color:entryTab===t.k?S.blue:S.label,cursor:"pointer",transition:"all 0.15s ease"}}>{t.l}</button>
                       ))}
                     </div>
-                    {/* Scenario picker */}
-                    <div style={{display:"flex",gap:4,marginBottom:10,overflowX:"auto",paddingBottom:2}}>
-                      {ALL_SCENARIOS.filter(s=>s.id!=="manual").map(s=>(
-                        <button key={s.id} onClick={()=>setManualSc(s.id)} style={{padding:"5px 8px",borderRadius:8,fontSize:10,fontWeight:600,background:manualSc===s.id?"rgba(0,122,255,0.08)":S.card,color:manualSc===s.id?S.blue:S.label,border:manualSc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
-                      ))}
-                    </div>
-                    <div style={{display:"flex",gap:8,marginBottom:10}}>
-                      <div style={{flex:1,display:"flex",alignItems:"center",gap:4,background:S.bg,borderRadius:10,padding:"8px 10px",border:`1px solid ${S.sep}`}}>
-                        <span style={{fontSize:14,color:S.label,fontWeight:600}}>$</span>
-                        <input type="number" value={manualAmt} onChange={e=>setManualAmt(e.target.value)} placeholder="金額" style={{flex:1,background:"transparent",border:"none",outline:"none",fontSize:14,fontWeight:700,color:S.dark,minWidth:0}}/>
-                      </div>
-                      <div style={{position:"relative"}}>
-                        <div onClick={()=>{const el=document.getElementById("manual-date-input");if(el)el.showPicker?.();}} style={{padding:"8px 12px",borderRadius:10,background:S.bg,border:`1px solid ${S.sep}`,cursor:"pointer",display:"flex",alignItems:"center",gap:4,height:"100%",boxSizing:"border-box"}}>
-                          <CalendarDays size={12} color={S.label}/>
-                          <span style={{fontSize:12,fontWeight:600,color:S.dark}}>{(()=>{const today=new Date().toISOString().slice(0,10);if(manualDate===today)return"今日";const[,lm,ld]=manualDate.split("-");return`${parseInt(lm)}/${parseInt(ld)}`;})()}</span>
+                    {/* Manual entry form */}
+                    {entryTab==="manual"&&(
+                      <div style={{padding:"12px 16px 16px"}}>
+                        <div style={{display:"flex",gap:6,marginBottom:12}}>
+                          {[{k:"cash",l:"💵 現金"},{k:"octopus",l:"🚇 八達通"},{k:"other",l:"📝 其他"}].map(t=>(
+                            <button key={t.k} onClick={()=>setManualType(t.k)} style={{flex:1,padding:"8px 4px",borderRadius:10,fontSize:11,fontWeight:600,border:manualType===t.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:manualType===t.k?"rgba(0,122,255,0.06)":S.card,color:manualType===t.k?S.blue:S.label,cursor:"pointer"}}>{t.l}</button>
+                          ))}
                         </div>
-                        <input id="manual-date-input" type="date" value={manualDate} onChange={e=>setManualDate(e.target.value)} max={new Date().toISOString().slice(0,10)} style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",opacity:0,cursor:"pointer"}}/>
+                        <div style={{display:"flex",gap:4,marginBottom:10,overflowX:"auto",paddingBottom:2}}>
+                          {ALL_SCENARIOS.filter(s=>s.id!=="manual").map(s=>(
+                            <button key={s.id} onClick={()=>setManualSc(s.id)} style={{padding:"5px 8px",borderRadius:8,fontSize:10,fontWeight:600,background:manualSc===s.id?"rgba(0,122,255,0.08)":S.card,color:manualSc===s.id?S.blue:S.label,border:manualSc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
+                          ))}
+                        </div>
+                        <div style={{display:"flex",gap:8,marginBottom:10}}>
+                          <div style={{flex:1,display:"flex",alignItems:"center",gap:4,background:S.bg,borderRadius:10,padding:"8px 10px",border:`1px solid ${S.sep}`}}>
+                            <span style={{fontSize:14,color:S.label,fontWeight:600}}>$</span>
+                            <input type="number" value={manualAmt} onChange={e=>setManualAmt(e.target.value)} placeholder="金額" style={{flex:1,background:"transparent",border:"none",outline:"none",fontSize:14,fontWeight:700,color:S.dark,minWidth:0}}/>
+                          </div>
+                          <div style={{position:"relative"}}>
+                            <div onClick={()=>{const el=document.getElementById("manual-date-input");if(el)el.showPicker?.();}} style={{padding:"8px 12px",borderRadius:10,background:S.bg,border:`1px solid ${S.sep}`,cursor:"pointer",display:"flex",alignItems:"center",gap:4,height:"100%",boxSizing:"border-box"}}>
+                              <CalendarDays size={12} color={S.label}/>
+                              <span style={{fontSize:12,fontWeight:600,color:S.dark}}>{(()=>{const today=new Date().toISOString().slice(0,10);if(manualDate===today)return"今日";const[,lm,ld]=manualDate.split("-");return`${parseInt(lm)}/${parseInt(ld)}`;})()}</span>
+                            </div>
+                            <input id="manual-date-input" type="date" value={manualDate} onChange={e=>setManualDate(e.target.value)} max={new Date().toISOString().slice(0,10)} style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",opacity:0,cursor:"pointer"}}/>
+                          </div>
+                        </div>
+                        <input type="text" value={manualMemo} onChange={e=>setManualMemo(e.target.value)} placeholder="Mark低用咗咩錢" maxLength={40} style={{width:"100%",padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,background:S.bg,fontSize:12,outline:"none",color:S.dark,boxSizing:"border-box",marginBottom:10}}/>
+                        <button onClick={addManualLog} disabled={!manualAmt||parseFloat(manualAmt)<=0} style={{width:"100%",padding:12,borderRadius:14,background:(!manualAmt||parseFloat(manualAmt)<=0)?S.bg:S.blue,color:(!manualAmt||parseFloat(manualAmt)<=0)?S.label:"#fff",border:"none",fontSize:14,fontWeight:700,cursor:(!manualAmt||parseFloat(manualAmt)<=0)?"default":"pointer"}}>記錄</button>
                       </div>
-                    </div>
-                    <input type="text" value={manualMemo} onChange={e=>setManualMemo(e.target.value)} placeholder="Mark低用咗咩錢" maxLength={40} style={{width:"100%",padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,background:S.bg,fontSize:12,outline:"none",color:S.dark,boxSizing:"border-box",marginBottom:10}}/>
-                    <button onClick={addManualLog} disabled={!manualAmt||parseFloat(manualAmt)<=0} style={{width:"100%",padding:12,borderRadius:14,background:(!manualAmt||parseFloat(manualAmt)<=0)?S.bg:S.blue,color:(!manualAmt||parseFloat(manualAmt)<=0)?S.label:"#fff",border:"none",fontSize:14,fontWeight:700,cursor:(!manualAmt||parseFloat(manualAmt)<=0)?"default":"pointer"}}>記錄</button>
+                    )}
+                    {/* Recurring entries */}
+                    {entryTab==="recurring"&&(
+                      <div>
+                        <div style={{padding:"10px 16px",borderBottom:(recurring.length>0||recForm)?`1px solid ${S.sep}`:"none"}}>
+                          <button onClick={()=>setRecForm(recForm?null:{memo:"",amount:"",day:"1",cardId:"",cardName:"",sc:"onlineHKD",isMiles:false,currency:"HKD"})} style={{width:"100%",padding:"8px 12px",borderRadius:10,background:recForm?darkMode?"rgba(255,69,58,0.1)":"#FFF1F0":"rgba(0,122,255,0.06)",border:`1px solid ${recForm?"rgba(255,69,58,0.2)":"rgba(0,122,255,0.15)"}`,cursor:"pointer",fontSize:12,fontWeight:600,color:recForm?S.red:S.blue,display:"flex",alignItems:"center",justifyContent:"center",gap:4}}>
+                            {recForm?"取消":"＋ 新增定期扣款"}
+                          </button>
+                        </div>
+                        {recForm&&(()=>{
+                          const isFx=FX_SCENARIOS.includes(recForm.sc);
+                          return(
+                          <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)"}}>
+                            <div style={{display:"flex",gap:8,marginBottom:8}}>
+                              <input type="text" value={recForm.memo} onChange={e=>setRecForm(p=>({...p,memo:e.target.value}))} placeholder="洗費 (e.g. YouTube)" style={{flex:1,padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,minWidth:0}}/>
+                              <div style={{display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0,minWidth:isFx?130:90}}>
+                                {isFx&&<select value={recForm.currency||"HKD"} onChange={e=>setRecForm(p=>({...p,currency:e.target.value}))} style={{border:"none",outline:"none",fontSize:11,fontWeight:700,color:S.blue,background:"transparent",appearance:"auto",padding:0}}>
+                                  {["HKD","USD","JPY","EUR","GBP","CNY","TWD","THB","KRW","SGD","AUD","CAD"].map(c=><option key={c} value={c}>{c}</option>)}
+                                </select>}
+                                {!isFx&&<span style={{fontSize:12,color:S.label}}>$</span>}
+                                <input type="number" value={recForm.amount} onChange={e=>setRecForm(p=>({...p,amount:e.target.value}))} placeholder="金額" style={{width:"100%",border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,background:"transparent"}}/>
+                              </div>
+                            </div>
+                            <div style={{display:"flex",gap:8,marginBottom:8}}>
+                              <div style={{display:"flex",alignItems:"center",gap:4,background:S.card,borderRadius:10,padding:"6px 10px",border:`1px solid ${S.sep}`,flex:1}}>
+                                <span style={{fontSize:11,color:S.label}}>每月</span>
+                                <input type="number" min={1} max={28} value={recForm.day} onChange={e=>setRecForm(p=>({...p,day:e.target.value}))} style={{width:30,border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,textAlign:"center",background:"transparent"}}/>
+                                <span style={{fontSize:11,color:S.label}}>號</span>
+                              </div>
+                              <select value={recForm.cardId||""} onChange={e=>{const c=CARDS.find(x=>x.id===e.target.value);setRecForm(p=>({...p,cardId:e.target.value,cardName:c?c.name:"未指定"}));}} style={{flex:2,padding:"6px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:recForm.cardId?S.dark:S.label,background:S.card,appearance:"auto"}}>
+                                <option value="" disabled>揀你嘅卡</option>
+                                {CARDS.filter(c=>own.includes(c.id)).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
+                              </select>
+                            </div>
+                            <div style={{display:"flex",gap:6,marginBottom:8}}>
+                              <button onClick={()=>setRecForm(p=>({...p,isMiles:false}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:!recForm.isMiles?`2px solid ${S.green}`:`2px solid ${S.sep}`,background:!recForm.isMiles?"rgba(52,199,89,0.06)":S.card,color:!recForm.isMiles?S.green:S.label,cursor:"pointer"}}>💰 現金回贈</button>
+                              <button onClick={()=>setRecForm(p=>({...p,isMiles:true}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:recForm.isMiles?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:recForm.isMiles?"rgba(0,122,255,0.06)":S.card,color:recForm.isMiles?S.blue:S.label,cursor:"pointer"}}>✈️ 飛行里數</button>
+                            </div>
+                            <div style={{display:"flex",gap:4,marginBottom:10,overflowX:"auto"}}>
+                              {SCENARIOS.map(s=>(
+                                <button key={s.id} onClick={()=>setRecForm(p=>({...p,sc:s.id,currency:FX_SCENARIOS.includes(s.id)?(p.currency==="HKD"?"USD":p.currency):"HKD"}))} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:recForm.sc===s.id?"rgba(0,122,255,0.08)":S.card,color:recForm.sc===s.id?S.blue:S.label,border:recForm.sc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
+                              ))}
+                            </div>
+                            <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:recForm.isMiles,rate:0,currency:isFx?(recForm.currency||"USD"):"HKD"}]);setRecForm(null);gEvent("recurring_add",{scenario:recForm.sc});showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
+                          </div>);
+                        })()}
+                        {recurring.length===0&&!recForm&&(
+                          <div style={{padding:"20px 16px",textAlign:"center"}}>
+                            <p style={{fontSize:12,color:S.label}}>未有定期扣款。Netflix、Spotify、保險⋯ 記低佢哋！</p>
+                          </div>
+                        )}
+                        {recurring.map(r=>(
+                          <div key={r.id} style={{padding:"10px 16px",display:"flex",alignItems:"center",borderBottom:`1px solid ${S.sep}`}}>
+                            <div style={{flex:1,minWidth:0}}>
+                              <p style={{fontSize:13,fontWeight:500,color:S.dark}}>{r.memo}</p>
+                              <p style={{fontSize:11,color:S.label}}>{r.cardName} · 每月{r.dayOfMonth}號 · {r.currency&&r.currency!=="HKD"?`${r.currency} ${r.amount}`:`$${r.amount}`} · {r.isMiles?"✈️ 里數":"💰 回贈"}</p>
+                            </div>
+                            <button onClick={()=>{gEvent("recurring_delete",{});setRecurring(p=>p.filter(x=>x.id!==r.id));}} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
-              </div>
-
-              {/* Recurring entries management */}
-              <div style={{background:S.card,borderRadius:S.rad,overflow:"hidden",boxShadow:S.shadow}}>
-                <button onClick={()=>setRecForm(recForm?null:{memo:"",amount:"",day:"1",cardId:"",cardName:"",sc:"onlineHKD",isMiles:false,currency:"HKD"})} style={{width:"100%",padding:"12px 16px",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:(recurring.length>0||recForm)?`1px solid ${S.sep}`:"none"}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{fontSize:16}}>🔄</span>
-                    <span style={{fontSize:14,fontWeight:600,color:S.dark}}>定期扣款</span>
-                    {recurring.length>0&&<span style={{fontSize:11,color:S.label}}>{recurring.length} 項</span>}
-                  </div>
-                  <span style={{fontSize:12,color:recForm?S.red:S.label}}>{recForm?"取消":"＋"}</span>
-                </button>
-                {/* Inline add form */}
-                {recForm&&(()=>{
-                  const isFx=FX_SCENARIOS.includes(recForm.sc);
-                  return(
-                  <div style={{padding:"12px 16px",borderBottom:`1px solid ${S.sep}`,background:darkMode?"rgba(10,132,255,0.12)":"rgba(0,122,255,0.02)"}}>
-                    <div style={{display:"flex",gap:8,marginBottom:8}}>
-                      <input type="text" value={recForm.memo} onChange={e=>setRecForm(p=>({...p,memo:e.target.value}))} placeholder="洗費 (e.g. YouTube)" style={{flex:1,padding:"8px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:S.dark,background:S.card,minWidth:0}}/>
-                      <div style={{display:"flex",alignItems:"center",gap:2,background:S.card,borderRadius:10,padding:"0 10px",border:`1px solid ${S.sep}`,flexShrink:0,minWidth:isFx?130:90}}>
-                        {isFx&&<select value={recForm.currency||"HKD"} onChange={e=>setRecForm(p=>({...p,currency:e.target.value}))} style={{border:"none",outline:"none",fontSize:11,fontWeight:700,color:S.blue,background:"transparent",appearance:"auto",padding:0}}>
-                          {["HKD","USD","JPY","EUR","GBP","CNY","TWD","THB","KRW","SGD","AUD","CAD"].map(c=><option key={c} value={c}>{c}</option>)}
-                        </select>}
-                        {!isFx&&<span style={{fontSize:12,color:S.label}}>$</span>}
-                        <input type="number" value={recForm.amount} onChange={e=>setRecForm(p=>({...p,amount:e.target.value}))} placeholder="金額" style={{width:"100%",border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,background:"transparent"}}/>
-                      </div>
-                    </div>
-                    <div style={{display:"flex",gap:8,marginBottom:8}}>
-                      <div style={{display:"flex",alignItems:"center",gap:4,background:S.card,borderRadius:10,padding:"6px 10px",border:`1px solid ${S.sep}`,flex:1}}>
-                        <span style={{fontSize:11,color:S.label}}>每月</span>
-                        <input type="number" min={1} max={28} value={recForm.day} onChange={e=>setRecForm(p=>({...p,day:e.target.value}))} style={{width:30,border:"none",outline:"none",fontSize:12,fontWeight:700,color:S.dark,textAlign:"center",background:"transparent"}}/>
-                        <span style={{fontSize:11,color:S.label}}>號</span>
-                      </div>
-                      <select value={recForm.cardId||""} onChange={e=>{const c=CARDS.find(x=>x.id===e.target.value);setRecForm(p=>({...p,cardId:e.target.value,cardName:c?c.name:"未指定"}));}} style={{flex:2,padding:"6px 10px",borderRadius:10,border:`1px solid ${S.sep}`,fontSize:12,outline:"none",color:recForm.cardId?S.dark:S.label,background:S.card,appearance:"auto"}}>
-                        <option value="" disabled>揀你嘅卡</option>
-                        {CARDS.filter(c=>own.includes(c.id)).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
-                      </select>
-                    </div>
-                    <div style={{display:"flex",gap:6,marginBottom:8}}>
-                      <button onClick={()=>setRecForm(p=>({...p,isMiles:false}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:!recForm.isMiles?`2px solid ${S.green}`:`2px solid ${S.sep}`,background:!recForm.isMiles?"rgba(52,199,89,0.06)":S.card,color:!recForm.isMiles?S.green:S.label,cursor:"pointer"}}>💰 現金回贈</button>
-                      <button onClick={()=>setRecForm(p=>({...p,isMiles:true}))} style={{flex:1,padding:"6px 0",borderRadius:8,fontSize:11,fontWeight:600,border:recForm.isMiles?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:recForm.isMiles?"rgba(0,122,255,0.06)":S.card,color:recForm.isMiles?S.blue:S.label,cursor:"pointer"}}>✈️ 飛行里數</button>
-                    </div>
-                    <div style={{display:"flex",gap:4,marginBottom:10,overflowX:"auto"}}>
-                      {SCENARIOS.map(s=>(
-                        <button key={s.id} onClick={()=>setRecForm(p=>({...p,sc:s.id,currency:FX_SCENARIOS.includes(s.id)?(p.currency==="HKD"?"USD":p.currency):"HKD"}))} style={{padding:"4px 8px",borderRadius:8,fontSize:11,fontWeight:600,background:recForm.sc===s.id?"rgba(0,122,255,0.08)":S.card,color:recForm.sc===s.id?S.blue:S.label,border:recForm.sc===s.id?`1px solid rgba(0,122,255,0.2)`:`1px solid ${S.sep}`,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{s.emoji}{s.label}</button>
-                      ))}
-                    </div>
-                    <button onClick={()=>{const a=parseFloat(recForm.amount);if(!recForm.memo||!a)return;setRecurring(p=>[...p,{id:Date.now(),cardId:recForm.cardId||"_recurring",cardName:recForm.cardName||"未指定",sc:recForm.sc,amount:a,memo:recForm.memo,dayOfMonth:Math.min(28,Math.max(1,parseInt(recForm.day)||1)),isMiles:recForm.isMiles,rate:0,currency:isFx?(recForm.currency||"USD"):"HKD"}]);setRecForm(null);gEvent("recurring_add",{scenario:recForm.sc});showToast("✅ 已新增定期扣款");}} disabled={!recForm.memo||!recForm.amount} style={{width:"100%",padding:10,borderRadius:12,background:(!recForm.memo||!recForm.amount)?S.bg:S.blue,color:(!recForm.memo||!recForm.amount)?S.label:"#fff",border:"none",fontSize:13,fontWeight:700,cursor:(!recForm.memo||!recForm.amount)?"default":"pointer"}}>新增定期扣款</button>
-                  </div>);
-                })()}
-                {recurring.map(r=>(
-                  <div key={r.id} style={{padding:"10px 16px",display:"flex",alignItems:"center",borderBottom:`1px solid ${S.sep}`}}>
-                    <div style={{flex:1,minWidth:0}}>
-                      <p style={{fontSize:13,fontWeight:500,color:S.dark}}>{r.memo}</p>
-                      <p style={{fontSize:11,color:S.label}}>{r.cardName} · 每月{r.dayOfMonth}號 · {r.currency&&r.currency!=="HKD"?`${r.currency} ${r.amount}`:`$${r.amount}`} · {r.isMiles?"✈️ 里數":"💰 回贈"}</p>
-                    </div>
-                    <button onClick={()=>{gEvent("recurring_delete",{});setRecurring(p=>p.filter(x=>x.id!==r.id));}} style={{padding:6,background:"none",border:"none",cursor:"pointer"}}><X size={14} color={S.label}/></button>
-                  </div>
-                ))}
               </div>
 
               {/* View toggle */}
@@ -2448,6 +2469,36 @@ export default function App(){
                             </div>
                           );
                         })}
+                        {(cid==="boc_cheers"||cid==="boc_cheers_vs")&&isCurrentMonth&&(()=>{
+                          const isVI=cid==="boc_cheers";
+                          const diningCap=isVI?10000:7500;
+                          const fxCap=isVI?25000:18750;
+                          const overallCap=isVI?30000:22500;
+                          const diningSpent=data.byScenario["dining"]?.spent||0;
+                          const fxScs=["onlineFX","physicalFX","travelJKSTA"];
+                          const fxSpent=fxScs.reduce((s,k)=>(data.byScenario[k]?.spent||0)+s,0);
+                          const totalSpent=diningSpent+fxSpent;
+                          if(totalSpent===0)return null;
+                          const bars=[
+                            diningSpent>0&&{label:"🍽️ 食飯分部",spent:diningSpent,cap:diningCap},
+                            fxSpent>0&&{label:"🌍 外幣分部",spent:fxSpent,cap:fxCap},
+                            {label:"📊 合共上限",spent:totalSpent,cap:overallCap}
+                          ].filter(Boolean);
+                          return(
+                            <div style={{padding:"10px 16px",background:darkMode?"rgba(0,122,255,0.04)":"rgba(0,122,255,0.02)",display:"flex",flexDirection:"column",gap:8}}>
+                              {bars.map(b=>{const pct=Math.min(100,Math.round(b.spent/b.cap*100));return(
+                                <div key={b.label}>
+                                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:3}}>
+                                    <span style={{fontSize:11,fontWeight:600,color:pct>=100?S.red:pct>=80?S.promo:S.sec}}>{b.label}</span>
+                                    <span style={{fontSize:11,fontWeight:600,color:pct>=100?S.red:S.dark}}>${b.spent.toLocaleString()} / ${b.cap.toLocaleString()}</span>
+                                  </div>
+                                  <div style={{height:4,borderRadius:2,background:darkMode?"#3A3A3C":"#E5E5EA",overflow:"hidden"}}><div style={{height:4,borderRadius:2,background:pct>=100?S.red:pct>=80?S.promo:S.blue,width:`${pct}%`,transition:"width 0.3s ease"}}/></div>
+                                  {pct>=100&&<p style={{fontSize:10,color:S.red,marginTop:2}}>⚠️ 已達上限</p>}
+                                </div>
+                              );})}
+                            </div>
+                          );
+                        })()}
                       </div>
                     );
                   })}
