@@ -983,7 +983,7 @@ export default function App(){
 
       {/* Tutorial tooltip — Steps 2-3 use fixed position, Steps 4-6 use inline (rendered near target in JSX) */}
       {tut===2&&(
-        <div style={{position:"fixed",bottom:58,right:12,zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
+        <div style={{position:"fixed",bottom:"calc(58px + env(safe-area-inset-bottom, 0px))",right:12,zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
           <div style={{background:S.card,borderRadius:16,padding:16,boxShadow:darkMode?"0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)":"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
               <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 1/9</span>
@@ -999,7 +999,7 @@ export default function App(){
         </div>
       )}
       {tut===9&&(
-        <div style={{position:"fixed",bottom:58,left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
+        <div style={{position:"fixed",bottom:"calc(58px + env(safe-area-inset-bottom, 0px))",left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
           <div style={{background:S.card,borderRadius:16,padding:16,boxShadow:darkMode?"0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)":"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
               <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 7/9</span>
@@ -1015,7 +1015,7 @@ export default function App(){
         </div>
       )}
       {tut===10&&(
-        <div style={{position:"fixed",bottom:58,left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
+        <div style={{position:"fixed",bottom:"calc(58px + env(safe-area-inset-bottom, 0px))",left:"50%",transform:"translateX(-50%)",zIndex:9995,maxWidth:300,width:"calc(100% - 40px)"}}>
           <div style={{background:S.card,borderRadius:16,padding:16,boxShadow:darkMode?"0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)":"0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05)"}}>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
               <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 8/9</span>
