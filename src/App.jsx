@@ -748,6 +748,12 @@ export default function App(){
           if(d.ccbEyeReg===false)setCcbEyeReg(false);
         }
       }catch(e){/* first time */}
+      // First-time user: no sw_data → pre-select HSBC Red as demo
+      if(!localStorage.getItem("sw_data")){
+        setOwn(["hsbc_red"]);
+        setSc("onlineHKD");
+        setAmt(100);
+      }
       setLoaded(true);
     })();
   },[]);
@@ -991,7 +997,7 @@ export default function App(){
               <span style={{fontSize:10,fontWeight:700,color:S.blue,letterSpacing:1}}>步驟 1/9</span>
               <div style={{flex:1,height:3,borderRadius:2,background:darkMode?"#3A3A3C":"#E5E5EA"}}><div style={{height:3,borderRadius:2,background:S.blue,width:"11%"}}/></div>
             </div>
-            <p style={{fontSize:15,fontWeight:600,color:S.dark,lineHeight:1.5}}>剔選你擁有嘅信用卡！部分銀行有 ⚙️ 可微調優惠設定（e.g. HSBC 最紅自主獎賞類別），唔設定都 OK</p>
+            <p style={{fontSize:15,fontWeight:600,color:S.dark,lineHeight:1.5}}>剔選你擁有嘅信用卡！我哋 set 咗 HSBC Red 做例子 🔴 部分銀行有 ⚙️ 可微調優惠設定（e.g. 最紅自主獎賞類別），唔設定都 OK</p>
             <div style={{display:"flex",gap:8,marginTop:12}}>
               <button onClick={()=>setTut(0)} style={{padding:"8px 16px",borderRadius:16,background:S.bg,border:"none",fontSize:12,fontWeight:600,color:S.label,cursor:"pointer"}}>跳過</button>
               <button onClick={tutNext} style={{flex:1,padding:"8px 16px",borderRadius:16,background:S.blue,border:"none",fontSize:12,fontWeight:700,color:"#fff",cursor:"pointer"}}>下一步 →</button>
