@@ -571,6 +571,7 @@ export default function App(){
   useEffect(()=>{try{localStorage.setItem("sw_dark",darkPref);}catch{}},[darkPref]);
   const[themeModal,setThemeModal]=useState(false);
   const S=darkMode?S_DARK:S_LIGHT;
+  useEffect(()=>{document.body.style.backgroundColor=S.bg;document.body.style.margin="0";const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=S.bg;else{const t=document.createElement("meta");t.name="theme-color";t.content=S.bg;document.head.appendChild(t);}},[darkMode]);
   const gEvent=(name,params)=>{try{window.gtag?.("event",name,params);}catch{}};
   const[tab,setTabRaw]=useState("calc");
   const scrollTop=()=>window.scrollTo({top:0,behavior:"smooth"});
@@ -1153,7 +1154,7 @@ export default function App(){
                 <button key={t.k} onClick={()=>{setDarkPref(t.k);gEvent("theme_change",{theme:t.k});setThemeModal(false);}} style={{flex:1,padding:"14px 8px",borderRadius:14,border:darkPref===t.k?`2px solid ${S.blue}`:`2px solid ${S.sep}`,background:darkPref===t.k?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",textAlign:"center"}}>
                   <p style={{fontSize:24}}>{t.emoji}</p>
                   <p style={{fontSize:13,fontWeight:600,color:darkPref===t.k?S.blue:S.dark,marginTop:4}}>{t.label}</p>
-                  <p style={{fontSize:10,color:S.label,marginTop:2}}>{t.desc}</p>
+                  <p style={{fontSize:11,color:S.label,marginTop:2}}>{t.desc}</p>
                 </button>
               ))}
             </div>
@@ -1215,7 +1216,7 @@ export default function App(){
       <main style={{maxWidth:640,margin:"0 auto",padding:"0 16px"}}>
         {/* Privacy badge — always visible */}
         <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"6px 0",opacity:0.7}}>
-          <span style={{fontSize:10,color:S.label}}>🔒 零伺服器 · 零追蹤 · 所有資料只存你手機</span>
+          <span style={{fontSize:11,color:S.label}}>🔒 零伺服器 · 零追蹤 · 所有資料只存你手機</span>
         </div>
 
         {tab==="calc"&&(
@@ -1270,9 +1271,9 @@ export default function App(){
                     const ic=ISSUER_COLORS[best.card.issuer]||{bg:"#8E8E93",short:"?"};
                     return <div key={s.id} onClick={()=>{setSc(s.id);setWalletOpen(false);}} style={{padding:"8px 4px",borderRadius:12,background:S.cardAlt,textAlign:"center",cursor:"pointer"}}>
                       <p style={{fontSize:16}}>{s.emoji}</p>
-                      <p style={{fontSize:10,color:S.label,marginTop:2}}>{s.label}</p>
+                      <p style={{fontSize:11,color:S.label,marginTop:2}}>{s.label}</p>
                       <div style={{padding:"2px 8px",borderRadius:6,background:ic.bg,display:"inline-flex",alignItems:"center",justifyContent:"center",marginTop:4}}><span style={{fontSize:8,fontWeight:700,color:"#fff"}}>{ic.short}</span></div>
-                      <p style={{fontSize:9,fontWeight:600,color:S.dark,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{best.card.name.replace(/^.*?\s/,"")}</p>
+                      <p style={{fontSize:10,fontWeight:600,color:S.dark,marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{best.card.name.replace(/^.*?\s/,"")}</p>
                       <p style={{fontSize:11,fontWeight:700,color:isCB?S.green:S.blue}}>{isCB?`${(best.rate*100).toFixed(1)}%`:`$${parseFloat(best.rate.toFixed(1))}/里`}</p>
                     </div>;
                   })}
@@ -1291,7 +1292,7 @@ export default function App(){
                     return(
                       <button key={s.id} onClick={()=>{if(s.id==="physicalFX"){setFxSub(true);setOctSub(false);setSc("physicalFX");}else if(s.id==="octopus"){setOctSub(true);setFxSub(false);setSc("octopus");}else{setFxSub(false);setOctSub(false);setSc(s.id);}}} style={{padding:"8px 2px",borderRadius:14,border:active?"2px solid #007AFF":"2px solid transparent",background:active?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",textAlign:"center",transition:"all 0.2s ease",boxShadow:active?"none":(darkMode?"none":S.shadow)}}>
                         <div style={{fontSize:20}}>{s.emoji}</div>
-                        <div style={{fontSize:12,fontWeight:600,color:active?S.blue:S.dark,marginTop:2,letterSpacing:-0.08}}>{s.label}</div>
+                        <div style={{fontSize:13,fontWeight:600,color:active?S.blue:S.dark,marginTop:2,letterSpacing:-0.08}}>{s.label}</div>
                       </button>
                     );
                   })}
@@ -1312,11 +1313,11 @@ export default function App(){
                 {octSub&&<div style={{display:"flex",gap:8,marginTop:8}}>
                   <button onClick={()=>setSc("octopus")} style={{flex:1,padding:"10px 8px",borderRadius:14,border:sc==="octopus"?"2px solid #007AFF":"2px solid "+S.sep,background:sc==="octopus"?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",transition:"all 0.15s"}}>
                     <span style={{fontSize:13,fontWeight:600,color:sc==="octopus"?S.blue:S.dark}}>🔄 自動增值</span>
-                    <div style={{fontSize:11,color:sc==="octopus"?S.blue:S.label,marginTop:2}}>AAVS 信用卡自動</div>
+                    <div style={{fontSize:12,color:sc==="octopus"?S.blue:S.label,marginTop:2}}>AAVS 信用卡自動</div>
                   </button>
                   <button onClick={()=>setSc("octopusManual")} style={{flex:1,padding:"10px 8px",borderRadius:14,border:sc==="octopusManual"?"2px solid #007AFF":"2px solid "+S.sep,background:sc==="octopusManual"?"rgba(0,122,255,0.08)":S.card,cursor:"pointer",transition:"all 0.15s"}}>
                     <span style={{fontSize:13,fontWeight:600,color:sc==="octopusManual"?S.blue:S.dark}}>📱 手動增值</span>
-                    <div style={{fontSize:11,color:sc==="octopusManual"?S.blue:S.label,marginTop:2}}>Apple Pay/八達通App</div>
+                    <div style={{fontSize:12,color:sc==="octopusManual"?S.blue:S.label,marginTop:2}}>Apple Pay/八達通App</div>
                   </button>
                 </div>}
               </div>
@@ -1352,18 +1353,18 @@ export default function App(){
                 {editMax?<div style={{display:"flex",alignItems:"center",gap:4}}>
                   <span style={{fontSize:10,color:S.label}}>$</span>
                   <input type="number" autoFocus value={sMax===-1?"":sMax} onChange={e=>{const v=e.target.value;setSMax(v===""?-1:parseInt(v)||0);}} onBlur={()=>{setSMax(v=>Math.max(1000,v<0?3000:v));setEditMax(false);}} onKeyDown={e=>{if(e.key==="Enter"){setSMax(v=>Math.max(1000,v<0?3000:v));setEditMax(false);}}} style={{width:60,fontSize:11,fontWeight:700,color:S.blue,background:"rgba(0,122,255,0.06)",border:`1px solid ${S.blue}`,borderRadius:8,padding:"3px 6px",outline:"none",textAlign:"right"}}/>
-                </div>:<button onClick={()=>setEditMax(true)} style={{fontSize:10,color:S.label,background:"none",border:"none",cursor:"pointer",padding:"2px 4px",borderRadius:4}}>${sMax.toLocaleString()} ✎</button>}
+                </div>:<button onClick={()=>setEditMax(true)} style={{fontSize:11,color:S.label,background:"none",border:"none",cursor:"pointer",padding:"2px 4px",borderRadius:4}}>${sMax.toLocaleString()} ✎</button>}
               </div>
               {/* Quick amount buttons */}
               <div style={{display:"flex",gap:6,marginTop:10,alignItems:"center"}}>
                 {quickAmts.map(v=>(
-                  <button key={v} onClick={()=>{setAmt(v);if(v>sMax)setSMax(Math.ceil(v/1000)*1000);}} style={{flex:1,padding:"7px 0",borderRadius:10,fontSize:11,fontWeight:600,background:amt===v?"rgba(0,122,255,0.08)":S.bg,color:amt===v?S.blue:S.sec,border:amt===v?`1px solid rgba(0,122,255,0.2)`:"1px solid transparent",cursor:"pointer"}}>${v>=1000?`${v/1000}k`:v}</button>
+                  <button key={v} onClick={()=>{setAmt(v);if(v>sMax)setSMax(Math.ceil(v/1000)*1000);}} style={{flex:1,padding:"7px 0",borderRadius:10,fontSize:12,fontWeight:600,background:amt===v?"rgba(0,122,255,0.08)":S.bg,color:amt===v?S.blue:S.sec,border:amt===v?`1px solid rgba(0,122,255,0.2)`:"1px solid transparent",cursor:"pointer"}}>${v>=1000?`${v/1000}k`:v}</button>
                 ))}
                 <button onClick={()=>setEditQuick(p=>!p)} style={{width:28,height:28,borderRadius:8,background:editQuick?"rgba(0,122,255,0.08)":S.bg,border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:14,color:editQuick?S.blue:S.label}}>⚙</button>
               </div>
               {editQuick&&<div style={{marginTop:8,padding:12,background:S.bg,borderRadius:12}}>
-                <p style={{fontSize:10,fontWeight:600,color:S.label,marginBottom:6}}>自訂快捷金額（逗號分隔）</p>
-                <input type="text" defaultValue={quickAmts.join(",")} onBlur={e=>{const vals=e.target.value.split(",").map(s=>parseInt(s.trim())).filter(n=>n>0&&!isNaN(n)).slice(0,6);if(vals.length>=2)setQuickAmts(vals.sort((a,b)=>a-b));setEditQuick(false);}} onKeyDown={e=>{if(e.key==="Enter")e.target.blur();}} style={{width:"100%",padding:"8px 10px",borderRadius:8,border:`1px solid ${S.sep}`,fontSize:13,fontWeight:600,outline:"none",color:S.dark,boxSizing:"border-box"}}/>
+                <p style={{fontSize:11,fontWeight:600,color:S.label,marginBottom:6}}>自訂快捷金額（逗號分隔）</p>
+                <input type="text" defaultValue={quickAmts.join(",")} onBlur={e=>{const vals=e.target.value.split(",").map(s=>parseInt(s.trim())).filter(n=>n>0&&!isNaN(n)).slice(0,6);if(vals.length>=2)setQuickAmts(vals.sort((a,b)=>a-b));setEditQuick(false);}} onKeyDown={e=>{if(e.key==="Enter")e.target.blur();}} style={{width:"100%",padding:"8px 10px",borderRadius:8,border:`1px solid ${S.sep}`,fontSize:13,fontWeight:600,outline:"none",color:S.dark,background:S.inputBg,boxSizing:"border-box"}}/>
               </div>}
             </div>
             {/* Inline tooltip for step 5: below amount */}
@@ -1402,8 +1403,8 @@ export default function App(){
               </div>
               <div style={{width:0,height:0,borderLeft:"10px solid transparent",borderRight:"10px solid transparent",borderTop:"10px solid #fff",margin:"0 auto"}}/>
             </div>}
-            {(()=>{const activePromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(sc));return activePromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:11,color:S.promo,fontWeight:600}}>計算結果已包含 {activePromos.length} 項特選優惠</span><button onClick={()=>{setTab("calc");setTimeout(()=>document.getElementById("promo-section")?.scrollIntoView({behavior:"smooth"}),100);}} style={{marginLeft:"auto",fontSize:10,color:S.blue,background:"none",border:"none",cursor:"pointer",fontWeight:600}}>管理 →</button></div>:null;})()}
-            {FX_SCENARIOS.includes(sc)&&amt>0&&<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>💱</span><span style={{fontSize:11,color:S.sec,lineHeight:1.4}}>結果已扣除外幣手續費（Visa/MC ~1.95%, AE ~2%, 銀聯 ~1%）。0%手續費嘅卡會標示。</span></div>}
+            {(()=>{const activePromos=customPromos.filter(cp=>(cp.scs||[cp.sc]).includes(sc));return activePromos.length>0?<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(255,159,10,0.15)":"#FFF8F0",border:`1px solid rgba(255,149,0,0.15)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>🎯</span><span style={{fontSize:12,color:S.promo,fontWeight:600}}>計算結果已包含 {activePromos.length} 項特選優惠</span><button onClick={()=>{setTab("calc");setTimeout(()=>document.getElementById("promo-section")?.scrollIntoView({behavior:"smooth"}),100);}} style={{marginLeft:"auto",fontSize:10,color:S.blue,background:"none",border:"none",cursor:"pointer",fontWeight:600}}>管理 →</button></div>:null;})()}
+            {FX_SCENARIOS.includes(sc)&&amt>0&&<div style={{padding:"8px 12px",borderRadius:12,background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",border:`1px solid rgba(0,122,255,0.1)`,display:"flex",alignItems:"center",gap:6,marginBottom:8}}><span style={{fontSize:12}}>💱</span><span style={{fontSize:12,color:S.sec,lineHeight:1.4}}>結果已扣除外幣手續費（Visa/MC ~1.95%, AE ~2%, 銀聯 ~1%）。0%手續費嘅卡會標示。</span></div>}
             <div id="tut-result" style={{borderRadius:22,padding:22,background:S.card,border:p?`1px solid rgba(52,199,89,0.15)`:`1px solid ${S.sep}`,boxShadow:S.shadow,...hlStyle("result")}}>
               {!p?(
                 <div style={{textAlign:"center",padding:"20px 0",cursor:noCards?"pointer":undefined}} onClick={()=>noCards&&setTab("cards")}>
@@ -1426,9 +1427,9 @@ export default function App(){
                           <span style={{fontSize:11,color:S.cond,fontWeight:600}}>{p.card.cond[sc]}</span>
                         </div>
                       )}
-                      {p.minWarning&&<div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",border:darkMode?"1px solid rgba(255,69,58,0.4)":"1px solid #FFD1D1",display:"inline-block"}}><span style={{fontSize:11,color:S.red,fontWeight:600}}>{p.minWarning}</span></div>}
-                      {p.sharedCapNote&&<div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(0,122,255,0.12)":"#EFF6FF",border:darkMode?"1px solid rgba(0,122,255,0.3)":"1px solid #BFDBFE",display:"inline-block"}}><span style={{fontSize:11,color:S.blue,fontWeight:600}}>{p.sharedCapNote}</span></div>}
-                      {(()=>{const ex=getExpiry(p.card);return ex?<p style={{fontSize:10,color:ex.color,fontWeight:600,marginTop:4}}>{ex.text}</p>:null;})()}
+                      {p.minWarning&&<div style={{marginTop:6,padding:"6px 10px",borderRadius:10,background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",border:darkMode?"1px solid rgba(255,69,58,0.4)":"1px solid #FFD1D1",display:"inline-block"}}><span style={{fontSize:12,color:S.red,fontWeight:600}}>{p.minWarning}</span></div>}
+                      {/* sharedCapNote removed — already shown in cond note + cap info box */}
+                      {(()=>{const ex=getExpiry(p.card);return ex?<p style={{fontSize:11,color:ex.color,fontWeight:600,marginTop:4}}>{ex.text}</p>:null;})()}
                     </div>
                     <div style={{width:36,height:36,borderRadius:18,background:isCB?"rgba(52,199,89,0.04)":"rgba(0,122,255,0.04)",display:"flex",alignItems:"center",justifyContent:"center"}}>{isCB?<Wallet size={18} color={S.green}/>:<Plane size={18} color={S.blue}/>}</div>
                   </div>
@@ -1441,36 +1442,37 @@ export default function App(){
                         if(isCB&&hasBoc&&!p.splitCalc){
                           const cardVal=p.val;const bocVal=amt*bocB;const total=cardVal+bocVal;
                           return <>
-                            <p style={{fontSize:11,color:S.label}}>合計回贈</p>
+                            <p style={{fontSize:12,color:S.label}}>合計回贈</p>
                             <p style={{fontSize:36,fontWeight:800,color:S.green,lineHeight:1.1,letterSpacing:-0.5}}>${total.toFixed(1)}</p>
                             <p style={{fontSize:12,color:S.sec,marginTop:4}}>卡積分 ${cardVal.toFixed(1)} ({(p.rate*100).toFixed(1)}%) + 狂賞{bocLabel}{isFly?"":(rd?"🔴":"⚪")} ${bocVal.toFixed(1)} ({(bocB*100).toFixed(0)}%){isFly?" 每季累積制":""}</p>
-                            {!p.splitCalc&&p.fxFee>0&&<p style={{fontSize:11,color:S.sec,marginTop:2}}>扣手續費後 ≈ ${(amt*(p.rate-p.fxFee)+bocVal).toFixed(1)}</p>}
+                            {!p.splitCalc&&p.fxFee>0&&<p style={{fontSize:12,color:S.sec,marginTop:2}}>扣手續費後 ≈ ${(amt*(p.rate-p.fxFee)+bocVal).toFixed(1)}</p>}
                           </>;
                         }
                         if(!isCB&&hasBoc){
                           return <>
-                            <p style={{fontSize:11,color:S.label}}>預期里數</p>
+                            <p style={{fontSize:12,color:S.label}}>預期里數</p>
                             <p style={{fontSize:36,fontWeight:800,color:S.blue,lineHeight:1.1,letterSpacing:-0.5}}>{Math.round(p.val).toLocaleString()} 里</p>
                             <p style={{fontSize:12,color:S.green,fontWeight:600,marginTop:4}}>+ 狂賞{bocLabel} {isFly?"額外3%（每季累積制）":(rd?"🔴紅日":"⚪平日")}另加 {(bocB*100).toFixed(0)}% 現金回贈 ≈ <span style={{fontWeight:800}}>${(amt*bocB).toFixed(1)}</span></p>
                           </>;
                         }
                         return <>
-                          <p style={{fontSize:11,color:S.label}}>{isCB?"預期回贈":"預期里數"}</p>
+                          <p style={{fontSize:12,color:S.label}}>{isCB?"預期回贈":"預期里數"}</p>
                           <p style={{fontSize:36,fontWeight:800,color:isCB?S.green:S.blue,lineHeight:1.1,letterSpacing:-0.5}}>{isCB?`$${p.val.toFixed(1)}`:`${Math.round(p.val).toLocaleString()} 里`}</p>
                           {isCB&&!p.splitCalc&&p.fxFee>0&&<p style={{fontSize:12,color:S.sec,marginTop:4}}>扣手續費後 ≈ <span style={{color:(p.rate-p.fxFee)>0?S.green:S.red,fontWeight:600}}>${(amt*(p.rate-p.fxFee)).toFixed(1)}</span></p>}
                         </>;
                       })()}
                     </div>
-                    <div style={{padding:"8px 14px",borderRadius:14,background:isCB?"linear-gradient(135deg, #34C759, #28A745)":"linear-gradient(135deg, #007AFF, #0056D6)",boxShadow:isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)"}}>
+                    <div style={{padding:"8px 14px",borderRadius:14,background:isCB?(darkMode?"linear-gradient(135deg, #1B7A33, #145A25)":"linear-gradient(135deg, #34C759, #28A745)"):(darkMode?"linear-gradient(135deg, #0056D6, #003EA1)":"linear-gradient(135deg, #007AFF, #0056D6)"),boxShadow:isCB?"0 4px 12px rgba(52,199,89,0.3)":"0 4px 12px rgba(0,122,255,0.3)"}}>
                       {(()=>{
                         const bocB=getBocBonus(p.card,sc,bocMs,bocMf);
                         if(isCB&&bocB>0)return <>
                           <p style={{fontSize:20,fontWeight:700,color:"#fff",letterSpacing:-0.36}}>{(p.rate*100).toFixed(1)}%+{(bocB*100).toFixed(0)}%</p>
-                          <p style={{fontSize:11,color:"rgba(255,255,255,0.8)",marginTop:1}}>積分+狂賞{["physicalFX","travelJKSTA","travelTW"].includes(sc)?"飛":"派"}</p>
+                          <p style={{fontSize:11,color:"rgba(255,255,255,0.85)",marginTop:1}}>積分+狂賞{["physicalFX","travelJKSTA","travelTW"].includes(sc)?"飛":"派"}</p>
                         </>;
                         return <>
                           <p style={{fontSize:22,fontWeight:700,color:"#fff",letterSpacing:-0.36}}>{isCB?(p.splitCalc?`≈${((p.splitCalc.totalVal/amt)*100).toFixed(1)}%`:`${(p.rate*100).toFixed(1)}%`):(p.splitCalc?.miles?`≈$${(amt/p.splitCalc.totalMiles).toFixed(1)}/里`:`$${parseFloat(p.rate.toFixed(2))}/里`)}</p>
-                          {p.fxFee>0&&<p style={{fontSize:10,color:"rgba(255,255,255,0.8)",marginTop:2}}>{isCB?`扣手續費${(p.fxFee*100).toFixed(2)}%`:`手續費$${Math.round(amt*p.fxFee)}`}</p>}
+                          {isCB&&p.fxFee>0&&(()=>{const net=p.rate-p.fxFee;return <p style={{fontSize:13,fontWeight:700,color:net>0?"#B8FFB8":"#FF6B6B",marginTop:3}}>淨 {(net*100).toFixed(2)}%{net<=0?" ⚠️":""}</p>})()}
+                          {!isCB&&p.fxFee>0&&<p style={{fontSize:10,color:"rgba(255,255,255,0.85)",marginTop:2}}>手續費${Math.round(amt*p.fxFee)}</p>}
                           {p.fxFee===0&&FX_SCENARIOS.includes(sc)&&<p style={{fontSize:10,color:"rgba(255,255,255,0.9)",marginTop:2}}>✅ 免手續費</p>}
                         </>;
                       })()}
@@ -1577,14 +1579,6 @@ export default function App(){
                       </div>}
                     </div>
                   )}
-                  {/* CBF net return for FX scenarios — cashback only */}
-                  {isCB&&FX_SCENARIOS.includes(sc)&&p&&(()=>{
-                    const fee=getFxFee(p.card,sc);const net=p.rate-fee;
-                    return <div style={{background:"rgba(0,122,255,0.03)",borderRadius:12,padding:10,marginTop:8,border:`1px solid rgba(0,122,255,0.08)`}}>
-                      <p style={{fontSize:11,fontWeight:600,color:S.dark}}>💱 外幣手續費分析</p>
-                      <p style={{fontSize:10,color:S.sec,marginTop:3,lineHeight:1.6}}>回贈 {(p.rate*100).toFixed(2)}% − 手續費 {(fee*100).toFixed(2)}% = <strong style={{color:net>0?S.green:S.red}}>淨回贈 {(net*100).toFixed(2)}%</strong>{net<=0?" ⚠️ 蝕手續費！":""}</p>
-                    </div>;
-                  })()}
                   {/* Custom promo match */}
                   {promoMatch&&(()=>{
                     const pm=promoMatch;
@@ -1786,12 +1780,9 @@ export default function App(){
               </div>
             </div>
 
-            {noCards&&tut===0&&<div style={{background:darkMode?"rgba(255,69,58,0.2)":"#FFF1F0",borderRadius:12,padding:12,display:"flex",alignItems:"center",gap:8}}><AlertTriangle size={14} color={S.red}/><p style={{fontSize:12,fontWeight:600,color:S.red}}>請先剔選你擁有嘅信用卡</p></div>}
-            {own.length===0&&tut===0&&<div style={{background:darkMode?"rgba(0,122,255,0.12)":"rgba(0,122,255,0.04)",borderRadius:14,padding:12,border:darkMode?"1px solid rgba(0,122,255,0.2)":"none"}}>
-              <p style={{fontSize:12,color:S.sec,lineHeight:1.5}}>💡 只揀你<strong>錢包入面有</strong>嘅卡。唔使全選 — 揀得越準，推薦越啱你！</p>
-            </div>}
-            {own.length>0&&tut===0&&<div style={{background:darkMode?"rgba(52,199,89,0.12)":"rgba(52,199,89,0.04)",borderRadius:12,padding:10,border:`1px solid rgba(52,199,89,${darkMode?0.2:0.08})`}}>
-              <p style={{fontSize:11,color:S.sec,lineHeight:1.5}}>✅ 揀好卡即刻用到！下面銀行 ⚙️ 設定係<strong>進階功能</strong>（可選），唔設定一樣正常運作。</p>
+            {tut===0&&<div style={{background:darkMode?"rgba(0,122,255,0.08)":"rgba(0,122,255,0.03)",borderRadius:14,padding:12}}>
+              <p style={{fontSize:13,color:S.sec,lineHeight:1.6}}>只揀你<strong style={{color:S.dark}}>錢包入面有</strong>嘅卡就得，唔使全選 — 揀得越準，推薦越啱你！</p>
+              <p style={{fontSize:13,color:S.sec,lineHeight:1.6,marginTop:4}}>想了解每張卡詳情？去「<span onClick={()=>setTab("guide")} style={{color:S.blue,fontWeight:600,cursor:"pointer"}}>攻略</span>」睇排名同條件。</p>
             </div>}
 
             {/* Custom Promos — top of My Cards */}
@@ -2024,11 +2015,13 @@ export default function App(){
                 )}
                 </>}
                 {(bankOpen?filteredGrouped[iss]:[...filteredGrouped[iss]].sort((a,b)=>{const ao=own.includes(a.id)?0:1;const bo=own.includes(b.id)?0:1;return ao-bo;}).slice(0,3)).map((c,i)=>{const sel=own.includes(c.id);return(
-                  <button key={c.id} onClick={()=>toggle(c.id)} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:bankOpen?"12px 16px":"8px 16px",textAlign:"left",background:sel?"rgba(0,122,255,0.04)":S.card,border:"none",borderBottom:`0.5px solid ${S.sep}`,cursor:"pointer",minHeight:bankOpen?44:36,boxSizing:"border-box"}}>
+                  <button key={c.id} onClick={()=>toggle(c.id)} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:"10px 16px",textAlign:"left",background:sel?"rgba(0,122,255,0.04)":S.card,border:"none",borderBottom:`0.5px solid ${S.sep}`,cursor:"pointer",minHeight:40,boxSizing:"border-box"}}>
                     <div style={{flex:1,minWidth:0}}>
-                      <p style={{fontSize:bankOpen?15:13,fontWeight:sel?600:400,color:sel?S.dark:S.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",letterSpacing:-0.24}}>{c.name}</p>
-                      {bankOpen&&<p style={{fontSize:12,color:S.label,marginTop:2,lineHeight:1.4}}>{c.desc}</p>}
-                      {bankOpen&&<div style={{marginTop:4,display:"flex",alignItems:"center",gap:6}}><Badge type={c.type} dark={darkMode}/>{(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:10,color:ex.color,fontWeight:600}}>{ex.short}</span>:null;})()}</div>}
+                      <div style={{display:"flex",alignItems:"center",gap:6}}>
+                        <p style={{fontSize:14,fontWeight:sel?600:400,color:sel?S.dark:S.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",letterSpacing:-0.24}}>{c.name}</p>
+                        <Badge type={c.type} dark={darkMode}/>
+                        {(()=>{const ex=getExpiry(c);return ex?<span style={{fontSize:9,color:ex.color,fontWeight:600,flexShrink:0}}>{ex.short}</span>:null;})()}
+                      </div>
                     </div>
                     {sel?<div style={{width:24,height:24,borderRadius:12,background:S.blue,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Check size={14} color="#fff" strokeWidth={3}/></div>:<div style={{width:24,height:24,borderRadius:12,border:`2px solid ${S.sep}`,flexShrink:0}}/>}
                   </button>
@@ -2038,11 +2031,12 @@ export default function App(){
               </div>
             );})}
 
+
             <div style={{display:"flex",gap:8}}>
               <button onClick={()=>setTut(1)} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.sec,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><HelpCircle size={14}/> 睇教學</button>
               <button onClick={()=>{if(!confirm("確定要重設所有資料？"))return;gEvent("data_reset",{});setOwn([]);setAmt(0);setVs("none");setGuru("none");setSMax(3000);setLogs([]);setSeen(false);setRecurring([]);setCustomPromos([]);setMoxTier(false);setDbsLfFx("none");setWewaCategory("overseas");setBocMs("none");setBocMf("none");setAeExplorerReg(true);setAeChargeReg(true);setEveryMileReg(true);setMmpowerReg(true);setTravelPlusReg(true);setDbsEminentReg(true);setBeaWorldReg(true);setCcbEyeReg(true);setQuickAmts([50,100,200,500,1000]);setMode("cashback");showToast("🗑️ 所有資料已重設");}} style={{flex:1,padding:12,borderRadius:S.rad,background:S.card,border:"none",fontSize:12,fontWeight:600,color:S.red,cursor:"pointer",boxShadow:S.shadow,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><RotateCcw size={14}/> 重設</button>
             </div>
-            <p style={{textAlign:"center",fontSize:10,color:S.label,padding:8}}>© 2026 碌邊張 SwipeWhich · v1.4</p>
+            <p style={{textAlign:"center",fontSize:10,color:S.label,padding:8}}>© 2026 碌邊張 SwipeWhich · v1.4.1</p>
           </div>
         )}
 
@@ -2098,8 +2092,8 @@ export default function App(){
                     return(
                       <button key={s.id} onClick={()=>{if(s.id==="physicalFX"){setGuideFxSub(true);setGuideOctSub(false);setGuideSc("physicalFX");}else if(s.id==="octopus"){setGuideOctSub(true);setGuideFxSub(false);setGuideSc("octopus");}else{setGuideFxSub(false);setGuideOctSub(false);setGuideSc(s.id);}}} style={{padding:"8px 2px",borderRadius:12,border:active?"2px solid #007AFF":"2px solid transparent",background:active?"rgba(0,122,255,0.08)":S.card,boxShadow:active?"none":(darkMode?"none":S.shadow),cursor:"pointer",textAlign:"center"}}>
                         <div style={{fontSize:20}}>{s.emoji}</div>
-                        <div style={{fontSize:12,fontWeight:600,color:active?S.blue:S.dark,marginTop:2,letterSpacing:-0.08}}>{s.label}</div>
-                        <div style={{fontSize:10,color:active?S.blue:S.label,marginTop:1,lineHeight:1.4}}>{s.sub}</div>
+                        <div style={{fontSize:13,fontWeight:600,color:active?S.blue:S.dark,marginTop:2,letterSpacing:-0.08}}>{s.label}</div>
+                        <div style={{fontSize:11,color:active?S.blue:S.label,marginTop:1,lineHeight:1.4}}>{s.sub}</div>
                       </button>
                     );
                   })}
@@ -2223,14 +2217,14 @@ export default function App(){
                       const ex=getExpiry(item.card);const mf=MILES_CONV_FEE[item.card.id];const cond1=item.card.cond?.[s.id];
                       return(<div onClick={toggle2} style={{flex:1,padding:"8px 10px",borderRadius:12,background:accent,border:`1px solid ${label==="首選"?(isMiles?"rgba(0,122,255,0.12)":"rgba(52,199,89,0.15)"):S.sep}`,minWidth:0,overflow:"hidden",cursor:"pointer"}}>
                         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                          <p style={{fontSize:11,color:S.label}}>{label}</p>
-                          <span style={{fontSize:10,color:S.blue,fontWeight:600,padding:"1px 5px",borderRadius:5,background:"rgba(0,122,255,0.06)"}}>{exp2?"▲":"▼"}</span>
+                          <p style={{fontSize:12,color:S.label}}>{label}</p>
+                          <span style={{fontSize:11,color:S.blue,fontWeight:600,padding:"1px 5px",borderRadius:5,background:"rgba(0,122,255,0.06)"}}>{exp2?"▲":"▼"}</span>
                         </div>
-                        <p style={{fontSize:12,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.name}</p>
-                        <p style={{fontSize:13,fontWeight:700,color:isMiles?S.blue:label==="首選"?S.green:S.sec}}>{isMiles?`$${parseFloat(item.rate.toFixed(2))}/里`:`${(item.rate*100).toFixed(1)}%`}</p>
-                        {!isMiles&&item.fxFee>0&&<p style={{fontSize:9,color:S.label}}>手續費 {(item.fxFee*100).toFixed(2)}%</p>}
-                        {!exp2&&<p style={{fontSize:10,color:S.label,marginTop:2,lineHeight:1.4}}>{item.card.desc}</p>}
-                        {exp2&&<div style={{marginTop:4,fontSize:10,lineHeight:1.7,color:S.sec,borderTop:`1px solid ${S.sep}`,paddingTop:4}}>
+                        <p style={{fontSize:14,fontWeight:600,color:S.dark,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.card.name}</p>
+                        <p style={{fontSize:14,fontWeight:700,color:isMiles?S.blue:label==="首選"?S.green:S.sec}}>{isMiles?`$${parseFloat(item.rate.toFixed(2))}/里`:`${(item.rate*100).toFixed(1)}%`}</p>
+                        {!isMiles&&item.fxFee>0&&<p style={{fontSize:10,color:S.label}}>手續費 {(item.fxFee*100).toFixed(2)}%</p>}
+                        {!exp2&&<p style={{fontSize:11,color:S.label,marginTop:2,lineHeight:1.4}}>{item.card.desc}</p>}
+                        {exp2&&<div style={{marginTop:4,fontSize:11,lineHeight:1.7,color:S.sec,borderTop:`1px solid ${S.sep}`,paddingTop:4}}>
                           <p>{item.card.desc}</p>
                           {item.card.capInfo&&<p style={{color:S.red}}>⚠️ {item.card.capInfo}</p>}
                           {cond1&&<p style={{color:S.cond}}>{cond1}</p>}
@@ -2249,14 +2243,14 @@ export default function App(){
                         </div>
                         <div style={{padding:14,display:"flex",flexDirection:"column",gap:10}}>
                           <div>
-                            <p style={{fontSize:10,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>💰 現金回贈</p>
+                            <p style={{fontSize:11,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>💰 現金回贈</p>
                             <div style={{display:"flex",gap:8}}>
                               {comboCard(best,"首選",false,"rgba(52,199,89,0.06)")}
                               {fb&&fb.card.id!==best?.card.id&&comboCard(fb,"🛡️ 保底",false,S.bg)}
                             </div>
                           </div>
                           {mBest&&<div>
-                            <p style={{fontSize:10,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>✈️ 飛行里數</p>
+                            <p style={{fontSize:11,fontWeight:700,color:S.label,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>✈️ 飛行里數</p>
                             <div style={{display:"flex",gap:8}}>
                               {comboCard(mBest,"首選",true,"rgba(0,122,255,0.04)")}
                               {mFb&&mFb.card.id!==mBest.card.id&&comboCard(mFb,"🛡️ 保底",true,S.bg)}
@@ -2302,7 +2296,7 @@ export default function App(){
                             {isCBG&&item.fxFee===0&&FX_SCENARIOS.includes(guideSc)&&<p style={{fontSize:9,color:"rgba(255,255,255,0.9)",marginTop:1}}>✅ 免手續費</p>}
                           </div>:<div>
                             <p style={{fontSize:13,fontWeight:500,color:S.sec}}>{isCBG?`${(item.rate*100).toFixed(1)}%`:`$${parseFloat(item.rate.toFixed(2))}/里`}</p>
-                            {isCBG&&item.fxFee>0&&<p style={{fontSize:9,color:S.label}}>手續費 {(item.fxFee*100).toFixed(2)}%</p>}
+                            {isCBG&&item.fxFee>0&&<p style={{fontSize:10,color:S.label}}>手續費 {(item.fxFee*100).toFixed(2)}%</p>}
                             {isCBG&&item.fxFee===0&&FX_SCENARIOS.includes(guideSc)&&<p style={{fontSize:9,color:S.green}}>✅ 免手續費</p>}
                           </div>}
                         </div>
@@ -2847,7 +2841,7 @@ export default function App(){
                   <p>• 新增台灣簽賬獨立場景</p>
                   <p style={{fontWeight:700,color:S.dark,marginTop:10}}>v1.3.0 · 2026-02-28</p>
                   <p>• 中銀狂賞派/飛紅日自動追蹤</p>
-                  <p>• 外幣手續費分析、爆 Cap 分拆計算</p>
+                  <p>• 外幣手續費淨回贈率顯示、爆 Cap 分拆計算</p>
                   <p>• Travel Guru 疊加計算</p>
                   <p style={{fontWeight:700,color:S.dark,marginTop:10}}>v1.2.0 · 2026-02-15</p>
                   <p>• 登記制回贈提示（AE Explorer/EveryMile 等 8 張卡）</p>
